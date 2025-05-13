@@ -1,6 +1,12 @@
 {
-  "devDependencies": {
-    "@types/pako": "^2.0.3",
-    "typescript": "^5.5.4"
-  }
+    "devDependencies": {
+        "@types/js-cookie": "^3.0.6",
+        "@types/node": "^22.15.17",
+        "@types/pako": "^2.0.3",
+        "ts-migrate": "^0.1.35",
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "html2canvas": "^1.4.1"
+    }
 }

@@ -1,0 +1,2607 @@
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+        <meta
+            name="description"
+            content="オンラインゲーム「Ragnarok Online」のステータス計算機の避難所の避難所"
+        />
+
+        <title>ROラトリオHub</title>
+
+        <base href="./" />
+
+        <link rel="stylesheet" href="css/calcx.css" type="text/css" />
+        <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/pako@2/dist/pako.min.js"
+            integrity="sha256-7eJpOkpqUSa501ZpBis1jsq2rnubhqHPMC/rRahRSQc="
+            crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            const script_files = [
+                /*
+                JSONLファイルの読み込み
+                */
+                { src: "js/LoadJSONL.js", type: "text/javascript" },
+                /*
+                サイト共通系ファイル
+                */
+                { src: "../roro/common/js/util.js", type: "text/javascript" },
+                { src: "js/CModalWindow.js", type: "text/javascript" },
+
+                /*
+                デバッグ定義
+                非デバッグ環境でも読み込む
+                */
+                { src: "js/DEBUG.js", type: "text/javascript" },
+
+                /*
+                共通系 javascript ファイル
+                */
+                { src: "../roro/m/js/CInstanceManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CGlobalConstManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CNameKana.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCustomSelectBase.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCustomSelectMapBase.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCustomSelectMapCategory.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCustomSelectMapMap.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCustomSelectMapMonster.js", type: "text/javascript" },
+                { src: "../roro/m/js/common.js", type: "text/javascript" },
+                { src: "../roro/m/js/etc.js", type: "text/javascript" },
+
+                /*
+                データ定義系 javascript ファイル
+                */
+                { src: "../roro/m/js/alias.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/alias.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/chara.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/skill.h.js", type: "text/javascript" },
+                //{ src: "../roro/m/js/skill.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/usableskill.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/usableskill.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/autospell.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/autospell.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/CSkillManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/monster.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/monster.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/monstergroup.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/monstermap.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/monstermap.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/item.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/item.dat.js", type: "text/javascript" },
+
+                /*
+                追加分：item/pet/cardなど
+                */
+                { src: "../roro/m/js/arrow.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/arrow.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/card.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/card.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/costume.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/costume.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/pet.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/pet.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/itemset.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/itemset.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndopt.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndopt.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndoptlist.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndoptlist.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndopttype.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndopttype.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/timeitem.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/timeitem.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/itempack.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/itempack.dat.js", type: "text/javascript" },
+
+                /*
+                [MIG] データ定義系
+                */
+                { src: "js/data/mig.job.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/mig.itemsp.h.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigJobData.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigStateData.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigEquipableSpTag.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigEquipableStaticData.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigEquipableSpData.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigEquipableData.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubBase.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubJob.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubState.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubBuff.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubMonster.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubArrow.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubItem.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubCard.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubEnchList.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManagerSubRndOpt.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/CMigConstDataManager.js", type: "text/javascript" },
+
+                /*
+                グローバル変数定義
+                */
+                { src: "js/global.js", type: "text/javascript" },
+
+                /*
+                [MIG] datファイル
+                */
+                { src: "js/data/mig.job.dat.js", type: "text/javascript" },
+                { src: "../roro/m/js/data/mig.enchlist.dat.js", type: "text/javascript" },
+
+                /*
+                機能処理系 javascript ファイル
+                */
+                { src: "js/calcautospell.js", type: "text/javascript" },
+                { src: "../roro/m/js/rndench.js", type: "text/javascript" },
+                { src: "../roro/m/js/equip.js", type: "text/javascript" },
+                { src: "../roro/m/js/learnedskill.js", type: "text/javascript" },
+                { src: "../roro/m/js/slotpager.js", type: "text/javascript" },
+                { src: "../roro/m/js/spmode.js", type: "text/javascript" },
+                { src: "../roro/m/js/quickcontrol.js", type: "text/javascript" },
+
+                /*
+                データ管理系 javascript ファイル
+                */
+                { src: "../roro/m/js/chara.js", type: "text/javascript" },
+                { src: "../roro/m/js/mob.js", type: "text/javascript" },
+                { src: "../roro/m/js/CAttackMethodConf.js", type: "text/javascript" },
+
+                /*
+                キャラクター設定操作系 javascript ファイル
+                */
+                { src: "../roro/m/js/CConfBase.js", type: "text/javascript" },
+                { src: "../roro/m/js/CConfBase2.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfIchizi.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfNizi.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfSanzi.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfYozi.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfCustomStatus.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfCustomAtk.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfCustomDef.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfCustomSkill.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCharaConfCustomSpecStatus.js", type: "text/javascript" },
+
+                /*
+                モンスター設定操作系 javascript ファイル
+                */
+                { src: "../roro/m/js/mobconfdebuf.js", type: "text/javascript" },
+                { src: "../roro/m/js/mobconfbuf.js", type: "text/javascript" },
+                { src: "../roro/m/js/mobconfplayer.js", type: "text/javascript" },
+                { src: "../roro/m/js/CMobConfInput.js", type: "text/javascript" },
+
+                /*
+                機能処理系 HTML 処理 javascript ファイル
+                */
+                { src: "../roro/m/js/CItemInfoManager.js", type: "text/javascript" },
+                { src: "js/hmjob.js", type: "text/javascript" },
+                { src: "../roro/m/js/hmcard.js", type: "text/javascript" },
+                { src: "../roro/m/js/hmcostume.js", type: "text/javascript" },
+
+                { src: "js/CMonsterMapAreaComponentManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/hmrndopt.js", type: "text/javascript" },
+                { src: "../roro/m/js/hmchara.js", type: "text/javascript" },
+                { src: "../roro/m/js/hmmob.js", type: "text/javascript" },
+                { src: "../roro/m/js/castsim.js", type: "text/javascript" },
+                { src: "js/CEnchSearch.js", type: "text/javascript" },
+
+                /*
+                機能処理系 javascript ファイル
+                */
+                { src: "../roro/m/js/CTimeItemAreaComponentManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CBattleQuickControlAreaComponentManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CExtraInfoAreaComponentManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CFloatingInfoAreaComponentManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CCalcDataTextCreator.js", type: "text/javascript" },
+
+                /*
+                [MIG] 操作処理系 javascript ファイル
+                */
+                { src: "js/CShadowEquipController.js", type: "text/javascript" },
+
+                /*
+                メイン処理系 javascript ファイル
+                */
+                { src: "js/CBattleCalcInfo.js", type: "text/javascript" },
+                { src: "js/CBattleCalcResult.js", type: "text/javascript" },
+                { src: "js/CBattleCalcResultAll.js", type: "text/javascript" },
+                { src: "js/head.js", type: "text/javascript" },
+
+                /*
+                セーブデータ管理系 javascript ファイル
+                */
+                { src: "../roro/m/js/CSaveDataMappingManager.js", type: "text/javascript" },
+                { src: "../roro/m/js/CSaveDataConverter.js", type: "text/javascript" },
+                { src: "../roro/m/js/saveload.js", type: "text/javascript" },
+                { src: "js/CSaveDataUnit.js", type: "text/javascript" },
+                { src: "js/CSaveDataManager.js", type: "text/javascript" },
+                { src: "js/CSaveController.js", type: "text/javascript" },
+                { src: "js/saveload.js", type: "text/javascript" },
+
+                /*
+                機能処理系 javascript ファイル （この辺の順序整理したい）
+                */
+                { src: "js/CAttackMethodAreaComponentManager.js", type: "text/javascript" },
+
+                /*
+                メイン処理系 javascript ファイル
+                */
+                { src: "../roro/m/js/foot.js", type: "text/javascript" },
+
+                /*
+                左メニュー用 javascript ファイル
+                */
+                { src: "../roro/frame.js", type: "text/javascript" },
+
+                /* load RODB Translator */
+                { src: "js/LoadRodbTranslator.js", type: "text/javascript" }
+            ];
+
+            async function loadScriptsSequentially(script_files) {
+                for (const dict of script_files) {
+                    await new Promise((resolve, reject) => {
+                        const script = document.createElement("script");
+                        script.src = dict.src;
+                        script.type = dict.type;
+
+                        script.onload = () => {
+                            console.log(`✅ Loaded: ${dict.src}`);
+                            resolve(); // スクリプトの読み込みが成功したら解決
+                        };
+
+                        script.onerror = () => {
+                            console.error(`❌ Failed: ${dict.src}`);
+                            reject(new Error(`Failed to load script: ${dict.src}`)); // エラー時は拒否
+                        };
+
+                        document.head.appendChild(script);
+                    });
+                }
+
+                console.log("📦 Done loading all scripts.");
+                // エンチャントサーチのロード
+                new enchSearch();
+
+                // 検索可能ドロップダウンリストのロード
+                //LoadSelect2();
+
+                // RODB Translatorからのデータロード
+                loadRodbTranslator(window.location.hash);
+            }
+
+            // 実行
+            loadScriptsSequentially(script_files).catch(error => {
+                console.error("Error loading scripts:", error);
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="side">
+                <span id="ID_FRAME"></span>
+            </div>
+            <div class="content">
+                <div class="spinner" id="loadingSpinner"></div>
+                <div style="padding: 20px 34px">
+                    <form name="calcForm">
+                        <div
+                            style="
+                                width: 100%;
+                                display: grid;
+                                grid-template-columns: max-content auto;
+                                column-gap: 3%;
+                            "
+                        >
+                            <div>
+                                <div id="OBJID_CALCULAATOR_HEADER">
+                                    <div id="OBJID_SAVE_BLOCK_MIG" class="folding-block-MIG">
+                                        <input
+                                            type="checkbox"
+                                            id="OBJID_SWITCH_SAVE_CTRL_MIG"
+                                            class="folding-switch-MIG"
+                                        />
+                                        <label for="OBJID_SWITCH_SAVE_CTRL_MIG"
+                                            >セーブ／ロード</label
+                                        >
+                                        <div class="folding-block-body-MIG">
+                                            <select id="OBJID_SELECT_SAVE_DATA_MIG"></select>
+                                            <input
+                                                id="OBJID_INPUT_SAVE_NAME_MIG"
+                                                type="textbox"
+                                                size="24"
+                                                placeholder="名前入力可能（40文字まで）"
+                                            />
+                                            <button
+                                                id="OBJID_BUTTON_IMAGE_SAVE_DATA_MIG"
+                                                type="button"
+                                            >
+                                                画像保存
+                                            </button>
+
+                                            <button
+                                                id="OBJID_BUTTON_LOAD_SAVE_DATA_MIG"
+                                                type="button"
+                                                onclick="OnClickLoadSaveData()"
+                                            >
+                                                ロード
+                                            </button>
+                                            <button
+                                                id="OBJID_BUTTON_SAVE_SAVE_DATA_MIG"
+                                                type="button"
+                                                onclick="OnClickSaveSaveData()"
+                                            >
+                                                セーブ
+                                            </button>
+                                            <button
+                                                id="OBJID_BUTTON_DELETE_SAVE_DATA_MIG"
+                                                type="button"
+                                                onclick="OnClickDeleteSaveData()"
+                                            >
+                                                削除
+                                            </button>
+                                            <button
+                                                id="OBJID_BUTTON_DEBUG_SAVE_DATA_MIG"
+                                                type="button"
+                                                onclick="OnClickClipboardSaveData()"
+                                            >
+                                                バグ報告用データ出力
+                                            </button>
+
+                                            <button
+                                                id="OBJID_BUTTON_URL_OUT_MIG"
+                                                type="button"
+                                                onclick="OnClickUrlOutMIG()"
+                                            >
+                                                URL出力
+                                            </button>
+                                            <input
+                                                id="OBJID_INPUT_URL_OUT_MIG"
+                                                type="textbox"
+                                                size="24"
+                                            />
+                                            <button
+                                                id="OBJID_BUTTON_COPY_URL_OUT_MIG"
+                                                type="button"
+                                                onclick="HtmlCopyToClipboardById('OBJID_INPUT_URL_OUT_MIG')"
+                                            >
+                                                コピー
+                                            </button>
+
+                                            <button
+                                                id="OBJID_BUTTON_URL_IN_MIG"
+                                                type="button"
+                                                onclick="OnClickUrlInMIG()"
+                                            >
+                                                URL入力
+                                            </button>
+                                            <input
+                                                id="OBJID_INPUT_URL_IN_MIG"
+                                                type="textbox"
+                                                size="24"
+                                            />
+                                            <button
+                                                id="OBJID_BUTTON_CLEAR_URL_IN_MIG"
+                                                type="button"
+                                                onclick="HtmlSetObjectValueById('OBJID_INPUT_URL_IN_MIG', '')"
+                                            >
+                                                クリア
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <strong style="color: red">
+                                            本サイトの管理人を騙って近づいてくる人物がいた場合<br />
+                                            無闇に信用せず、一旦
+                                            <a href="../../information/index.html" target="_blank"
+                                                >連絡先</a
+                                            >
+                                            からご確認ください<br />
+                                        </strong>
+                                        <strong>
+                                            以前のデータも問題なく読み込むことが出来ます<br />
+                                            URL出力にてデータを取得し、こちらのURL入力から入力いただくことでデータ移行が可能です<br />
+                                        </strong>
+                                    </div>
+                                </div>
+
+                                <table>
+                                    <tr>
+                                        <td valign="top">
+                                            <div style="display: inline-block">
+                                                <table border="1">
+                                                    <tr>
+                                                        <td colspan="6" bgcolor="#DDDDFF">
+                                                            <span>基本ステータス</span>
+
+                                                            <input
+                                                                id="OBJID_CHECK_AUTO_BASE_LEVEL"
+                                                                type="checkbox"
+                                                                name="BLVauto"
+                                                                checked="checked"
+                                                            />
+                                                            <label for="OBJID_CHECK_AUTO_BASE_LEVEL"
+                                                                >BaseLVを自動調節する</label
+                                                            >
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                min-width: 4em;
+                                                                text-align: center;
+                                                            "
+                                                        >
+                                                            LV
+                                                        </td>
+                                                        <td style="min-width: 7em">
+                                                            <select
+                                                                id="OBJID_SELECT_BASE_LEVEL"
+                                                                name="A_BaseLV"
+                                                                onChange="CalcStatusPoint(true) | StAllCalc() | CAttackMethodAreaComponentManager.RebuildControls() | AutoCalc()"
+                                                            ></select>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                min-width: 4em;
+                                                                text-align: center;
+                                                            "
+                                                        >
+                                                            JobLV
+                                                        </td>
+                                                        <td style="min-width: 7em">
+                                                            <select
+                                                                id="OBJID_SELECT_JOB_LEVEL"
+                                                                name="A_JobLV"
+                                                                onChange="StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                min-width: 4em;
+                                                                text-align: center;
+                                                            "
+                                                        >
+                                                            職業
+                                                        </td>
+                                                        <td style="min-width: 7em">
+                                                            <select
+                                                                id="OBJID_SELECT_JOB"
+                                                                name="A_JOB"
+                                                                onChange="OnChangeJobSelect(this.value) | StAllCalc() | CalcStatusPoint(false) | AutoCalc()"
+                                                            ></select>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="text-align: center">Str</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_STR"
+                                                                name="A_STR"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_STR"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td style="text-align: center">Agi</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_AGI"
+                                                                name="A_AGI"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_AGI"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td style="text-align: center">Vit</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_VIT"
+                                                                name="A_VIT"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_VIT"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="text-align: center">Int</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_INT"
+                                                                name="A_INT"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_INT"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td style="text-align: center">Dex</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_DEX"
+                                                                name="A_DEX"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_DEX"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td style="text-align: center">Luk</td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_LUK"
+                                                                name="A_LUK"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_LUK"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <div id="OBJID_DIV_STATUS_NOTICE"></div>
+
+                                                <table border="1">
+                                                    <tr>
+                                                        <td>
+                                                            <span
+                                                                >基本ステータスポイント　残り</span
+                                                            >
+                                                        </td>
+                                                        <td
+                                                            style="
+                                                                min-width: 4em;
+                                                                text-align: right;
+                                                                padding-right: 0.5em;
+                                                            "
+                                                        >
+                                                            <span id="A_STPOINT">0000</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table
+                                                    id="OBJID_TABLE_SPEC_STATUS"
+                                                    border="1"
+                                                    style="margin-top: 1em"
+                                                >
+                                                    <tr>
+                                                        <td colspan="6" bgcolor="#DDDDFF">
+                                                            <span>特性ステータス</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                min-width: 4em;
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Pow
+                                                        </td>
+                                                        <td style="min-width: 7em">
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_POW"
+                                                                name="A_POW"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_POW"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                min-width: 5em;
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            P.Atk
+                                                        </td>
+                                                        <td
+                                                            style="
+                                                                min-width: 7em;
+                                                                text-align: center;
+                                                            "
+                                                        >
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_P_ATK"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                min-width: 5em;
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Res
+                                                        </td>
+                                                        <td
+                                                            style="
+                                                                min-width: 7em;
+                                                                text-align: center;
+                                                            "
+                                                        >
+                                                            <span id="OBJID_SPAN_STATUS_RES"></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Sta
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_STA"
+                                                                name="A_STA"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_STA"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            S.Matk
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_S_MATK"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Mres
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_MRES"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Wis
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_WIS"
+                                                                name="A_WIS"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_WIS"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            H.Plus
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_H_PLUS"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Spl
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_SPL"
+                                                                name="A_SPL"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_SPL"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            C.Rate
+                                                        </td>
+                                                        <td style="text-align: center">
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_C_RATE"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Con
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_CON"
+                                                                name="A_CON"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_CON"
+                                                            ></span>
+                                                        </td>
+
+                                                        <td
+                                                            colspan="2"
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            T.Status Point
+                                                        </td>
+                                                        <td colspan="2" style="text-align: center">
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_T_STATUS_POINT"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="
+                                                                text-align: center;
+                                                                background-color: #ddddff;
+                                                            "
+                                                        >
+                                                            Crt
+                                                        </td>
+                                                        <td>
+                                                            <select
+                                                                id="OBJID_SELECT_STATUS_CRT"
+                                                                name="A_CRT"
+                                                                onChange="CalcStatusPoint(false) | StAllCalc() | AutoCalc()"
+                                                            ></select>
+                                                            <span
+                                                                id="OBJID_SPAN_STATUS_BONUS_CRT"
+                                                            ></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <div
+                                                style="
+                                                    display: inline-block;
+                                                    margin-left: 2em;
+                                                    padding: 0.5em;
+                                                    border: 1px solid black;
+                                                    vertical-align: top;
+                                                "
+                                            >
+                                                <style>
+                                                    #OBJID_CHK_UPGRADE_JOB_EXPLAIN:checked
+                                                        ~ .OBJCLS_EXPLAIN {
+                                                        display: block !important;
+                                                    }
+                                                </style>
+
+                                                <div>
+                                                    <span>臨時機能</span>
+                                                    <span
+                                                        style="display: inline-block; width: 2em"
+                                                    ></span>
+                                                    <input
+                                                        type="checkbox"
+                                                        id="OBJID_CHK_UPGRADE_JOB_EXPLAIN"
+                                                    />
+                                                    <label for="OBJID_CHK_UPGRADE_JOB_EXPLAIN"
+                                                        >説明表示</label
+                                                    >
+                                                    <hr
+                                                        class="OBJCLS_EXPLAIN"
+                                                        style="display: none"
+                                                    />
+                                                    <p class="OBJCLS_EXPLAIN" style="display: none">
+                                                        三次職のデータを読み込んでいる状態で「四次職へ変更」ボタンを押すと、<br />
+                                                        ステータスや装備などをそのままの状態で、四次職に変更できます。<br />
+                                                        ただし、以下の制限があるのでご注意ください。<br />
+                                                        ・ベースレベルは200になります。<br />
+                                                        ・ジョブレベルは1になります。<br />
+                                                        ・『BaseLVを自動調節する』オプションは強制的にOFFになります。<br />
+                                                        ・処理に多少時間がかかります。処理終了時にはメッセージが表示されます。<br />
+                                                        なお、実験段階なので、バグがあるかもしれません。<br />
+                                                        ご利用前には、三次職のデータをセーブ、あるいはURL出力しておいて下さい。<br />
+                                                    </p>
+                                                    <hr />
+                                                    <div>
+                                                        <input
+                                                            type="button"
+                                                            onclick="UpgradeJobTo4th()"
+                                                            value="四次職へ変更"
+                                                        />
+                                                        <span
+                                                            id="OBJID_SPAN_UPGRADE_JOB_STATUS"
+                                                            style="margin-left: 2em"
+                                                        ></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <table border="1">
+                                                    <tr bgcolor="#DDDDFF">
+                                                        <td>最大HP</td>
+                                                        <td>最大SP</td>
+                                                        <td>ATK</td>
+                                                        <td>DEF</td>
+                                                        <td>MDEF</td>
+                                                        <td>HIT</td>
+                                                        <td>FLEE</td>
+                                                        <td>完全回避</td>
+                                                        <td>クリティカル</td>
+                                                        <td>MATK</td>
+                                                        <td>ASPD</td>
+                                                        <td>HP回復力</td>
+                                                        <td>SP回復力</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_MAXHP">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_MAXSP">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_ATK"> </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_DEF"> </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_MDEF">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_HIT"> </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_FLEE">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_LUCKY">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_CRI"> </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_MATK">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right">
+                                                            <span id="OBJID_SPAN_CHARA_ASPD">
+                                                            </span>
+                                                        </td>
+                                                        <td align="right" id="A_HPR">
+                                                            <span id="OBJID_SPAN_CHARA_HPR"> </span>
+                                                        </td>
+                                                        <td align="right" id="A_SPR">
+                                                            <span id="OBJID_SPAN_CHARA_SPR"> </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <br />
+                                <!--
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_NEWS_AREA">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br>
+-->
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span id="ID_QUICK_CONTROL">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="OBJID_QUICK_CONTROL_EXTRACT_CHECKBOX"
+                                                        onclick="OnClickQuickControlSW()"
+                                                    />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- フローティングメニュー -->
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    id="OBJID_CHK_DISABLE_FLOATING"
+                                    style="display: none"
+                                />
+                                <div id="OBJID_DIV_FLOATING_MENU" class="CSSCLS_DIV_FLOATING_MENU">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td id="ID_FLOATING_INFO_AREA"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span id="nm026">スピードポーション：</span>
+                                        <select
+                                            id="OBJID_SPEED_POT"
+                                            name="A_SpeedPOT"
+                                            onChange="StAllCalc() | AutoCalc()"
+                                        ></select>
+
+                                        <br />
+
+                                        <span id="nm027">武器タイプ：</span>
+                                        <select
+                                            id="OBJID_ARMS_TYPE_RIGHT"
+                                            name="A_WeaponType"
+                                            onChange="OnChangeArmsTypeRight(this[this.selectedIndex].value) | StAllCalc() | AutoCalc()"
+                                        ></select>
+
+                                        <span id="A_SobWeaponName"></span>
+
+                                        <span id="OBJID_SPAN_SELECT_ARROW"></span>
+
+                                        <span id="OBJID_SPAN_SWAP_ARMS"></span>
+
+                                        <table border="1">
+                                            <tr>
+                                                <td colspan="3" bgcolor="#DDDDFF">
+                                                    武器＆防具/カード
+                                                </td>
+                                                <td colspan="10" bgcolor="#DDDDFF">
+                                                    <input
+                                                        type="button"
+                                                        id="OBJID_SLOT_MODE_BUTTON"
+                                                        value="入力欄切替"
+                                                        onclick="OnClickSlotModeButton()"
+                                                    />
+                                                    カードの入力とランダムオプションの入力を切り替えます
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <select
+                                                        id="OBJID_ARMS_RIGHT_REFINE"
+                                                        name="A_Weapon_ATKplus"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td rowspan="2">
+                                                    <select
+                                                        id="OBJID_ARMS_RIGHT_TRANSCENDENCE"
+                                                        name="A_Weapon_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td rowspan="2">
+                                                    <select
+                                                        id="OBJID_ARMS_RIGHT"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_ARMS, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+
+                                                <td colspan="2" style="white-space: nowrap">
+                                                    <span id="ID_A_HUYO_NAME">武器属性付与</span>
+                                                    <select
+                                                        id="OBJID_SELECT_ARMS_ELEMENT"
+                                                        name="A_Weapon_zokusei"
+                                                        onChange="AutoCalc()"
+                                                    ></select>
+                                                </td>
+
+                                                <td colspan="8">
+                                                    <span
+                                                        style="
+                                                            font-size: smaller;
+                                                            white-space: nowrap;
+                                                        "
+                                                        >※攻撃属性の優先度は状況次第なので、確実に設定するには左の付与欄で指定してください。（無属性は、全ての属性設定を解除）</span
+                                                    >
+                                                </td>
+                                            </tr>
+
+                                            <tr id="OBJID_ARMS_RIGHT_SLOT_ROOT"></tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_ARMS_LEFT_SLOT_ROOT">
+                                                <td>
+                                                    <select
+                                                        id="OBJID_ARMS_LEFT_REFINE"
+                                                        name="A_Weapon2_ATKplus"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                        disabled
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_ARMS_LEFT_TRANSCENDENCE"
+                                                        name="A_Weapon2_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                        disabled
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_ARMS_LEFT"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_ARMS_LEFT, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_HEAD_TOP_SLOT_ROOT">
+                                                <td>
+                                                    <select
+                                                        id="OBJID_HEAD_TOP_REFINE"
+                                                        name="A_HEAD_DEF_PLUS"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_HEAD_TOP_TRANSCENDENCE"
+                                                        name="A_HEAD_DEF_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_HEAD_TOP"
+                                                        name="A_head1"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_HEAD_TOP, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_HEAD_MID_SLOT_ROOT">
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_HEAD_MID"
+                                                        name="A_head2"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_HEAD_MID, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_HEAD_UNDER_SLOT_ROOT">
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_HEAD_UNDER"
+                                                        name="A_head3"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_HEAD_UNDER, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_SHIELD_SLOT_ROOT">
+                                                <td id="ID_B4">
+                                                    <select
+                                                        id="OBJID_SHIELD_REFINE"
+                                                        name="A_SHIELD_DEF_PLUS"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHIELD_TRANSCENDENCE"
+                                                        name="A_SHIELD_DEF_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHIELD"
+                                                        name="A_left"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_SHIELD, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_BODY_SLOT_ROOT">
+                                                <td>
+                                                    <select
+                                                        id="OBJID_BODY_REFINE"
+                                                        name="A_BODY_DEF_PLUS"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_BODY_TRANSCENDENCE"
+                                                        name="A_BODY_DEF_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_BODY"
+                                                        name="A_body"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_BODY, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_SHOULDER_SLOT_ROOT">
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOULDER_REFINE"
+                                                        name="A_SHOULDER_DEF_PLUS"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOULDER_TRANSCENDENCE"
+                                                        name="A_SHOULDER_DEF_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOULDER"
+                                                        name="A_shoulder"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_SHOULDER, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_SHOES_SLOT_ROOT">
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOES_REFINE"
+                                                        name="A_SHOES_DEF_PLUS"
+                                                        onChange="OnChangeRefined() | AutoCalc()"
+                                                    >
+                                                        <option value="0">+0</option>
+                                                        <option value="1">+1</option>
+                                                        <option value="2">+2</option>
+                                                        <option value="3">+3</option>
+                                                        <option value="4">+4</option>
+                                                        <option value="5">+5</option>
+                                                        <option value="6">+6</option>
+                                                        <option value="7">+7</option>
+                                                        <option value="8">+8</option>
+                                                        <option value="9">+9</option>
+                                                        <option value="10">+10</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOES_TRANSCENDENCE"
+                                                        name="A_SHOES_DEF_Transcendence"
+                                                        onChange="StAllCalc() | AutoCalc()"
+                                                    >
+                                                        <option value="0">-</option>
+                                                        <option value="1">★1</option>
+                                                        <option value="2">★2</option>
+                                                        <option value="3">★3</option>
+                                                        <option value="4">★4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_SHOES"
+                                                        name="A_shoes"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_SHOES, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_ACCESSARY_1_SLOT_ROOT">
+                                                <td></td>
+                                                <td style="text-align: right">
+                                                    <button
+                                                        type="button"
+                                                        id="OBJID_ACCESSARY_1_COPY"
+                                                        onclick="copyAccs(1, 2)"
+                                                    >
+                                                        ↓
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_ACCESSARY_1"
+                                                        name="A_acces1"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_ACCESSARY_1, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="12"></td>
+                                            </tr>
+
+                                            <tr id="OBJID_ACCESSARY_2_SLOT_ROOT">
+                                                <td></td>
+                                                <td style="text-align: right">
+                                                    <button
+                                                        type="button"
+                                                        id="OBJID_ACCESSARY_2_COPY"
+                                                        onclick="copyAccs(2, 1)"
+                                                    >
+                                                        ↑
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <select
+                                                        id="OBJID_ACCESSARY_2"
+                                                        name="A_acces2"
+                                                        onChange="OnChangeEquip(EQUIP_REGION_ID_ACCESSARY_2, parseInt(this.value)) | AutoCalc()"
+                                                    ></select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="OBJID_DIV_BATTLE_RESULT_TINY"></div>
+                        <div id="OBJID_DIV_RESIST_ELEMENT_TINY"></div>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_ITEM_INFO"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="OBJID_SHADOW_EQUIPS_MIG" class="folding-block-MIG">
+                            <input
+                                type="checkbox"
+                                id="OBJID_SWITCH_SHADOW_EQUIPS_CTRL_MIG"
+                                class="folding-switch-MIG"
+                                checked
+                            />
+                            <label for="OBJID_SWITCH_SHADOW_EQUIPS_CTRL_MIG">シャドウ装備</label>
+                            <div class="folding-block-body-MIG shadow-equips">
+                                <div class="equip-block eqprgn-arms-right">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_WEAPON_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_WEAPON"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-arms-left">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_SHIELD_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_SHIELD"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-head-top">
+                                    <input class="equip-ctrl" type="checkbox" />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select class="item-refined"></select>
+                                            <select class="item-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-head-mid">
+                                    <input class="equip-ctrl" type="checkbox" />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select class="item-refined"></select>
+                                            <select class="item-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-head-under">
+                                    <input class="equip-ctrl" type="checkbox" />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select class="item-refined"></select>
+                                            <select class="item-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-shield">
+                                    <input class="equip-ctrl" type="checkbox" />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select class="item-refined"></select>
+                                            <select class="item-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-body">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_BODY_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_BODY"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-shoulder">
+                                    <input class="equip-ctrl" type="checkbox" />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select class="item-refined"></select>
+                                            <select class="item-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-foot">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_SHOESE_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_SHOESE"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-accessory-1">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_ACCESSORY1_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_ACCESSORY1"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="equip-block eqprgn-accessory-2">
+                                    <input class="equip-ctrl" type="checkbox" checked />
+                                    <div class="equip-conf">
+                                        <input type="checkbox" class="item-ctrl" checked />
+                                        <div class="item-conf">
+                                            <select
+                                                class="item-refined"
+                                                id="OBJID_SHADOW_ACCESSORY2_REFINE"
+                                            ></select>
+                                            <select
+                                                class="item-select"
+                                                id="OBJID_SHADOW_ACCESSORY2"
+                                            ></select>
+                                        </div>
+
+                                        <input type="checkbox" class="card-ctrl" />
+                                        <div class="card-conf">
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                            <select class="card-select"></select>
+                                        </div>
+
+                                        <input type="checkbox" class="rndopt-ctrl" checked />
+                                        <div class="rndopt-conf">
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                            <select class="rndopt-kind-select"></select>
+                                            <select class="rndopt-value-select"></select>
+                                        </div>
+
+                                        <div class="divider-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_SKILL_LEARNED"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_PASS_SKILL">
+                                        <input
+                                            type="checkbox"
+                                            name="A1_SKILLSW"
+                                            onclick="Click_PassSkillSW()"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_ICHIZI"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_NIZI"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_SANZI"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_YOZI"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br />
+
+                        <div id="OBJID_ATTACK_BLOCK_MIG">
+                            <div id="ID_ATTACK_METHOD_AREA"></div>
+
+                            <div
+                                id="OBJID_ATTACK_SETTING_BLOCK_MIG"
+                                class="folding-block-MIG"
+                                style="white-space: nowrap"
+                            >
+                                <input
+                                    type="checkbox"
+                                    id="OBJID_SWITCH_ATTACK_SETTING_MIG"
+                                    class="folding-switch-MIG"
+                                />
+                                <label for="OBJID_SWITCH_ATTACK_SETTING_MIG">動作設定</label>
+                                <span class="folding-link-help-MIG"
+                                    ><a href="../other/set.html" target="_blank">説明表示</a></span
+                                >
+                                <div class="folding-block-body-MIG">
+                                    <div id="OBJID_ATTACK_SETTING_DIGIT3_MIG">
+                                        <input
+                                            id="OBJID_CHECK_DIGIT3"
+                                            type="checkbox"
+                                            onchange="CAttackMethodAreaComponentManager.OnChangeDigit3()"
+                                        />
+                                        <label for="OBJID_CHECK_DIGIT3">3桁区切りで表示する</label>
+                                    </div>
+                                    <div id="OBJID_ATTACK_SETTING_AUTO_CALC_MIG">
+                                        <label for="OBJID_INPUT_ATTACK_METHOD_AUTO_CALC"
+                                            >自動再計算：</label
+                                        >
+                                        <select
+                                            id="OBJID_INPUT_ATTACK_METHOD_AUTO_CALC"
+                                            onchange="CAttackMethodAreaComponentManager.OnChangeAutoCalc()"
+                                        >
+                                            <option value="0">
+                                                攻撃方法変更時に自動で再
+                                                攻撃方法変更時に自動で再計算しない
+                                            </option>
+                                            <option value="1">
+                                                攻撃方法変更時に自動で再計算する
+                                            </option>
+                                            <option value="2">
+                                                全ての項目変更時に自動で再計算しない
+                                            </option>
+                                            <option value="3">
+                                                全ての項目変更時に自動で再計算する
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div id="OBJID_ATTACK_SETTING_ACTIVE_INTERVAL_MIG">
+                                        <label for="OBJID_SELECT_ACTIVE_INTERVAL"
+                                            >アクティブスキルの限界攻撃間隔：</label
+                                        >
+                                        <select
+                                            id="OBJID_SELECT_ACTIVE_INTERVAL"
+                                            name="Conf01"
+                                            onchange="CAttackMethodAreaComponentManager.OnChangeAttackInterval()"
+                                        >
+                                            <option value="10">0.10秒(秒間10発)</option>
+                                            <option value="11">0.11秒(秒間9発)</option>
+                                            <option value="12">0.12秒(秒間8発)</option>
+                                            <option value="14" selected>0.14秒(秒間7発)</option>
+                                            <option value="15">0.15秒</option>
+                                            <option value="17">0.17秒(秒間6発)</option>
+                                            <option value="20">0.20秒(秒間5発)</option>
+                                            <option value="25">0.25秒(秒間4発)</option>
+                                            <option value="30">0.30秒</option>
+                                            <option value="33">0.33秒(秒間3発)</option>
+                                            <option value="40">0.40秒</option>
+                                            <option value="50">0.50秒(秒間2発)</option>
+                                        </select>
+                                    </div>
+                                    <div id="OBJID_ATTACK_SETTING_CASTSIM_INTERVAL_MIG">
+                                        <label for="OBJID_SELECT_CASTSIM_INTERVAL"
+                                            >詠唱イメージ更新間隔：</label
+                                        >
+                                        <select
+                                            id="OBJID_SELECT_CASTSIM_INTERVAL"
+                                            onchange="CAttackMethodAreaComponentManager.OnChangeCastSimInterval()"
+                                        >
+                                            <option value="10" selected>
+                                                10ミリ秒(最も滑らか)
+                                            </option>
+                                            <option value="25">25ミリ秒</option>
+                                            <option value="50">50ミリ秒</option>
+                                            <option value="100">100ミリ秒</option>
+                                            <option value="250">250ミリ秒(最もカクカク)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 暫定移動措置 -->
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span
+                                            id="OBJID_SPAN_ACTIVE_SKILL_RATIO_CHANGE_PHYSICAL"
+                                        ></span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            id="OBJID_SPAN_ACTIVE_SKILL_RATIO_CHANGE_MAGICAL"
+                                        ></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tr valign="top">
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td id="OBJID_TD_MONSTER_MAP_AREA"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td id="OBJID_TD_MOB_CONF_DEBUF"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td id="OBJID_TD_MOB_CONF_BUF"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td id="OBJID_TD_MOB_CONF_PLAYER"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td id="OBJID_TD_MOB_CONF_INPUT_NEW"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td id="OBJID_TD_MOB_CONF_INPUT"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td>
+                                    <!--
+                            <div id="BATTLE_RESULT_HEADER" style="display: flex; column-gap: 4px; margin-top: 3px;">
+                                <div style="flex: 1 1 25%; border: 1px solid black; text-align: center; padding: 0.25em 0 0.125em; background-color: #ccffcc; cursor: pointer; font-weight: bold;" onclick="OnClickTabBTLRSLT(0)">全表示</div>
+                                <div style="flex: 1 1 25%; border: 1px solid black; text-align: center; padding: 0.25em 0 0.125em; background-color: #ffffcc; cursor: pointer; opacity: 0.5;" onclick="OnClickTabBTLRSLT(1)">基本情報</div>
+                                <div style="flex: 1 1 25%; border: 1px solid black; text-align: center; padding: 0.25em 0 0.125em; background-color: #ffcccc; cursor: pointer; opacity: 0.5;" onclick="OnClickTabBTLRSLT(2)">ダメージ</div>
+                                <div style="flex: 1 1 25%; border: 1px solid black; text-align: center; padding: 0.25em 0 0.125em; background-color: #ffccff; cursor: pointer; opacity: 0.5;" onclick="OnClickTabBTLRSLT(3)">効率情報</div>
+                            </div>
+-->
+                                    <div id="BATTLE_RESULT_BASIC"></div>
+
+                                    <table style="display: none">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table border="1">
+                                                        <tr>
+                                                            <td colspan="2" bgcolor="#DDDDFF">
+                                                                戦闘結果
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>命中率　（必中効果）</td>
+                                                            <td>
+                                                                <span id="BattleHIT"></span
+                                                                >％　（<span
+                                                                    id="BattlePerfectHIT"
+                                                                ></span
+                                                                >％）
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>回避率</td>
+                                                            <td><span id="BattleFLEE"></span>％</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td id="CRIATKname">
+                                                                クリティカルダメージ
+                                                            </td>
+                                                            <td id="CRIATK"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td id="CRInumname">
+                                                                クリティカル(発動率)
+                                                            </td>
+                                                            <td id="CRInum"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td id="bSUBname"></td>
+                                                            <td id="bSUB"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td id="bSUB2name">攻撃間隔</td>
+                                                            <td id="bSUB2"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <a
+                                                                    href="../howtouse/howtouse_simulatecasttime.html"
+                                                                    target="_blank"
+                                                                    >詠唱イメージ</a
+                                                                >
+                                                                <input
+                                                                    type="button"
+                                                                    value="詠唱!!"
+                                                                    id="OBJID_BUTTON_SIMULATE_CAST_TIME"
+                                                                />
+                                                            </td>
+                                                            <td>
+                                                                <progress
+                                                                    id="OBJID_PROGRESS_SIMULATE_CAST_TIME"
+                                                                ></progress>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>最小与ダメ</td>
+                                                            <td id="strID_0"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>平均与ダメ</td>
+                                                            <td id="strID_1"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>最大与ダメ</td>
+                                                            <td id="strID_2"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>秒間与ダメ</td>
+                                                            <td id="AveSecondATK"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>最小攻撃回数</td>
+                                                            <td id="MinATKnum"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>平均攻撃回数</td>
+                                                            <td id="AveATKnum"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>最大攻撃回数</td>
+                                                            <td id="MaxATKnum"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>平均戦闘時間</td>
+                                                            <td id="BattleTime"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>一撃BaseExp</td>
+                                                            <td id="AtkBaseExp"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>一撃JobExp</td>
+                                                            <td id="AtkJobExp"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>平均被ダメージ(仮)</td>
+                                                            <td id="B_AveAtk"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>平均被ダメ(回避込)</td>
+                                                            <td width="128" id="B_Ave2Atk"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+
+                                <td>
+                                    <div id="BATTLE_RESULT_DAMAGE"></div>
+                                </td>
+
+                                <td>
+                                    <div
+                                        id="ID_BATTLE_QUICK_CONTROL_AREA"
+                                        style="margin-top: 3px"
+                                    ></div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br clear="left" />
+                        <hr />
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="SP_SIEN01">
+                                        <input
+                                            type="checkbox"
+                                            name="A3_SKILLSW"
+                                            onclick="Click_Skill3SW()"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="SP_SIEN02">
+                                        <input
+                                            type="checkbox"
+                                            name="A4_SKILLSW"
+                                            onclick="Click_Skill4SW()"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="SP_SIEN03"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_SP_SIEN05">
+                                        <input
+                                            id="OBJID_CHECK_A7_SKILLSW"
+                                            type="checkbox"
+                                            name="A7_SKILLSW"
+                                            onclick="Click_Skill7SW()"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_TIME_ITEM_AREA"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_ETC">
+                                        <input
+                                            type="checkbox"
+                                            name="A8_SKILLSW"
+                                            onclick="Click_Skill8SW()"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_CUSTOM_STATUS"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_CUSTOM_ATK"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_CUSTOM_DEF"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_CUSTOM_SKILL"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CHARA_CONF_CUSTOM_SPECSTATUS"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="OBJID_TD_CASTSIM"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="white-space: nowrap">
+                            <hr />
+                            <p>
+                                アクティブスキルの限界攻撃間隔の設定等は、<br />
+                                攻撃方法欄の横にある「動作設定」欄に移動しました。<br />
+                                <a href="../../ro4/m/calcx.html#OBJID_ATTACK_SETTING_BLOCK_MIG"
+                                    >動作設定欄は、こちらです。</a
+                                >
+                            </p>
+
+                            <hr />
+
+                            <p style="font-weight: bold">
+                                旧バージョンのセーブ・ロード機能は撤去しました<br />
+                                今後は<a href="../../ro4/m/calcx.html#OBJID_SAVE_BLOCK_MIG"
+                                    >最新版のセーブ・ロード機能</a
+                                >をご利用下さい
+                            </p>
+                        </div>
+<!--
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" id="OBJID_BUTTON_URL_OUT" value="URL出力" onclick="URLOUT()">
+                        </td>
+                        <td>
+                            <input type="text" id="OBJID_URL_OUT" name="URL_TEXT" value="" size=130>
+                        </td>
+                        <td>
+                            <input type="button" value="コピー" onclick="HtmlCopyToClipboardById('OBJID_URL_OUT')">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            ※ボタンを押すと、データ保存用の URL を出力します。コピーしてお使いください。
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" id="OBJID_BUTTON_URL_IN" value="URL入力" onclick="OnClickUrlIn() | LoadSelect2()">
+                        </td>
+                        <td>
+                            <input type="text" id="OBJID_URL_IN" value="" size=130>
+                        </td>
+                        <td>
+                            <input type="button" value="クリア" onclick="HtmlSetObjectValueById('OBJID_URL_IN', '')">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            ※URL を入力してボタンを押すと、解析してデータを表示します。
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td id="ID_BROWSER_MIGRATION">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+-->
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_PARSER_AREA"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_TESTER_AREA"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td id="ID_DEBUG_AREA"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div id="OBJID_RRTGET_ROOT"></div>
+                    </form>
+
+                    <table border="1" style="display: none">
+                        <tbody>
+                            <tr>
+                                <td id="DATA_OBJID_SLOT_MODE_BUTTON"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_ARMS_RIGHT_REFINE"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT_CARD_1"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT_CARD_2"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT_CARD_3"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT_CARD_4"></td>
+                                <td id="DATA_OBJID_ARMS_RIGHT_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_ARMS_LEFT_REFINE"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT_CARD_1"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT_CARD_2"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT_CARD_3"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT_CARD_4"></td>
+                                <td id="DATA_OBJID_ARMS_LEFT_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_HEAD_TOP_REFINE"></td>
+                                <td id="DATA_OBJID_HEAD_TOP"></td>
+                                <td id="DATA_OBJID_HEAD_TOP_CARD_1"></td>
+                                <td id="DATA_OBJID_HEAD_TOP_CARD_2"></td>
+                                <td id="DATA_OBJID_HEAD_TOP_CARD_3"></td>
+                                <td id="DATA_OBJID_HEAD_TOP_CARD_4"></td>
+                                <td id="DATA_OBJID_HEAD_TOP_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_HEAD_MID_REFINE"></td>
+                                <td id="DATA_OBJID_HEAD_MID"></td>
+                                <td id="DATA_OBJID_HEAD_MID_CARD_1"></td>
+                                <td id="DATA_OBJID_HEAD_MID_CARD_2"></td>
+                                <td id="DATA_OBJID_HEAD_MID_CARD_3"></td>
+                                <td id="DATA_OBJID_HEAD_MID_CARD_4"></td>
+                                <td id="DATA_OBJID_HEAD_MID_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_HEAD_UNDER_REFINE"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER_CARD_1"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER_CARD_2"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER_CARD_3"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER_CARD_4"></td>
+                                <td id="DATA_OBJID_HEAD_UNDER_COSTUME"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_SHIELD_REFINE"></td>
+                                <td id="DATA_OBJID_SHIELD"></td>
+                                <td id="DATA_OBJID_SHIELD_CARD_1"></td>
+                                <td id="DATA_OBJID_SHIELD_CARD_2"></td>
+                                <td id="DATA_OBJID_SHIELD_CARD_3"></td>
+                                <td id="DATA_OBJID_SHIELD_CARD_4"></td>
+                                <td id="DATA_OBJID_SHIELD_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_BODY_REFINE"></td>
+                                <td id="DATA_OBJID_BODY"></td>
+                                <td id="DATA_OBJID_BODY_CARD_1"></td>
+                                <td id="DATA_OBJID_BODY_CARD_2"></td>
+                                <td id="DATA_OBJID_BODY_CARD_3"></td>
+                                <td id="DATA_OBJID_BODY_CARD_4"></td>
+                                <td id="DATA_OBJID_BODY_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_SHOULDER_REFINE"></td>
+                                <td id="DATA_OBJID_SHOULDER"></td>
+                                <td id="DATA_OBJID_SHOULDER_CARD_1"></td>
+                                <td id="DATA_OBJID_SHOULDER_CARD_2"></td>
+                                <td id="DATA_OBJID_SHOULDER_CARD_3"></td>
+                                <td id="DATA_OBJID_SHOULDER_CARD_4"></td>
+                                <td id="DATA_OBJID_SHOULDER_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_SHOES_REFINE"></td>
+                                <td id="DATA_OBJID_SHOES"></td>
+                                <td id="DATA_OBJID_SHOES_CARD_1"></td>
+                                <td id="DATA_OBJID_SHOES_CARD_2"></td>
+                                <td id="DATA_OBJID_SHOES_CARD_3"></td>
+                                <td id="DATA_OBJID_SHOES_CARD_4"></td>
+                                <td id="DATA_OBJID_SHOES_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_ACCESSARY_1_REFINE"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1_CARD_1"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1_CARD_2"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1_CARD_3"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1_CARD_4"></td>
+                                <td id="DATA_OBJID_ACCESSARY_1_COSTUME_1"></td>
+                            </tr>
+                            <tr>
+                                <td id="DATA_OBJID_ACCESSARY_2_REFINE"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2_CARD_1"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2_CARD_2"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2_CARD_3"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2_CARD_4"></td>
+                                <td id="DATA_OBJID_ACCESSARY_2_COSTUME_1"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
