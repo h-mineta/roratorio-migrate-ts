@@ -345,8 +345,7 @@ export const HEAL_TARGETTYPE_ENEMY = 2;
  * @param attackMethodConfArray 攻撃手段設定データ配列
  * @return 全戦闘結果情報インスタンス（CBattleCalcResultAll クラスのインスタンス）
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function BattleCalc999(battleCalcInfo, charaData, specData, mobData, attackMethodConfArray) {
+function BattleCalc999(battleCalcInfo: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any) {
     var idx = 0;
     var idxChild = 0;
     var idxAS = 0;
@@ -676,8 +675,7 @@ function BattleCalc999(battleCalcInfo, charaData, specData, mobData, attackMetho
  * @param {*} bLeft
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function BattleCalc999Body(battleCalcInfo, charaData, specData, mobData, attackMethodConfArray, bLeft) {
+function BattleCalc999Body(battleCalcInfo: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any, bLeft: any) {
     var idx = 0;
     var idxUnit = 0;
     var battleCalcResult = null;
@@ -695,7 +693,7 @@ function BattleCalc999Body(battleCalcInfo, charaData, specData, mobData, attackM
     // 結果用インスタンスの用意
     //
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
+    // @ts-expect-error TS(2552): Cannot find name 'CBattleCalcResult'. Did you mean... Remove this comment to see the full error message
     battleCalcResult = new CBattleCalcResult();
     battleCalcResult.skillId = battleCalcInfo.skillId;
     battleCalcResult.skillLv = battleCalcInfo.skillLv;
@@ -969,8 +967,7 @@ function BattleCalc999Body(battleCalcInfo, charaData, specData, mobData, attackM
  * @param {*} bLeft
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function BattleCalc999Core(battleCalcInfo, charaData, specData, mobData, attackMethodConfArray, dmgUnit, bCri, bLeft) {
+function BattleCalc999Core(battleCalcInfo: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any, dmgUnit: any, bCri: any, bLeft: any) {
     var ret = null;
     var dmgMin = Number.MAX_VALUE;
     var dmgMax = 0;
@@ -5163,7 +5160,7 @@ function BattleCalc999Core(battleCalcInfo, charaData, specData, mobData, attackM
                         w = UsedSkillSearch(SKILL.ID_KIKO);
                     }
                     else {
-                        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+                        // @ts-expect-error TS(2531): Object is possibly 'null'.
                         w = g_confDataNizi[CCharaConfNizi.CONF_ID_KIKO];
                     }
                     if (w > n_A_ActiveSkillLV) {
@@ -10487,8 +10484,7 @@ function BattleCalc999Core(battleCalcInfo, charaData, specData, mobData, attackM
  * @param {*} bLeft
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function BattleCalcSubDamagePhysicalCommon(battleCalcInfo, charaData, specData, mobData, attackMethodConfArray, skillId, dmgUnit, dmgAmp, hitCountArrat, dividedHitCount, bCri, bLeft) {
+function BattleCalcSubDamagePhysicalCommon(battleCalcInfo: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any, skillId: any, dmgUnit: any, dmgAmp: any, hitCountArrat: any, dividedHitCount: any, bCri: any, bLeft: any) {
     var idx = 0;
     var dmgUnitResult = null;
     var dmgPerfect = 0;
@@ -10569,8 +10565,7 @@ function BattleCalcSubDamagePhysicalCommon(battleCalcInfo, charaData, specData, 
  * @param {*} attackMethodConfArray
  * @returns {Number} 加算される倍率％
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function GetBattlerAtkPercentUp(charaData, specData, mobData, attackMethodConfArray) {
+function GetBattlerAtkPercentUp(charaData: any, specData: any, mobData: any, attackMethodConfArray: any) {
     let sklLv = 0;
     /** 最終的に加算される倍率％ */
     let w = 0;
@@ -10593,7 +10588,7 @@ function GetBattlerAtkPercentUp(charaData, specData, mobData, attackMethodConfAr
         w += UsedSkillSearch(SKILL.ID_CONCENTRATION) * 5;
     }
     // 「二次職支援　コンセントレイション」の、効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     else if ((sklLv = g_confDataNizi[CCharaConfNizi.CONF_ID_CONCENTRATION]) > 0) {
         w += sklLv * 5;
     }
@@ -10605,7 +10600,7 @@ function GetBattlerAtkPercentUp(charaData, specData, mobData, attackMethodConfAr
     //----------------------------------------------------------------
     // 「二次職支援　トゥルーサイト」の、効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     else if ((sklLv = g_confDataNizi[CCharaConfNizi.CONF_ID_TRUE_SIGHT]) > 0) {
         w += sklLv * 2;
     }
@@ -10644,9 +10639,9 @@ function GetBattlerAtkPercentUp(charaData, specData, mobData, attackMethodConfAr
                 w += UsedSkillSearch(SKILL.ID_OVER_TRUST) * 5;
             }
             // オーバートラスト（ＰＴ）
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             else if (g_confDataNizi[CCharaConfNizi.CONF_ID_OVER_TRUST]) {
-                // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+                // @ts-expect-error TS(2531): Object is possibly 'null'.
                 w += g_confDataNizi[CCharaConfNizi.CONF_ID_OVER_TRUST] * 5 / 5;
             }
         }
@@ -10689,8 +10684,7 @@ function GetBattlerAtkPercentUp(charaData, specData, mobData, attackMethodConfAr
  * @param {*} wJ 適用前のダメージ倍率
  * @returns 適用後のダメージ倍率
  */
-// @ts-expect-error TS(7006): Parameter 'wJ' implicitly has an 'any' type.
-function ATKbaiJYOUSAN(wJ) {
+function ATKbaiJYOUSAN(wJ: any) {
     var w = 100;
     if (n_A_WeaponType == 11 && UsedSkillSearch(SKILL.ID_KATAR_KENKYU)) {
         w += 10 + 2 * UsedSkillSearch(SKILL.ID_KATAR_KENKYU);
@@ -10714,13 +10708,12 @@ function ATKbaiJYOUSAN(wJ) {
  * @param {*} mobData 対象に応じて倍率を返す場合のパラメータ。無作為に処理する場合は null / undefined でも良い。
  * @returns 加算されるスキル倍率（１００分率）
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetBattlerMatkPercentUp(mobData) {
+function GetBattlerMatkPercentUp(mobData: any) {
     var w = 0;
     // 支援マインドブレイカー
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (g_confDataNizi[CCharaConfNizi.CONF_ID_SHIEN_MIND_BREAKER]) {
-        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         w += 20 * g_confDataNizi[CCharaConfNizi.CONF_ID_SHIEN_MIND_BREAKER];
     }
     if (mobData) {
@@ -10738,8 +10731,7 @@ function GetBattlerMatkPercentUp(mobData) {
  * @param dmg ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonster(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonster(charaData: any, specData: any, mobData: any, dmg: any) {
     // 今後の仕様変更用に、検証処理自体は残しておく
     /*
     if (_MAGIC_CALC_INSPECTION) {
@@ -10872,8 +10864,7 @@ function ApplyMagicalSpecializeMonsterMod20211014(charaData, specData, mobData, 
  * @param dmg ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonster20211117(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonster20211117(charaData: any, specData: any, mobData: any, dmg: any) {
     var idxChar = 0;
     var dmgResult = 0;
     var patternStr = "";
@@ -10927,8 +10918,7 @@ function ApplyMagicalSpecializeMonster20211117(charaData, specData, mobData, dmg
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubMagicalDamageUp(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubMagicalDamageUp(charaData: any, specData: any, mobData: any, dmg: any) {
     if (n_tok[ITEM_SP_MAGICAL_DAMAGE_UP]) {
         dmg = Math.floor(dmg * (100 + n_tok[ITEM_SP_MAGICAL_DAMAGE_UP]) / 100);
     }
@@ -10943,8 +10933,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubMagicalDamageUp(charaData, s
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpiderWebModify(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpiderWebModify(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = GetSpiderWebDamageRatio();
     if (wX != 0) {
         dmg = Math.floor(dmg * (100 + wX) / 100);
@@ -10961,8 +10950,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpiderWebModify(charaData, s
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMap(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMap(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     //--------------------------------
     // マヌク特化
@@ -11595,8 +11583,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMap(charaData, spe
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeRace(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeRace(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     // 対プレイヤーでない場合
     if (mobData[MONSTER_DATA_INDEX_ID] != MONSTER_ID_PLAYER) {
@@ -11638,8 +11625,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeRace(charaData, sp
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeSize(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeSize(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     // 対プレイヤーでない場合
     if (mobData[MONSTER_DATA_INDEX_ID] != MONSTER_ID_PLAYER) {
@@ -11674,8 +11660,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeSize(charaData, sp
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMonsterElement(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMonsterElement(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     wX = n_tok[ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_VANITY + Math.floor(mobData[MONSTER_DATA_INDEX_ELEMENT] / 10)];
     if (wX != 0) {
@@ -11692,8 +11677,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMonsterElement(cha
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMagicElement(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMagicElement(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     // 魔法スキルの場合、処理の途中で武器属性がスキルによって上書きされる
     if (n_A_Weapon_zokusei >= 0) {
@@ -11713,8 +11697,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeMagicElement(chara
  * @param {*} dmg
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeBossType(charaData, specData, mobData, dmg) {
+function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeBossType(charaData: any, specData: any, mobData: any, dmg: any) {
     var wX = 0;
     // ボス特化
     if (mobData[MONSTER_DATA_INDEX_BOSS_TYPE] == 1) {
@@ -11741,8 +11724,7 @@ function ApplyMagicalSpecializeMonsterMod20211014SubSpecializeBossType(charaData
  * @param dmg ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyResistElement(mobData, dmg) {
+function ApplyResistElement(mobData: any, dmg: any) {
     var wX = 0;
     var bufLv = 0;
     // 敵が対プレイヤーの場合、対プレイヤー設定欄のサイズ耐性を適用
@@ -11841,8 +11823,7 @@ function ApplyResistElement(mobData, dmg) {
  * @param {*} w_Tai_DMG
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'w_Tai_DMG' implicitly has an 'any' type... Remove this comment to see the full error message
-function BaiTaisei_A_SP(w_Tai_DMG) {
+function BaiTaisei_A_SP(w_Tai_DMG: any) {
     var wX = n_tok[ITEM_SP_RESIST_SIZE_MEDIUM];
     if (n_A_PassSkill8[13] == 1) wX = n_tok[ITEM_SP_RESIST_SIZE_SMALL];
     w_Tai_DMG -= ROUNDDOWN(w_Tai_DMG * wX / 100);
@@ -11860,8 +11841,7 @@ function BaiTaisei_A_SP(w_Tai_DMG) {
  * @param dmg ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyRegistPVPNormal(mobData, dmg) {
+function ApplyRegistPVPNormal(mobData: any, dmg: any) {
     var wX = 0;
     // 敵が対プレイヤーの場合、対プレイヤー設定欄の人間orドラム形耐性を適用
     if (mobData[0] == MONSTER_ID_PLAYER) {
@@ -11887,8 +11867,7 @@ function ApplyRegistPVPNormal(mobData, dmg) {
  * @param {*} w_Tai_DMG
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function BaiTaisei_C(mobData, w_Tai_DMG) {
+function BaiTaisei_C(mobData: any, w_Tai_DMG: any) {
     var wX = 0;
     if (mobData[0] == MONSTER_ID_PLAYER) wX += n_B_TAISEI[MOB_CONF_PLAYER_ID_NINGEN_KEI_TAISEI];
     w_Tai_DMG -= ROUNDDOWN(w_Tai_DMG * wX / 100);
@@ -11900,8 +11879,7 @@ function BaiTaisei_C(mobData, w_Tai_DMG) {
  * @param dmg ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyRegistPVPEnergyCoat(mobData, dmg) {
+function ApplyRegistPVPEnergyCoat(mobData: any, dmg: any) {
     var wX = 0;
     // 敵が対プレイヤーの場合、対プレイヤー設定欄のエナジーコート効果を適用
     if (mobData[0] == MONSTER_ID_PLAYER) {
@@ -11917,8 +11895,7 @@ function ApplyRegistPVPEnergyCoat(mobData, dmg) {
  * @param {*} w_Tai_DMG
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function BaiTaisei_E(mobData, w_Tai_DMG) {
+function BaiTaisei_E(mobData: any, w_Tai_DMG: any) {
     var wX = 0;
     if (n_Enekyori == 1) {
         wX = 0;
@@ -11936,8 +11913,7 @@ function BaiTaisei_E(mobData, w_Tai_DMG) {
  * @param w_WHO 対象
  * @param ptmCount PT人数
  */
-// @ts-expect-error TS(7006): Parameter 'HealLv' implicitly has an 'any' type.
-function HealCalc(HealLv, HealType, wMinMax, w_WHO, ptmCount) {
+function HealCalc(HealLv: any, HealType: any, wMinMax: any, w_WHO: any, ptmCount: any) {
     const learnedHealLv = Math.max(1, LearnedSkillSearch(SKILL.ID_HEAL));
     var wHeal = 0;
     // H.Plus
@@ -12057,8 +12033,7 @@ function HealCalc(HealLv, HealType, wMinMax, w_WHO, ptmCount) {
  * @param {*} attackMethodConfArray
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function BuildBattleResultHtml(charaData, specData, mobData, attackMethodConfArray) {
+function BuildBattleResultHtml(charaData: any, specData: any, mobData: any, attackMethodConfArray: any) {
     // 命中率が１００％未満の場合、必中ダメージがあれば追加表示
     if (n_PerfectHIT_DMG > 0 && w_HIT_HYOUJI < 100) {
         str_bSUBname += "<Font size=2>Miss時の必中ダメージ</Font>";
@@ -12307,7 +12282,7 @@ function BuildBattleResultHtml(charaData, specData, mobData, attackMethodConfArr
     var agLv = Math.max(
         0,
         UsedSkillSearch(SKILL.ID_AUTO_GUARD),
-        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         g_confDataNizi[CCharaConfNizi.CONF_ID_AUTO_GUARD],
         TimeItemNumSearch(70)
     );
@@ -12371,8 +12346,7 @@ function OnClickTabBTLRSLT(tabIndex) {
  * @param {*} battleCalcResultAll
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConfArray, battleCalcResultAll) {
+function BuildBattleResultHtmlMIG(charaData: any, specData: any, mobData: any, attackMethodConfArray: any, battleCalcResultAll: any) {
 
     // パート定義名
     const PART_ID_STR_BASE = "BTLRSLT_PART_BASE";
@@ -12401,8 +12375,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
 
     var partIdStr = "";
     var uncheckedMap = null;
-    // @ts-expect-error TS(7034): Variable 'refreshCheckboxArray' implicitly has typ... Remove this comment to see the full error message
-    var refreshCheckboxArray = null;
+    var refreshCheckboxArray: any = null;
 
     var criRate = 0;
     var attackCountAve = 0;
@@ -12420,8 +12393,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
     var objGridTiny = null;
 
     // 数値の整形
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcDIG3PX = function (valueF, pointCountF, unitText = "") {
+    var funcDIG3PX = function (valueF: any, pointCountF: any, unitText = "") {
 
         // 数値でない場合はそのまま返す（単位もつけない）
         if (isNaN(valueF)) {
@@ -12447,28 +12419,23 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
         return valueTextF + unitText;
     };
 
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcDIG3PXPercent = function (valueF, pointCountF) {
+    var funcDIG3PXPercent = function (valueF: any, pointCountF: any) {
         return funcDIG3PX(valueF, pointCountF, " %");
     };
 
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcDIG3PXSecond = function (valueF, pointCountF) {
+    var funcDIG3PXSecond = function (valueF: any, pointCountF: any) {
         return funcDIG3PX(valueF, pointCountF, " 秒");
     };
 
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcDIG3PXSecondCompact = function (valueF, pointCountF) {
+    var funcDIG3PXSecondCompact = function (valueF: any, pointCountF: any) {
         return funcDIG3PX(valueF, pointCountF, "秒").replace(/\.?0+秒$/, '秒');
     };
 
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcDIG3PXCount = function (valueF, pointCountF) {
+    var funcDIG3PXCount = function (valueF: any, pointCountF: any) {
         return funcDIG3PX(valueF, pointCountF, (valueF == 1) ? " Hit" : " Hits");
     };
 
-    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-    var funcPerMill = function (valueF) {
+    var funcPerMill = function (valueF: any) {
         var valWorkF = parseInt("" + valueF, 10);
         var retF = valWorkF % 1000;
         // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
@@ -12478,8 +12445,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
         return Number(retF);
     };
 
-    // @ts-expect-error TS(7006): Parameter 'evtF' implicitly has an 'any' type.
-    var funcOnChangeChkPart = function (evtF) {
+    var funcOnChangeChkPart = function (evtF: any) {
 
         var idxF = 0;
 
@@ -12492,8 +12458,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
         }
     };
 
-    // @ts-expect-error TS(7006): Parameter 'evtF' implicitly has an 'any' type.
-    var funcOnChangeDamageDetail = function (evtF) {
+    var funcOnChangeDamageDetail = function (evtF: any) {
 
         var idxF = 0;
 
@@ -12510,8 +12475,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
     };
 
     // チェックボックスの生成
-    // @ts-expect-error TS(7006): Parameter 'objRootF' implicitly has an 'any' type.
-    var funcAppendCheckbox = function (objRootF, idStrF, dispTextF, bUncheckedF, funcOnChange) {
+    var funcAppendCheckbox = function (objRootF: any, idStrF: any, dispTextF: any, bUncheckedF: any, funcOnChange: any) {
 
         var objCheckF = null;
         var objLabelF = null;
@@ -12538,16 +12502,14 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
     };
 
     // スキルダメージブロックの生成
-    // @ts-expect-error TS(7006): Parameter 'objGridF' implicitly has an 'any' type.
-    var funcAddSkillDamageBlock = function (objGridF, battleCalcResultF, bAppendResult) {
+    var funcAddSkillDamageBlock = function (objGridF: any, battleCalcResultF: any, bAppendResult: any) {
 
         var criRateF = 0;
 
         var objCellF = null;
 
         // セルを生成する
-        // @ts-expect-error TS(7006): Parameter 'bTotalFF' implicitly has an 'any' type.
-        var funcCreateCellF = function (bTotalFF) {
+        var funcCreateCellF = function (bTotalFF: any) {
 
             var objCellFF = null;
 
@@ -12561,12 +12523,10 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
         };
 
         // 配列の和を計算する
-        // @ts-expect-error TS(7006): Parameter 'arrayFF' implicitly has an 'any' type.
-        var funcGetSumDmgText = function (arrayFF, funcDigFF, funcDigParamFF) {
+        var funcGetSumDmgText = function (arrayFF: any, funcDigFF: any, funcDigParamFF: any) {
 
             var sumFF = arrayFF.reduce(
-                // @ts-expect-error TS(7006): Parameter 'accFFF' implicitly has an 'any' type.
-                (accFFF, curFFF) => {
+                (accFFF: any, curFFF: any) => {
                     var valFFF = curFFF[0];
                     valFFF *= (curFFF[1] > 1) ? curFFF[1] : 1;
                     valFFF *= (curFFF[2] > 1) ? curFFF[2] : 1;
@@ -12579,11 +12539,9 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
         };
 
         // 結合表示を取得する
-        // @ts-expect-error TS(7006): Parameter 'arrayFF' implicitly has an 'any' type.
-        var funcGetJoinDmgText = function (arrayFF, funcDigFF, funcDigParamFF) {
+        var funcGetJoinDmgText = function (arrayFF: any, funcDigFF: any, funcDigParamFF: any) {
             return arrayFF.reduce(
-                // @ts-expect-error TS(7006): Parameter 'accFFF' implicitly has an 'any' type.
-                (accFFF, curFFF) => {
+                (accFFF: any, curFFF: any) => {
 
                     var valFFF = "";
 
@@ -12609,11 +12567,9 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
 
 
         // 合計ダメージ表示を取得する
-        // @ts-expect-error TS(7006): Parameter 'arrayFF' implicitly has an 'any' type.
-        var funcGetJoinDmgText2 = function (arrayFF, funcDigFF, funcDigParamFF, counts) {
+        var funcGetJoinDmgText2 = function (arrayFF: any, funcDigFF: any, funcDigParamFF: any, counts: any) {
             return arrayFF.reduce(
-                // @ts-expect-error TS(7006): Parameter 'accFFF' implicitly has an 'any' type.
-                (accFFF, curFFF) => {
+                (accFFF: any, curFFF: any) => {
 
                     var valFFF = "";
 
@@ -12788,8 +12744,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
     };
 
     // 簡易戦闘結果
-    // @ts-expect-error TS(7006): Parameter 'objRoot' implicitly has an 'any' type.
-    var funcRenderResultTinyHtml = function (objRoot, labelText, valueText) {
+    var funcRenderResultTinyHtml = function (objRoot: any, labelText: any, valueText: any) {
         var objCell = null;
 
         objCell = HtmlCreateElement("span", objRoot);
@@ -13767,7 +13722,6 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
 
     // 各パートの表示状態の更新
     for (idx = 0; idx < refreshCheckboxArray.length; idx++) {
-        // @ts-expect-error TS(7005): Variable 'refreshCheckboxArray' implicitly has an ... Remove this comment to see the full error message
         refreshCheckboxArray[idx].dispatchEvent(new Event("change"));
     }
 
@@ -14092,8 +14046,7 @@ function BuildBattleResultHtmlMIG(charaData, specData, mobData, attackMethodConf
  * @param {*} objCell
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function BattleHiDam(charaData, specData, mobData, attackMethodConfArray, objCell = null) {
+function BattleHiDam(charaData: any, specData: any, mobData: any, attackMethodConfArray: any, objCell = null) {
 
     var idx = 0;
 
@@ -14946,8 +14899,7 @@ function BattleHiDam(charaData, specData, mobData, attackMethodConfArray, objCel
  * @param {*} objCell
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function BattleHiDamMaxPain(charaData, specData, mobData, attackMethodConfArray, painATK, objCell = null) {
+function BattleHiDamMaxPain(charaData: any, specData: any, mobData: any, attackMethodConfArray: any, painATK: any, objCell = null) {
 
     var idx = 0;
 
@@ -15129,8 +15081,7 @@ function BattleHiDamMaxPain(charaData, specData, mobData, attackMethodConfArray,
  * @param wBMC ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function GetMagicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, mobData) {
+function GetMagicalSkillDamageRatioChange(battleCalcInfo: any, charaData: any, specData: any, mobData: any) {
 
     var valueWork = 0;
 
@@ -16396,8 +16347,7 @@ function GetMagicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, m
  * @param wBMC ダメージ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function ApplyMagicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, mobData, attackMethodConfArray, wBMC) {
+function ApplyMagicalSkillDamageRatioChange(battleCalcInfo: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any, wBMC: any) {
     var w_MDEF = mobData[14];
     var w_MDEF2 = n_B_MDEF2;
     var wBMC2 = Math.floor(wBMC);
@@ -16534,8 +16484,7 @@ function ApplyMagicalSkillDamageRatioChange(battleCalcInfo, charaData, specData,
  * @param カードID
  * @return 倍率
  */
-// @ts-expect-error TS(7006): Parameter 'cardid' implicitly has an 'any' type.
-function ApplyMagicalSkillDamageRatioChangeSubArcanaCard(cardid) {
+function ApplyMagicalSkillDamageRatioChangeSubArcanaCard(cardid: any) {
     var vartmp = 0;
 
     let cardCountArmsRight = CardNumSearch(cardid, CARD_REGION_ID_ARMS_RIGHT_ANY);
@@ -16575,8 +16524,7 @@ function ApplyMagicalSkillDamageRatioChangeSubArcanaCard(cardid) {
  * @param {*} specData
  * @param {*} mobData
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function RebuildActiveSkillRatioInfo(battleCalcInfo, charaData, specData, mobData) {
+function RebuildActiveSkillRatioInfo(battleCalcInfo: any, charaData: any, specData: any, mobData: any) {
 
     var ratioPhysical = 0;
     var ratioMagical = 0;
@@ -16616,8 +16564,7 @@ function RebuildActiveSkillRatioInfo(battleCalcInfo, charaData, specData, mobDat
  * @param {*} mobData
  * @param {*} wRatio
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function RebuildSizeModifyRatioInfo(battleCalcInfo, charaData, specData, mobData, wRatio) {
+function RebuildSizeModifyRatioInfo(battleCalcInfo: any, charaData: any, specData: any, mobData: any, wRatio: any) {
     if (!battleCalcInfo) {
         // @ts-expect-error TS(7009): 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         battleCalcInfo = new CBattleCalcInfo();
@@ -16678,7 +16625,7 @@ export function Click_PassSkillSW() {
                 wOBJ.options[1] = new Option("on", "1");
             }
             else {
-                // @ts-expect-error TS(2531): Object is possibly 'null'.
+                // @ts-expect-error TS(2339): Property 'options' does not exist on type 'HTMLEle... Remove this comment to see the full error message
                 for (var i = 10; i >= 0; i--) if (wOBJ) wOBJ.options[i] = null;
                 if (wOBJ) {
                     for (var i = 0; i <= SkillObjNew[passiveSkillIdArray[j]][SKILL_DATA_INDEX_MAXLV]; i++) {
@@ -17234,8 +17181,7 @@ export function Click_PassSkillSW() {
  * パッシブ持続系の設定変更を反映する
  * @param {*} n 再計算フラグ（1 = 再計算する, 1以外 = 再計算しない）
  */
-// @ts-expect-error TS(7006): Parameter 'n' implicitly has an 'any' type.
-export function Click_A1(n) {
+export function Click_A1(n: any) {
 
     if (n == 1) AutoCalc("Click_A1");
 
@@ -17651,8 +17597,7 @@ function Skill3SW_2() {
  * 演奏/踊り系スキルの変更を反映する
  * @param {*} n 再計算フラグ（n = 1 再計算する）
  */
-// @ts-expect-error TS(7006): Parameter 'n' implicitly has an 'any' type.
-export function Click_A3(n) {
+export function Click_A3(n: any) {
     if (n == 1) AutoCalc("Click_A3");
 
     var sw = 0;
@@ -17783,8 +17728,7 @@ export function Click_Skill4SW() {
  * ギルドスキル/ゴスペル/他の変更を反映する
  * @param {*} n 再計算フラグ（n = 1 再計算する）
  */
-// @ts-expect-error TS(7006): Parameter 'n' implicitly has an 'any' type.
-export function Click_A4(n) {
+export function Click_A4(n: any) {
     if (n == 1) AutoCalc("Click_A4");
 
     var sw = 0;
@@ -18218,8 +18162,7 @@ export function Click_Food_Off() {
  * アイテム(食品/他)の変更を反映する
  * @param {*} n 再計算フラグ（n = 1 再計算する）
  */
-// @ts-expect-error TS(7006): Parameter 'n' implicitly has an 'any' type.
-export function Click_A7(n) {
+export function Click_A7(n: any) {
     if (n == 1) AutoCalc("Click_A7");
 
     var sw = 0;
@@ -18313,8 +18256,7 @@ export function Click_Skill8SW() {
         // ペットのデータを複製して読み仮名ソート
         petDataArrayWork = PET_OBJ.slice();
         petDataArrayWork.sort(
-            // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-            function (a, b) {
+            function (a: any, b: any) {
                 if (a[PET_DATA_INDEX_KANA] < b[PET_DATA_INDEX_KANA]) return -1;
                 if (a[PET_DATA_INDEX_KANA] > b[PET_DATA_INDEX_KANA]) return 1;
                 return 0;
@@ -18446,8 +18388,7 @@ export function Click_Skill8SW() {
  * その他の支援/設定 (暫定追加機能)の変更を反映する
  * @param {*} n 再計算フラグ（n = 1 再計算する）
  */
-// @ts-expect-error TS(7006): Parameter 'n' implicitly has an 'any' type.
-export function Click_A8(n) {
+export function Click_A8(n: any) {
     if (n == 1) AutoCalc("Click_A8");
 
     var sw = 0;
@@ -18477,8 +18418,7 @@ export function Click_A8(n) {
  * @param wSC_Size サイズ補正倍率の基礎値
  * @returns 最終サイズ補正倍率
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetSizeModify(mobData, wSC_Size) {
+function GetSizeModify(mobData: any, wSC_Size: any) {
     let itemCount: number = 0;
 
     // 騎兵修練習得時の、槍装備による、中型の１００％補正
@@ -18499,7 +18439,7 @@ function GetSizeModify(mobData, wSC_Size) {
     }
 
     // 支援ウェポンパーフェクション使用時の、全型１００％補正
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (g_confDataNizi[CCharaConfNizi.CONF_ID_WEAPON_PERFECTION]) {
         wSC_Size = 1;
     }
@@ -18726,8 +18666,7 @@ function GetSizeModify(mobData, wSC_Size) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetBaseRateSandansho(mobData) {
+function GetBaseRateSandansho(mobData: any) {
 
     var sklLv = 0;
     var rate = 0;
@@ -18746,8 +18685,7 @@ function GetBaseRateSandansho(mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetBaseRateFearBleath(mobData) {
+function GetBaseRateFearBleath(mobData: any) {
 
     var aBaserate = [0, 20, 20, 35, 45, 50];		// 基本発動率
 
@@ -18766,8 +18704,7 @@ function GetBaseRateFearBleath(mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetBaseRateDA(mobData) {
+function GetBaseRateDA(mobData: any) {
 
     var rate = 0;
 
@@ -18794,8 +18731,7 @@ function GetBaseRateDA(mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActRateSandansho(skillId, mobData) {
+function GetActRateSandansho(skillId: any, mobData: any) {
 
     switch (skillId) {
         case SKILL.ID_TUZYO_KOGEKI:
@@ -18816,8 +18752,7 @@ function GetActRateSandansho(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateSandansho(skillId, mobData) {
+function GetActHitRateSandansho(skillId: any, mobData: any) {
     return GetActRateSandansho(skillId, mobData) * w_HIT / 100;
 }
 
@@ -18827,8 +18762,7 @@ function GetActHitRateSandansho(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActRateFearBleath(skillId, mobData) {
+function GetActRateFearBleath(skillId: any, mobData: any) {
 
     var rate = 0;
 
@@ -18845,8 +18779,7 @@ function GetActRateFearBleath(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateFearBleath(skillId, mobData) {
+function GetActHitRateFearBleath(skillId: any, mobData: any) {
 
     var rate = GetActRateFearBleath(skillId, mobData);
 
@@ -18864,8 +18797,7 @@ function GetActHitRateFearBleath(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActRateDA(skillId, mobData) {
+function GetActRateDA(skillId: any, mobData: any) {
 
     var rate = 0;
 
@@ -18882,8 +18814,7 @@ function GetActRateDA(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateDA(skillId, mobData) {
+function GetActHitRateDA(skillId: any, mobData: any) {
 
     var rate = GetActRateDA(skillId, mobData);
 
@@ -18901,8 +18832,7 @@ function GetActHitRateDA(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActRateCritical(skillId, mobData) {
+function GetActRateCritical(skillId: any, mobData: any) {
 
     var rate = 0;
 
@@ -18917,8 +18847,7 @@ function GetActRateCritical(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateCritical(skillId, mobData) {
+function GetActHitRateCritical(skillId: any, mobData: any) {
 
     var rate = GetActRateCritical(skillId, mobData);
 
@@ -18936,8 +18865,7 @@ function GetActHitRateCritical(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActRateNormal(skillId, mobData) {
+function GetActRateNormal(skillId: any, mobData: any) {
 
     var rate = 0;
 
@@ -18952,8 +18880,7 @@ function GetActRateNormal(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateNormal(skillId, mobData) {
+function GetActHitRateNormal(skillId: any, mobData: any) {
 
     var rate = GetActRateNormal(skillId, mobData);
 
@@ -18971,8 +18898,7 @@ function GetActHitRateNormal(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetActHitRateAll(skillId, mobData) {
+function GetActHitRateAll(skillId: any, mobData: any) {
 
     var rate = 0;
 
@@ -19000,8 +18926,7 @@ function GetActHitRateAll(skillId, mobData) {
  * @param {*} mobData
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetIkariPow(mobData) {
+function GetIkariPow(mobData: any) {
 
     // ○○の怒り系によるＡＴＫ増加効果
     var bEffective = false;
@@ -19120,8 +19045,7 @@ function GetIkariPow(mobData) {
  * 		CAttackMethodAreaComponentManager.OnChangeAttackMethodOption: 攻撃手段オプション
  * 			CAttackMethodAreaComponentManager.OnChangeAttackMethod	: 自動計算のON/OFF
  */
-// @ts-expect-error TS(7006): Parameter 'callFrom' implicitly has an 'any' type.
-export function AutoCalc(callFrom) {
+export function AutoCalc(callFrom: any) {
     // 自動設定が有効の場合のみ、再計算する
     var autoCalcFlag = HtmlGetObjectValueByIdAsInteger("OBJID_INPUT_ATTACK_METHOD_AUTO_CALC", 0);
     switch (autoCalcFlag) {
@@ -20015,12 +19939,9 @@ export function calc() {
  * @param {*} bLeft
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'strdex' implicitly has an 'any' type.
-function GetWeaponAtk(strdex, strBonus, armsType, armsLv, armsAtk, sizeModify,
-    // @ts-expect-error TS(7006): Parameter 'refineAtk' implicitly has an 'any' type... Remove this comment to see the full error message
-    refineAtk, exRefineAtkMin, exRefineAtkMax, tsuchifuAtkRate,
-    // @ts-expect-error TS(7006): Parameter 'atkSkillId' implicitly has an 'any' typ... Remove this comment to see the full error message
-    atkSkillId, mobData, bCri, bEQ, bGX, bLeft) {
+function GetWeaponAtk(strdex: any, strBonus: any, armsType: any, armsLv: any, armsAtk: any, sizeModify: any,
+    refineAtk: any, exRefineAtkMin: any, exRefineAtkMax: any, tsuchifuAtkRate: any,
+    atkSkillId: any, mobData: any, bCri: any, bEQ: any, bGX: any, bLeft: any) {
 
     var idx = 0;
 
@@ -20193,8 +20114,7 @@ function GetWeaponAtk(strdex, strBonus, armsType, armsLv, armsAtk, sizeModify,
 
         let appendDamageElement = ELM_ID_VANITY;
         let appendDamageRate = 0;
-        // @ts-expect-error TS(7006): Parameter 'elmIdF' implicitly has an 'any' type.
-        let funcSelectAppendDamage = (elmIdF, rateF) => {
+        let funcSelectAppendDamage = (elmIdF: any, rateF: any) => {
             if (rateF > appendDamageRate) {
                 appendDamageRate = rateF;
                 appendDamageElement = elmIdF;
@@ -20346,8 +20266,7 @@ function GetWeaponAtk(strdex, strBonus, armsType, armsLv, armsAtk, sizeModify,
  * @param {*} dmg ダメージ
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function _SUB_ApplyMonsterDefence(mobData, dmg) {
+function _SUB_ApplyMonsterDefence(mobData: any, dmg: any) {
 
     var bPenetrate = false;
 
@@ -20423,8 +20342,7 @@ function _SUB_ApplyMonsterDefence(mobData, dmg) {
  * @param {*} lefthand 二刀左手フラグ（0以外:二刀左手、0:その他）
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyMonsterDefence(mobData, dmg, lefthand) {
+function ApplyMonsterDefence(mobData: any, dmg: any, lefthand: any) {
 
     // モンスターの防御力を適用
     dmg = _SUB_ApplyMonsterDefence(mobData, dmg);
@@ -20469,8 +20387,7 @@ function ApplyMonsterDefence(mobData, dmg, lefthand) {
  * @param {*} bArmsLeft
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function TYPE_SYUUREN(mobData, attackMethodConfArray, bArmsLeft) {
+function TYPE_SYUUREN(mobData: any, attackMethodConfArray: any, bArmsLeft: any) {
     if (NumSearch(n_A_ActiveSkillIdNum, n_SP_SKILL) != 0) return 0;
     var w = 0;
     //----------------------------------------------------------------
@@ -20637,18 +20554,18 @@ function TYPE_SYUUREN(mobData, attackMethodConfArray, bArmsLeft) {
     //----------------------------------------------------------------
     // 「二次職支援　イムポシティオマヌス」の効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (g_confDataNizi[CCharaConfNizi.CONF_ID_IMPOSITIO_MANUS]) {
-        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         w += g_confDataNizi[CCharaConfNizi.CONF_ID_IMPOSITIO_MANUS] * 5;
     }
 
     //----------------------------------------------------------------
     // 「二次職支援　ボルケーノ」の効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI] == CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI_VOLCANO) {
-        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         w += g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_LEVEL] * 5;
     }
 
@@ -20660,7 +20577,7 @@ function TYPE_SYUUREN(mobData, attackMethodConfArray, bArmsLeft) {
         w += 3 * UsedSkillSearch(SKILL.ID_KIKO);
     }
     else {
-        // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+        // @ts-expect-error TS(2531): Object is possibly 'null'.
         w += 3 * g_confDataNizi[CCharaConfNizi.CONF_ID_KIKO];
     }
 
@@ -20675,7 +20592,7 @@ function TYPE_SYUUREN(mobData, attackMethodConfArray, bArmsLeft) {
                 w -= 3 * UsedSkillSearch(SKILL.ID_KIKO);
             }
             else {
-                // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+                // @ts-expect-error TS(2531): Object is possibly 'null'.
                 w -= 3 * g_confDataNizi[CCharaConfNizi.CONF_ID_KIKO];
             }
         }
@@ -20748,8 +20665,7 @@ function TYPE_SYUUREN(mobData, attackMethodConfArray, bArmsLeft) {
  * @param {*} elmIdDefault
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'itemRegionIdArray' implicitly has an 'a... Remove this comment to see the full error message
-function GetArmsElementBySPData(itemRegionIdArray, cardRegionIdArray, elmIdDefault = ELM_ID_VANITY) {
+function GetArmsElementBySPData(itemRegionIdArray: any, cardRegionIdArray: any, elmIdDefault = ELM_ID_VANITY) {
     var idx = 0;
     var idxRegion = 0;
     var itemId = 0;
@@ -20798,8 +20714,7 @@ function GetArmsElementBySPData(itemRegionIdArray, cardRegionIdArray, elmIdDefau
  * @param {*} mobData
  * @param {*} attackMethodConfArray
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function SET_ZOKUSEI(mobData, attackMethodConfArray) {
+function SET_ZOKUSEI(mobData: any, attackMethodConfArray: any) {
     var itemRegionIdArray = null;
     var cardRegionIdArray = null;
     var bApplyArrowElement = false;
@@ -21082,38 +20997,37 @@ function SET_ZOKUSEI(mobData, attackMethodConfArray) {
  * @param {*} elmId 属性ＩＤ
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyElementRatio(mobData, wpnAtk, elmId) {
+function ApplyElementRatio(mobData: any, wpnAtk: any, elmId: any) {
 
     var elmRatio = zokusei[mobData[18]][elmId];
 
     // 属性場の適用
-    // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
     if (g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_LEVEL] >= 1) {
 
         var baizok = [0, 10, 14, 17, 19, 20];
 
         // 火属性武器、かつ、ボルケーノ
         if (n_A_Weapon_zokusei == ELM_ID_FIRE
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             && g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI] == CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI_VOLCANO) {
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             elmRatio += baizok[g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_LEVEL]];
         }
 
         // 水属性武器、かつ、デリュージ
         if (n_A_Weapon_zokusei == ELM_ID_WATER
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             && g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI] == CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI_DELUGE) {
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             elmRatio += baizok[g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_LEVEL]];
         }
 
         // 風属性武器、かつ、バイオレントゲイル
         if (n_A_Weapon_zokusei == ELM_ID_WIND
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             && g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI] == CCharaConfNizi.CONF_ID_ZOKUSEIBA_SHURUI_VIOLENT_GALE) {
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             elmRatio += baizok[g_confDataNizi[CCharaConfNizi.CONF_ID_ZOKUSEIBA_LEVEL]];
         }
     }
@@ -21199,8 +21113,7 @@ function GetHitModify() {
  * @param {*} attackMethodConfArray
  * @returns 必中ダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function GetPerfectHitDamage(charaData, specData, mobData, attackMethodConfArray) {
+function GetPerfectHitDamage(charaData: any, specData: any, mobData: any, attackMethodConfArray: any) {
     var w999 = 0;
     // 素手、かつ、スパート状態の場合、特定スキルに必中攻撃力を追加
     if (n_A_WeaponType == ITEM_KIND_NONE && UsedSkillSearch(SKILL.ID_TAIRIGI)) {
@@ -21329,8 +21242,7 @@ function GetPerfectHitDamage(charaData, specData, mobData, attackMethodConfArray
  * @param mobData 相手データ
  * @return 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function ApplyHitJudgeElementRatio(skillId, dam, mobData) {
+function ApplyHitJudgeElementRatio(skillId: any, dam: any, mobData: any) {
 
     switch (skillId) {
 
@@ -21366,8 +21278,7 @@ function ApplyHitJudgeElementRatio(skillId, dam, mobData) {
  * @param {*} dmg 適用する前のダメージ
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-export function ApplyPhysicalSpecializeMonster(charaData, specData, mobData, dmg) {
+export function ApplyPhysicalSpecializeMonster(charaData: any, specData: any, mobData: any, dmg: any) {
 
     //--------------------------------
     // 種族特化
@@ -22298,8 +22209,7 @@ function GetElementFieldDamageRatio() {
  * @param {*} bCri
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function ApplyPhysicalDamageRatio(battleCalcInfo, charaData, specData, mobData, dmg, bCri) {
+function ApplyPhysicalDamageRatio(battleCalcInfo: any, charaData: any, specData: any, mobData: any, dmg: any, bCri: any) {
 
     var criDmgUp = 0;
 
@@ -22390,8 +22300,7 @@ function ApplyPhysicalDamageRatio(battleCalcInfo, charaData, specData, mobData, 
  * @param {*} mobData
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function GetPhysicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, mobData) {
+function GetPhysicalSkillDamageRatioChange(battleCalcInfo: any, charaData: any, specData: any, mobData: any) {
 
     //********************************************************************************************************************************
     //********************************************************************************************************************************
@@ -25599,8 +25508,7 @@ function GetPhysicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, 
  * @param {*} bLeft
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'battleCalcInfo' implicitly has an 'any'... Remove this comment to see the full error message
-function ApplyPhysicalSkillDamageRatioChange(battleCalcInfo, charaData, specData, mobData, dmg, dmgType, bCri, bLeft) {
+function ApplyPhysicalSkillDamageRatioChange(battleCalcInfo: any, charaData: any, specData: any, mobData: any, dmg: any, dmgType: any, bCri: any, bLeft: any) {
 
     var w1 = 0;
 
@@ -25880,8 +25788,7 @@ function ApplyPhysicalSkillDamageRatioChange(battleCalcInfo, charaData, specData
  * @param {*} cardid カードID
  * @returns 倍率
  */
-// @ts-expect-error TS(7006): Parameter 'cardid' implicitly has an 'any' type.
-function ApplyPhysicalSkillDamageRatioChangeSubArcanaCard(cardid) {
+function ApplyPhysicalSkillDamageRatioChangeSubArcanaCard(cardid: any) {
     var vartmp = 0;
 
     let cardCountArmsRight = CardNumSearch(cardid, CARD_REGION_ID_ARMS_RIGHT_ANY);
@@ -25920,8 +25827,7 @@ function ApplyPhysicalSkillDamageRatioChangeSubArcanaCard(cardid) {
  * @param {*} dmg ダメージ
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyLexAeterna(mobData, dmg) {
+function ApplyLexAeterna(mobData: any, dmg: any) {
 
     // TODO : 謎判定
     if (!n_AS_MODE) {
@@ -25961,8 +25867,7 @@ function ApplyLexAeterna(mobData, dmg) {
  * @param {*} dmgNormal
  * @returns ダメージ期待値
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function CalcMeanDamage(skillId, charaData, specData, mobData, attackMethodConfArray, dmgSandansho, dmgFearBleath, dmgCritical, dmgNormal) {
+function CalcMeanDamage(skillId: any, charaData: any, specData: any, mobData: any, attackMethodConfArray: any, dmgSandansho: any, dmgFearBleath: any, dmgCritical: any, dmgNormal: any) {
 
     // 三段掌　ダメージ倍率期待値
     var meanDmgSandansho = GetActHitRateSandansho(skillId, mobData) * dmgSandansho;
@@ -26001,8 +25906,7 @@ function CalcMeanDamage(skillId, charaData, specData, mobData, attackMethodConfA
  * @param {*} dmg ダメージ
  * @returns ダメージ期待値
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function CalcMeanDamageLeftHand(skillId, mobData, dmg) {
+function CalcMeanDamageLeftHand(skillId: any, mobData: any, dmg: any) {
 
     var meanDmgNormal = dmg * (100 - GetActHitRateSandansho(skillId, mobData)) * w_HIT / 100 / 100;
     var meanDmgAll = meanDmgNormal;
@@ -26041,7 +25945,7 @@ export function UsedSkillSearch(sklId: any, bOnlyUsed: boolean = false) {
 
         // 魔法力増幅
         case SKILL.ID_MAHORYOKU_ZOFUKU:
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             if ((sklLv = g_confDataNizi[CCharaConfNizi.CONF_ID_MAHORYOKU_ZOFUKU]) > 0) {
                 effectivLvArray.push(sklLv);
             }
@@ -26050,7 +25954,7 @@ export function UsedSkillSearch(sklId: any, bOnlyUsed: boolean = false) {
 
         // オーラブレイド
         case SKILL.ID_AURA_BLADE:
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             if ((sklLv = g_confDataNizi[CCharaConfNizi.CONF_ID_AURA_BLADE]) > 0) {
                 effectivLvArray.push(sklLv);
             }
@@ -26068,7 +25972,7 @@ export function UsedSkillSearch(sklId: any, bOnlyUsed: boolean = false) {
 
         // 金剛
         case SKILL.ID_KONGO:
-            // @ts-expect-error TS(7005): Variable 'g_confDataNizi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2531): Object is possibly 'null'.
             if ((sklLv = g_confDataNizi[CCharaConfNizi.CONF_ID_KONGO]) > 0) {
                 effectivLvArray.push(sklLv);
             }
@@ -26279,8 +26183,7 @@ export function UsedSkillSearch(sklId: any, bOnlyUsed: boolean = false) {
  * @param {*} sklId 確認するスキル
  * @returns 設定されているLv
  */
-// @ts-expect-error TS(7006): Parameter 'sklId' implicitly has an 'any' type.
-function UsedSkillSearchSubUsedOnly(sklId) {
+function UsedSkillSearchSubUsedOnly(sklId: any) {
     var idx = 0;
     // 通常スキル欄
     var passiveSkillIdArray = g_constDataManager.GetDataObject(CONST_DATA_KIND_JOB, n_A_JOB).GetPassiveSkillIdArray();
@@ -26303,8 +26206,7 @@ function UsedSkillSearchSubUsedOnly(sklId) {
  * @param {*} x_HIT
  * @returns 固定追加攻撃力
  */
-// @ts-expect-error TS(7006): Parameter 'skillId' implicitly has an 'any' type.
-function GetFixedAppendAtk(skillId, charaData, specData, mobData, w_DAM, ch_MAXMIN, x_HIT) {
+function GetFixedAppendAtk(skillId: any, charaData: any, specData: any, mobData: any, w_DAM: any, ch_MAXMIN: any, x_HIT: any) {
 
     var atkAuraBlade = 0;
     var atkEnchantBlade = 0;
@@ -26384,8 +26286,7 @@ function GetFixedAppendAtk(skillId, charaData, specData, mobData, w_DAM, ch_MAXM
  *詠唱時間とディレイを計算し、表示部を組み立てる
  * @param {*} mobData
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function BuildCastAndDelayHtml(mobData) {
+function BuildCastAndDelayHtml(mobData: any) {
     BuildCastAndDelayHtmlMIG(mobData);
 }
 
@@ -26393,8 +26294,7 @@ function BuildCastAndDelayHtml(mobData) {
  * 詠唱時間とディレイを計算し、引数の戦闘結果に格納する
  * @param {*} mobData
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function BuildCastAndDelayHtmlMIG(mobData) {
+function BuildCastAndDelayHtmlMIG(mobData: any) {
 
     var scaling = 0;
     var spTag = null;
@@ -26658,8 +26558,7 @@ function BuildResistElementTinyHtml() {
  * @param {*} dmg ダメージ
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyAttackDamageAmplify(mobData, dmg) {
+function ApplyAttackDamageAmplify(mobData: any, dmg: any) {
 
     var dmgAmp = 0;
 
@@ -26838,8 +26737,7 @@ function ApplyAttackDamageAmplify(mobData, dmg) {
  * @param {*} dmg ダメージ
  * @returns 適用後のダメージ
  */
-// @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyReceiveDamageAmplify(mobData, dmg) {
+function ApplyReceiveDamageAmplify(mobData: any, dmg: any) {
 
     var dmgAmp = 0;
 

@@ -2,68 +2,54 @@
  * 設置スキル計算用クラス
  */
 const instobject = class {
+    casttime: any;
+    cooltime: any;
+    delay: any;
+    depth: any;
+    endtime: any;
+    interval: any;
+    maxcount: any;
+    maxhit: any;
+    now: any;
+    skillinterval: any;
+    starttime: any;
+    undertime: any;
     lifetime: any;
     constructor() {
-        // @ts-expect-error TS(2339): Property 'depth' does not exist on type 'instobjec... Remove this comment to see the full error message
         this.depth = 0;
-        // @ts-expect-error TS(2339): Property 'maxcount' does not exist on type 'instob... Remove this comment to see the full error message
         this.maxcount = 0;
-        // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
         this.starttime = 0.0;
-        // @ts-expect-error TS(2339): Property 'now' does not exist on type 'instobject'... Remove this comment to see the full error message
         this.now = 0.0;
-        // @ts-expect-error TS(2339): Property 'endtime' does not exist on type 'instobj... Remove this comment to see the full error message
         this.endtime = 0.0;
-        // @ts-expect-error TS(2339): Property 'casttime' does not exist on type 'instob... Remove this comment to see the full error message
         this.casttime = 0.0;
-        // @ts-expect-error TS(2339): Property 'delay' does not exist on type 'instobjec... Remove this comment to see the full error message
         this.delay = 0.0;
-        // @ts-expect-error TS(2339): Property 'cooltime' does not exist on type 'instob... Remove this comment to see the full error message
         this.cooltime = 0.0;
         this.lifetime = 0.0;
-        // @ts-expect-error TS(2339): Property 'interval' does not exist on type 'instob... Remove this comment to see the full error message
         this.interval = 0.0;
-        // @ts-expect-error TS(2339): Property 'maxhit' does not exist on type 'instobje... Remove this comment to see the full error message
         this.maxhit = 0;//スキル１回分のhit回数
-        // @ts-expect-error TS(2339): Property 'skillinterval' does not exist on type 'i... Remove this comment to see the full error message
         this.skillinterval = 0.0;
-        // @ts-expect-error TS(2339): Property 'undertime' does not exist on type 'insto... Remove this comment to see the full error message
         this.undertime = 0.0;
     }
 
-    // @ts-expect-error TS(7006): Parameter 'depth' implicitly has an 'any' type.
-    init(depth, maxcount, starttime, casttime, delay, cooltime, lifetime, interval) {
-        // @ts-expect-error TS(2339): Property 'depth' does not exist on type 'instobjec... Remove this comment to see the full error message
+    init(depth: any, maxcount: any, starttime: any, casttime: any, delay: any, cooltime: any, lifetime: any, interval: any) {
         this.depth = depth;
-        // @ts-expect-error TS(2339): Property 'maxcount' does not exist on type 'instob... Remove this comment to see the full error message
         this.maxcount = maxcount;
-        // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
         this.starttime = this.now = starttime;
-        // @ts-expect-error TS(2339): Property 'casttime' does not exist on type 'instob... Remove this comment to see the full error message
         this.casttime = casttime;
-        // @ts-expect-error TS(2339): Property 'delay' does not exist on type 'instobjec... Remove this comment to see the full error message
         this.delay = delay;
-        // @ts-expect-error TS(2339): Property 'cooltime' does not exist on type 'instob... Remove this comment to see the full error message
         this.cooltime = cooltime;
         this.lifetime = lifetime;
-        // @ts-expect-error TS(2339): Property 'interval' does not exist on type 'instob... Remove this comment to see the full error message
         this.interval = interval;
         //
-        // @ts-expect-error TS(2339): Property 'maxhit' does not exist on type 'instobje... Remove this comment to see the full error message
         this.maxhit = this.lifetime / this.interval;
-        // @ts-expect-error TS(2339): Property 'undertime' does not exist on type 'insto... Remove this comment to see the full error message
         this.undertime = this.lifetime - ((this.delay > this.cooltime) ? this.delay : this.cooltime);//undertime が正数なら、削られる時間。負数なら、増える時間。
-        // @ts-expect-error TS(2339): Property 'skillinterval' does not exist on type 'i... Remove this comment to see the full error message
         this.skillinterval = this.casttime + (this.lifetime - this.undertime);
     }
 
-    // @ts-expect-error TS(7006): Parameter 'now' implicitly has an 'any' type.
-    getHitCount(now) {
+    getHitCount(now: any) {
         var t;
-        // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
         t = now - (this.starttime + this.casttime);//オブジェクト設置開始時刻
         if (t < 0) return 0;
-        // @ts-expect-error TS(2339): Property 'interval' does not exist on type 'instob... Remove this comment to see the full error message
         return ((Math.floor(t / this.interval) + 1) <= this.maxhit) ? (Math.floor(t / this.interval) + 1) : this.maxhit;
     }
 
@@ -71,19 +57,14 @@ const instobject = class {
         var tc = 0;
         var cur = 0;
         for (var i = InstObjArray.length - 1; i >= 0; i--) {
-            // @ts-expect-error TS(7005): Variable 'InstObjArray' implicitly has an 'any' ty... Remove this comment to see the full error message
             cur = InstObjArray[i].getHitCount(this.now);
-            // @ts-expect-error TS(2339): Property 'maxhit' does not exist on type 'instobje... Remove this comment to see the full error message
             if (cur == this.maxhit) {
-                // @ts-expect-error TS(7005): Variable 'InstObjArray' implicitly has an 'any' ty... Remove this comment to see the full error message
                 InstObjArray.splice(i, 1);//これ以上Hitの増えない要素を削除する
-                // @ts-expect-error TS(7005): Variable 'InstObjReleasedCount' implicitly has an ... Remove this comment to see the full error message
                 InstObjReleasedCount += this.maxhit;
             } else {
                 tc += cur;
             }
         }
-        // @ts-expect-error TS(7005): Variable 'InstObjReleasedCount' implicitly has an ... Remove this comment to see the full error message
         tc += InstObjReleasedCount;
         return tc;
     }
@@ -93,32 +74,23 @@ const instobject = class {
         var t0;
 
         //コールスタック安全装置
-        // @ts-expect-error TS(2339): Property 'depth' does not exist on type 'instobjec... Remove this comment to see the full error message
         if (this.depth >= 1000) {
             InstObjIsApproximate = true;
-            // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
             InstObjFinalTime = this.starttime;
             InstObjFinalCount = this.getTotalCount();
             return true;
         }
-        // @ts-expect-error TS(2339): Property 'maxhit' does not exist on type 'instobje... Remove this comment to see the full error message
         for (i = 0; i < this.maxhit; i++) {
-            // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
             t0 = this.starttime + this.casttime + (this.interval * i);
-            // @ts-expect-error TS(2339): Property 'now' does not exist on type 'instobject'... Remove this comment to see the full error message
             this.now = t0;
-            // @ts-expect-error TS(2339): Property 'maxcount' does not exist on type 'instob... Remove this comment to see the full error message
             if (this.getTotalCount() >= this.maxcount) {//gettotalcount()では、このインスタンスの分も計算される
                 InstObjFinalTime = t0;
                 return true;//終了
             }
             //インターバル１個増やしたら、次のオブジェクトができる時間に届いたか超えた
-            // @ts-expect-error TS(2339): Property 'starttime' does not exist on type 'insto... Remove this comment to see the full error message
             if ((this.starttime + this.skillinterval) <= t0) {
                 InstObjArray.push(new instobject());
-                // @ts-expect-error TS(7005): Variable 'InstObjArray' implicitly has an 'any' ty... Remove this comment to see the full error message
                 InstObjArray[InstObjArray.length - 1].init(this.depth + 1, this.maxcount, this.starttime + this.skillinterval, this.casttime, this.delay, this.cooltime, this.lifetime, this.interval);
-                // @ts-expect-error TS(7005): Variable 'InstObjArray' implicitly has an 'any' ty... Remove this comment to see the full error message
                 if (InstObjArray[InstObjArray.length - 1].exec() == true) {
                     return true;//終了
                 }
@@ -128,11 +100,9 @@ const instobject = class {
     }
 }
 
-// @ts-expect-error TS(7034): Variable 'InstObjArray' implicitly has type 'any' ... Remove this comment to see the full error message
-var InstObjArray;//設置スキル計算オブジェクトの配列
+var InstObjArray: any;//設置スキル計算オブジェクトの配列
 var InstObjFinalTime;//設置スキルオブジェクトによる計算の結果
-// @ts-expect-error TS(7034): Variable 'InstObjReleasedCount' implicitly has typ... Remove this comment to see the full error message
-var InstObjReleasedCount;//設置スキルオブジェクトの計算中に解放されたインスタンスの分のHitカウントの総数
+var InstObjReleasedCount: any;//設置スキルオブジェクトの計算中に解放されたインスタンスの分のHitカウントの総数
 var InstObjIsApproximate;//概算モードフラグ（コールスタック安全のために、再帰階層が限界値を超えた場合に真になる）
 var InstObjFinalCount;//概算モードの際に用いる、処理中段時点までのHITの総数
 
@@ -141,7 +111,7 @@ var InstObjFinalCount;//概算モードの際に用いる、処理中段時点�
 /**
  * 戦闘結果クラス（全体）.
  */
-function CBattleCalcResultAll() {
+function CBattleCalcResultAll(this: any) {
 
     //================================================================
     //
@@ -150,15 +120,12 @@ function CBattleCalcResultAll() {
     //================================================================
 
     // キャラ情報
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.charaData = null;
 
     // 能力情報
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.specData = null;
 
     // 攻撃対象情報
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.mobData = null;
 
 
@@ -174,19 +141,16 @@ function CBattleCalcResultAll() {
     //--------------------------------
     // パッシブ攻撃配列
     //--------------------------------
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.passiveResultArray = null;
 
     //--------------------------------
     // アクティブ攻撃配列
     //--------------------------------
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.activeResultArray = null;
 
     //--------------------------------
     // 確率追撃攻撃配列（オートスペル等）
     //--------------------------------
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.appendResultArray = null;
 
 
@@ -206,25 +170,18 @@ function CBattleCalcResultAll() {
     /**
      * 無名イニシャライザ.
      */
-    (function () {
+    ((function (this: any) {
 
         // データを初期化
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.charaData = null;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.specData = null;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.mobData = null;
 
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.passiveResultArray = [];
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.activeResultArray = [];
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.appendResultArray = [];
 
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    }).call(this);
+    })).call(this);
 
 
 
@@ -233,8 +190,7 @@ function CBattleCalcResultAll() {
      * @param skillIdParent 親となるスキルID（親がない場合は undefined）
      * @param result パッシブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.AddPassiveResult = function (skillIdParent, result) {
+    this.AddPassiveResult = function (skillIdParent: any, result: any) {
 
         var idx = 0;
 
@@ -258,8 +214,7 @@ function CBattleCalcResultAll() {
      * @param idx インデックス
      * @return パッシブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.GetPassiveResult = function (idx) {
+    this.GetPassiveResult = function (idx: any) {
 
         // 範囲チェック
         if ((idx < 0) || (this.passiveResultArray.length <= idx)) {
@@ -273,7 +228,6 @@ function CBattleCalcResultAll() {
      * パッシブ攻撃の結果データ数を取得する.
      * @param パッシブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetPassiveResultCount = function () {
         return this.passiveResultArray.length;
     };
@@ -285,8 +239,7 @@ function CBattleCalcResultAll() {
      * @param skillIdParent 親となるスキルID（親がない場合は undefined）
      * @param result アクティブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.AddActiveResult = function (skillIdParent, result) {
+    this.AddActiveResult = function (skillIdParent: any, result: any) {
 
         var idx = 0;
 
@@ -310,8 +263,7 @@ function CBattleCalcResultAll() {
      * @param idx インデックス
      * @return アクティブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.GetActiveResult = function (idx) {
+    this.GetActiveResult = function (idx: any) {
 
         // 範囲チェック
         if ((idx < 0) || (this.activeResultArray.length <= idx)) {
@@ -325,7 +277,6 @@ function CBattleCalcResultAll() {
      * アクティブ攻撃の結果データ数を取得する.
      * @param アクティブ攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetActiveResultCount = function () {
         return this.activeResultArray.length;
     };
@@ -337,8 +288,7 @@ function CBattleCalcResultAll() {
      * @param skillIdParent 親となるスキルID（親がない場合は undefined）
      * @param result 確率追撃攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.AddAppendResult = function (skillIdParent, result) {
+    this.AddAppendResult = function (skillIdParent: any, result: any) {
 
         var idx = 0;
 
@@ -362,8 +312,7 @@ function CBattleCalcResultAll() {
      * @param idx インデックス
      * @return 確率追撃攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.GetAppendResult = function (idx) {
+    this.GetAppendResult = function (idx: any) {
 
         // 範囲チェック
         if ((idx < 0) || (this.appendResultArray.length <= idx)) {
@@ -377,7 +326,6 @@ function CBattleCalcResultAll() {
      * 確率追撃攻撃の結果データ数を取得する.
      * @param 確率追撃攻撃の結果データ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAppendResultCount = function () {
         return this.appendResultArray.length;
     };
@@ -389,7 +337,6 @@ function CBattleCalcResultAll() {
      * 攻撃間隔の取得.
      * @return 概算攻撃間隔
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackInterval = function () {
 
         var resultWork = null;
@@ -416,7 +363,6 @@ function CBattleCalcResultAll() {
      * １HITごとの攻撃間隔の取得.
      * @return １HITごとの攻撃間隔（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetHitInterval = function () {
 
         var resultWork = null;
@@ -437,8 +383,7 @@ function CBattleCalcResultAll() {
      * スキル１回分のHIT回数の取得.
      * @return HIT回数
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.GetSkillCount = function (atkcnt) {
+    this.GetSkillCount = function (atkcnt: any) {
 
         var resultWork = null;
 
@@ -458,7 +403,6 @@ function CBattleCalcResultAll() {
      * 変動＋固定詠唱時間の取得.
      * @return 変動＋固定詠唱時間（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetCastTime = function () {
 
         var resultWork = null;
@@ -480,7 +424,6 @@ function CBattleCalcResultAll() {
      * オブジェクト維持時間を返す.
      * @return オブジェクト維持時間（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetLifeTime = function () {
         var resultWork = null;
         var lifetime = 0;
@@ -503,7 +446,6 @@ function CBattleCalcResultAll() {
      * ディレイまたはクールタイムがオブジェクト維持時間より小さい場合に、その時間を返す.
      * @return ディレイまたはクールタイムがオブジェクト維持時間より小さい場合の時間（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetUnderLifeTime = function () {
         var resultWork = null;
         var lifetime = 0;
@@ -536,7 +478,6 @@ function CBattleCalcResultAll() {
      * ディレイまたはクールタイムがオブジェクト維持時間より大きい場合に、その時間を返す.
      * @return ディレイまたはクールタイムがオブジェクト維持時間より大きい場合の時間（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetOverLifeTime = function () {
         var resultWork = null;
         var lifetime = 0;
@@ -569,7 +510,6 @@ function CBattleCalcResultAll() {
      * ディレイを返す.
      * @return ディレイ（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDelayTime = function () {
         var resultWork = null;
         var lifetime = 0;
@@ -594,7 +534,6 @@ function CBattleCalcResultAll() {
      * クールタイムを返す.
      * @return クールタイム（秒）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetCoolTime = function () {
         var resultWork = null;
         var lifetime = 0;
@@ -619,7 +558,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（一撃最小）の取得.
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryMinPerAtk = function () {
 
         var idx = 0;
@@ -664,7 +602,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（一撃平均）の取得.
      * @return 概算ダメージ（平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryAvePerAtk = function () {
 
         var idx = 0;
@@ -700,7 +637,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（一撃最大）の取得.
      * @return 概算ダメージ（最大）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryMaxPerAtk = function () {
 
         var idx = 0;
@@ -746,7 +682,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（秒間最小）の取得.
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryMinPerSec = function () {
 
         var idx = 0;
@@ -797,7 +732,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（秒間平均）の取得.
      * @return 概算ダメージ（平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryAvePerSec = function () {
         var idx = 0;
         var dmg = 0;
@@ -836,7 +770,6 @@ function CBattleCalcResultAll() {
      * 概算ダメージ（秒間最大）の取得.
      * @return 概算ダメージ（最大）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDamageSummaryMaxPerSec = function () {
         var idx = 0;
         var dmg = 0;
@@ -886,7 +819,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃回数（最小）の取得.
      * @return 概算攻撃回数（最小）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackCountSummaryMin = function () {
 
         var dmg = this.GetDamageSummaryMaxPerAtk();
@@ -903,7 +835,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃回数（平均）の取得.
      * @return 概算攻撃回数（平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackCountSummaryAve = function () {
 
         var dmg = this.GetDamageSummaryAvePerAtk();
@@ -920,7 +851,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃回数（最大）の取得.
      * @return 概算攻撃回数（最大）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackCountSummaryMax = function () {
 
         var dmg = this.GetDamageSummaryMinPerAtk();
@@ -939,7 +869,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（最小）の取得.
      * @return 概算攻撃秒数（最小）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryMin = function () {
 
         var dmg = this.GetDamageSummaryMaxPerAtk();
@@ -956,7 +885,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（平均）の取得.
      * @return 概算攻撃秒数（平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryAve = function () {
 
         var dmg = this.GetDamageSummaryAvePerAtk();
@@ -973,7 +901,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（最大）の取得.
      * @return 概算攻撃秒数（最大）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryMax = function () {
 
         var dmg = this.GetDamageSummaryMinPerAtk();
@@ -992,7 +919,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（最小）の取得（オブジェクト維持時間とHITインターバルのあるスキル用）.
      * @return 概算攻撃秒数（最小）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryMinInterval = function () {
         var dmg = this.GetDamageSummaryMaxPerAtk();
 
@@ -1077,7 +1003,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（平均）の取得（オブジェクト維持時間とHITインターバルのあるスキル用）.
      * @return 概算攻撃秒数（平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryAveInterval = function () {
         var dmg = this.GetDamageSummaryAvePerAtk();
 
@@ -1162,7 +1087,6 @@ function CBattleCalcResultAll() {
      * 概算攻撃秒数（最大）の取得（オブジェクト維持時間とHITインターバルのあるスキル用）.
      * @return 概算攻撃秒数（最大）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetAttackSecondSummaryMaxInterval = function () {
         var dmg = this.GetDamageSummaryMinPerAtk();
 
@@ -1249,7 +1173,6 @@ function CBattleCalcResultAll() {
      * 概算経験値効率（Base、一撃平均）の取得.
      * @return 概算経験値効率（Base、一撃平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetBaseExpPerAtk = function () {
 
         var cnt = this.GetAttackCountSummaryAve();
@@ -1266,7 +1189,6 @@ function CBattleCalcResultAll() {
      * 概算経験値効率（Job、一撃平均）の取得.
      * @return 概算経験値効率（Job、一撃平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetJobExpPerAtk = function () {
 
         var cnt = this.GetAttackCountSummaryAve();
@@ -1283,7 +1205,6 @@ function CBattleCalcResultAll() {
      * 概算経験値効率（Base、秒間平均）の取得.
      * @return 概算経験値効率（Base、秒間平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetBaseExpPerSec = function () {
 
         var sec = this.GetAttackSecondSummaryAve();
@@ -1300,7 +1221,6 @@ function CBattleCalcResultAll() {
      * 概算経験値効率（Job、秒間平均）の取得.
      * @return 概算経験値効率（Job、秒間平均）
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetJobExpPerSec = function () {
 
         var sec = this.GetAttackSecondSummaryAve();
@@ -1321,7 +1241,6 @@ function CBattleCalcResultAll() {
      * 複製する.
      * @return 複製されたインスタンス
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.Clone = function () {
 
         var idx = 0;

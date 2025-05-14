@@ -95,8 +95,7 @@ export class CSaveController {
      * @param {string} dataText データテキスト
      * @returns サニタイズされたデータテキスト
      */
-    // @ts-expect-error TS(7006): Parameter 'dataText' implicitly has an 'any' type.
-    static sanitizeDataText(dataText) {
+    static sanitizeDataText(dataText: any) {
         const regDataText = /[^-_\.\~a-zA-Z0-9]/g;
         return dataText.replaceAll(regDataText, "");
     }
@@ -108,12 +107,11 @@ export class CSaveController {
      * @param {string} saveName 入力された名前文字列
      * @returns エンコードされた文字列
      */
-    // @ts-expect-error TS(7006): Parameter 'saveName' implicitly has an 'any' type.
-    static encodeSaveName(saveName) {
+    static encodeSaveName(saveName: any) {
 
         // 名前が未設定の場合は、職業とレベルを設定する
         if (saveName.length == 0) {
-            // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+            // @ts-expect-error TS(2304): Cannot find name 'GetJobName'.
             saveName = (GetJobName(n_A_JOB) + "(Lv" + n_A_BaseLV + ")");
         }
 
@@ -145,8 +143,7 @@ export class CSaveController {
      * @param {string} saveName エンコードされた名前文字列
      * @returns デコードされた文字列
      */
-    // @ts-expect-error TS(7006): Parameter 'saveName' implicitly has an 'any' type.
-    static decodeSaveName(saveName) {
+    static decodeSaveName(saveName: any) {
 
         const codePointArray = [];
         for (let idx = 0; idx < saveName.length; idx += 4) {
@@ -177,8 +174,7 @@ export class CSaveController {
      * @param {int} index 取得するインデックス（０オリジン）
      * @returns {string} キャラクター名
      */
-    // @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
-    static getDisplayName(index) {
+    static getDisplayName(index: any) {
 
         // ストレージデータ配列の範囲外の場合は、処理不可
         if ((index < 0) || (index >= this.#charaDataArray.length)) {
@@ -208,8 +204,7 @@ export class CSaveController {
      * @param {string} propName プロパティ名
      * @returns 指定のプロパティ:データがある場合、undefined:データがない場合
      */
-    // @ts-expect-error TS(7006): Parameter 'propName' implicitly has an 'any' type.
-    static getSettingProp(propName) {
+    static getSettingProp(propName: any) {
         return this.#settingDataUnit ? this.#settingDataUnit.getProp(propName) : undefined;
     }
 
@@ -218,8 +213,7 @@ export class CSaveController {
      * @param {string} propName プロパティ名
      * @param {int} propValue プロパティ値
      */
-    // @ts-expect-error TS(7006): Parameter 'propName' implicitly has an 'any' type.
-    static setSettingProp(propName, propValue) {
+    static setSettingProp(propName: any, propValue: any) {
 
         if (!this.#settingDataUnit) {
             return;
@@ -237,8 +231,7 @@ export class CSaveController {
      * @param {string} charaName キャラクター名（空文字列可）
      * @returns {string} セレクトボックス表示用キャラクター名
      */
-    // @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
-    static saveCharaData(index, charaName) {
+    static saveCharaData(index: any, charaName: any) {
 
         // ストレージデータ配列の範囲外の場合は、処理不可
         if ((index < 0) || (index >= this.#charaDataArray.length)) {
@@ -267,8 +260,7 @@ export class CSaveController {
      * @param {*} index
      * @returns {string[2]} [セーブデータ名, セーブデータ文字列]
      */
-    // @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
-    static getSaveData(index) {
+    static getSaveData(index: any) {
         // ストレージデータ配列の範囲外の場合は、処理不可
         if ((index < 0) || (index >= this.#charaDataArray.length)) {
             return "";
@@ -286,8 +278,7 @@ export class CSaveController {
      * @param {int} index ロードするインデックス（０オリジン）
      * @returns {string} キャラクター名
      */
-    // @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
-    static loadCharaData(index) {
+    static loadCharaData(index: any) {
 
         // ストレージデータ配列の範囲外の場合は、処理不可
         if ((index < 0) || (index >= this.#charaDataArray.length)) {
@@ -315,8 +306,7 @@ export class CSaveController {
      * @param {int} index 削除するインデックス（０オリジン）
      * @returns {string} セレクトボックス表示用キャラクター名
      */
-    // @ts-expect-error TS(7006): Parameter 'index' implicitly has an 'any' type.
-    static deleteCharaData(index) {
+    static deleteCharaData(index: any) {
 
         // ストレージデータ配列の範囲外の場合は、処理不可
         if ((index < 0) || (index >= this.#charaDataArray.length)) {
@@ -364,8 +354,7 @@ export class CSaveController {
      * URLからデータを読み込む.
      * @param {string} urlText データURL文字列（クエリ部分のみ）
      */
-    // @ts-expect-error TS(7006): Parameter 'urlText' implicitly has an 'any' type.
-    static loadFromURL(urlText) {
+    static loadFromURL(urlText: any) {
 
         // サニタイジング
         let dataText = this.sanitizeDataText(urlText);
@@ -407,8 +396,7 @@ export class CSaveController {
      * @param {string} type ストレージタイプ（"localStorage" or "sessionStorage"）
      * @returns true:使用可能、false:使用不可
      */
-    // @ts-expect-error TS(7006): Parameter 'type' implicitly has an 'any' type.
-    static isAvailableBrowserStorage(type) {
+    static isAvailableBrowserStorage(type: any) {
 
         try {
 
@@ -567,8 +555,7 @@ export class CSaveController {
         return this.#saveDataManagerCur;
     }
 
-    // @ts-expect-error TS(7006): Parameter 'manager' implicitly has an 'any' type.
-    static setSaveDataManagerCur(manager) {
+    static setSaveDataManagerCur(manager: any) {
         this.#saveDataManagerCur = manager;
     }
 

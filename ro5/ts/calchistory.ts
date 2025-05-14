@@ -103,7 +103,7 @@ div.clip_memo {
             return items[0].dataset.metadata[items[0].parsed.x].memo;
         };
         const ctx = document.getElementById("history_graph") as HTMLCanvasElement;
-        // @ts-ignore
+        // @ts-expect-error TS(2552): Cannot find name 'Chart'. Did you mean 'chart'?
         const chart = new Chart(ctx, {
             type: 'line',
             data: data,
@@ -144,16 +144,14 @@ div.clip_memo {
                     }
                 },
                 onClick: (e: any) => {
-                    // @ts-ignore
+                    // @ts-expect-error TS(2552): Cannot find name 'Chart'. Did you mean 'chart'?
                     const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
                     const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
                     if (chart.data.datasets[0].data.length > dataX) {
-                        // @ts-ignore
                         const url = chart.data.datasets[0].metadata[Math.abs(dataX)]["url"];
                         CSaveController.loadFromURL(url);
-                        // @ts-ignore
                         CItemInfoManager.OnClickExtractSwitch();
-                        // @ts-ignore
+                        // @ts-expect-error TS(2304): Cannot find name 'LoadSelect2'.
                         LoadSelect2();
                     }
                 }

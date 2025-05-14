@@ -173,8 +173,7 @@ function OnClickUrlInMIG() {
 /**
  * セーブデータ形式を新形式へ変換する（旧DecodeURLの一部）.
  */
-// @ts-expect-error TS(7006): Parameter 'loadDataUrl' implicitly has an 'any' ty... Remove this comment to see the full error message
-export function ConvertDataTextMIG(loadDataUrl) {
+export function ConvertDataTextMIG(loadDataUrl: any) {
 
     let idx = 0;
     let pos = 0;
@@ -198,7 +197,7 @@ export function ConvertDataTextMIG(loadDataUrl) {
     //----------------------------------------------------------------
     // カレントバージョンのデータ長定義を取得し、配列領域を用意
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'MallocArray'.
+    // @ts-expect-error TS(2304): Cannot find name 'CSaveDataMappingManager'.
     saveDataArray = MallocArray(CSaveDataMappingManager.GetMappingArray(CURRENT_VERSION).length, 0);
 
 
@@ -314,8 +313,7 @@ export function ConvertDataTextMIG(loadDataUrl) {
  * @param 展開済みセーブデータ文字列
  * @return データ長が合わせられたセーブデータ文字列
  */
-// @ts-expect-error TS(7006): Parameter 'saveDataStrExtracted' implicitly has an... Remove this comment to see the full error message
-function AdaptSaveDataStrSizeMIG(saveDataStrExtracted) {
+function AdaptSaveDataStrSizeMIG(saveDataStrExtracted: any) {
 
     var idx = 0;
 
@@ -362,8 +360,7 @@ function AdaptSaveDataStrSizeMIG(saveDataStrExtracted) {
  * @param {string} wstr 旧形式のデータURL文字列
  * @returns 展開後のデータURL文字列
  */
-// @ts-expect-error TS(7006): Parameter 'wstr' implicitly has an 'any' type.
-function SaveDataChangeMIG(wstr) {
+function SaveDataChangeMIG(wstr: any) {
 
     let regNum = /^(\D*)(\d+)(.*?)$/;
 

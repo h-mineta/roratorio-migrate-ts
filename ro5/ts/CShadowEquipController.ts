@@ -88,8 +88,7 @@ export class CShadowEquipController {
      * 有効な装備箇所名の配列を取得する.
      * @param {boolean} bDualArms 二刀流フラグ
      */
-    // @ts-expect-error TS(7006): Parameter 'bDualShadowArms' implicitly has an 'any... Remove this comment to see the full error message
-    static getEqprgnNames(bDualShadowArms) {
+    static getEqprgnNames(bDualShadowArms: any) {
 
         // シャドウ装備二刀流の場合
         // @ts-expect-error TS(2304): Cannot find name 'bDualArms'.
@@ -160,8 +159,7 @@ export class CShadowEquipController {
      * @param {string} eqprgnName 装備箇所名
      * @returns {HtmlElement} ブロック全体のHTMLオブジェクト
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    #getEquipBlockHTML(eqprgnName) {
+    #getEquipBlockHTML(eqprgnName: any) {
 
         // ルート要素の取得
         const objRoot = document.getElementById("OBJID_SHADOW_EQUIPS_MIG");
@@ -202,10 +200,10 @@ export class CShadowEquipController {
         for (let idx = 0; idx < kindIdArray.length; idx++) {
 
             const kindId = kindIdArray[idx];
-            // @ts-expect-error TS(2304): Cannot find name 'g_ItemIdArrayByKind'.
+            // @ts-expect-error TS(2552): Cannot find name 'g_ItemIdArrayByKind'. Did you me... Remove this comment to see the full error message
             const filtered = g_ItemIdArrayByKind[kindId].filter(
-                // @ts-expect-error TS(7006): Parameter 'itemId' implicitly has an 'any' type.
-                (itemId) => IsMatchJobRestrict(itemId, n_A_JOB)
+                // @ts-expect-error TS(2304): Cannot find name 'IsMatchJobRestrict'.
+                (itemId: any) => IsMatchJobRestrict(itemId, n_A_JOB)
             );
 
             // 未選択を追加
@@ -243,8 +241,7 @@ export class CShadowEquipController {
      * @param {boolean} bDisplay 表示フラグ
      * @returns {int} 装備可能アイテムの数
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    #rebuildBlock(eqprgnName, itemIdArray) {
+    #rebuildBlock(eqprgnName: any, itemIdArray: any) {
 
         // ブロック全体を取得
         const objEquipBlock = this.#getEquipBlockHTML(eqprgnName);
@@ -276,8 +273,7 @@ export class CShadowEquipController {
      * @param {Array} itemIdArray 装備可能アイテムIDの配列
      * @returns 選択欄の選択肢の数
      */
-    // @ts-expect-error TS(7006): Parameter 'objEquipBlock' implicitly has an 'any' ... Remove this comment to see the full error message
-    #rebuildShadowSelectSubItem(objEquipBlock, itemIdArray) {
+    #rebuildShadowSelectSubItem(objEquipBlock: any, itemIdArray: any) {
 
         // アイテム設定ブロックを取得
         const objItemConf = objEquipBlock.querySelector(":scope .item-conf");
@@ -319,8 +315,7 @@ export class CShadowEquipController {
      * シャドウ装備の変更イベントハンドラ.
      * @param {Event} evt イベントオブジェクト
      */
-    // @ts-expect-error TS(7006): Parameter 'evt' implicitly has an 'any' type.
-    onChangeShadow(evt) {
+    onChangeShadow(evt: any) {
 
         const objTarget = evt.target;
         const selectedValue = objTarget.value;
@@ -357,8 +352,7 @@ export class CShadowEquipController {
      * @param {int} itemId 変更後のアイテムID
      * @returns 変更前の値、または、undefined
      */
-    // @ts-expect-error TS(7006): Parameter 'objEquipBlock' implicitly has an 'any' ... Remove this comment to see the full error message
-    #changeShadowItem(objEquipBlock, newValue) {
+    #changeShadowItem(objEquipBlock: any, newValue: any) {
 
         //--------------------------------
         // アイテムの設定
@@ -429,8 +423,7 @@ export class CShadowEquipController {
      * @param {int} newValue 変更後の値
      * @returns 変更前の値、または、undefined
      */
-    // @ts-expect-error TS(7006): Parameter 'objTarget' implicitly has an 'any' type... Remove this comment to see the full error message
-    #changeRefined(objTarget, newValue) {
+    #changeRefined(objTarget: any, newValue: any) {
 
         // 値変更
         // @ts-expect-error TS(2304): Cannot find name 'HtmlSelectObjectValueAsInteger'.
@@ -448,8 +441,7 @@ export class CShadowEquipController {
      * @param {int} newValue 変更後の値
      * @returns 変更前の値、または、undefined
      */
-    // @ts-expect-error TS(7006): Parameter 'objTarget' implicitly has an 'any' type... Remove this comment to see the full error message
-    #changeRndOptKind(objTarget, newValue) {
+    #changeRndOptKind(objTarget: any, newValue: any) {
 
         // 値変更
         // @ts-expect-error TS(2304): Cannot find name 'HtmlSelectObjectValueAsInteger'.
@@ -474,8 +466,7 @@ export class CShadowEquipController {
      * @param {int} newValue 変更後の値
      * @returns 変更前の値、または、undefined
      */
-    // @ts-expect-error TS(7006): Parameter 'objTarget' implicitly has an 'any' type... Remove this comment to see the full error message
-    #changeRndOptValue(objTarget, newValue) {
+    #changeRndOptValue(objTarget: any, newValue: any) {
 
         // 値変更
         // @ts-expect-error TS(2304): Cannot find name 'HtmlSelectObjectValueAsInteger'.
@@ -496,8 +487,7 @@ export class CShadowEquipController {
      * @param {int} refined 精錬値
      * @param {Array} rndOptInfoArray ランダムオプション情報（[[RndOptID, 値], [], ...]）
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    onLoadShadow(eqprgnName, itemId, refined, rndOptInfoArray) {
+    onLoadShadow(eqprgnName: any, itemId: any, refined: any, rndOptInfoArray: any) {
 
         // ブロック全体を取得
         const objEquipBlock = this.#getEquipBlockHTML(eqprgnName);
@@ -532,8 +522,7 @@ export class CShadowEquipController {
      * @param {string} eqprgnName 装備箇所名
      * @returns {int} 装備ID
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    getEquippedID(eqprgnName) {
+    getEquippedID(eqprgnName: any) {
 
         // ブロック全体を取得
         const objEquipBlock = this.#getEquipBlockHTML(eqprgnName);
@@ -555,8 +544,7 @@ export class CShadowEquipController {
      * @param {string} eqprgnName 装備箇所名
      * @returns {int} 精錬値
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    getRefined(eqprgnName) {
+    getRefined(eqprgnName: any) {
 
         // ブロック全体を取得
         const objEquipBlock = this.#getEquipBlockHTML(eqprgnName);
@@ -578,8 +566,7 @@ export class CShadowEquipController {
      * @param {string} eqprgnName 装備箇所名
      * @returns {Array} [[種別ID, 値], [], ...]
      */
-    // @ts-expect-error TS(7006): Parameter 'eqprgnName' implicitly has an 'any' typ... Remove this comment to see the full error message
-    getRndOptInfoArray(eqprgnName) {
+    getRndOptInfoArray(eqprgnName: any) {
 
         // ブロック全体を取得
         const objEquipBlock = this.#getEquipBlockHTML(eqprgnName);

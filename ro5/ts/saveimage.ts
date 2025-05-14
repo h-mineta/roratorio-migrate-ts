@@ -71,14 +71,12 @@ $(function () {
     }
     const randopt = (id: any) => {
         let text = "[ ";
-        // @ts-expect-error TS(2304): Cannot find name 'options'.
-        let options = []
+        let options: any = []
         g_equipRndOptTable[id].forEach((value: any) => {
             if (value[0] != 0) {
                 options.push(GetRndOptDispName(g_rndOptArray[value[0]][RND_OPT_DATA_INDEX_SPID]) + " " + value[1])
             }
         });
-        // @ts-expect-error TS(2304): Cannot find name 'text'.
         text += options.join(", ")
         text += " ]";
         return text;
@@ -128,13 +126,13 @@ $(function () {
         let regist_elm_vanity = [];
         let elm_ratio = [];
         let regist_ratio = [];
-        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_COUNT'.
+        // @ts-expect-error TS(2304): Cannot find name 'idx'.
         for (idx = 0; idx < ELM_ID_COUNT; idx++) {
-            // @ts-expect-error TS(2304): Cannot find name 'regist_elm_vanity'.
+            // @ts-expect-error TS(2304): Cannot find name 'idx'.
             regist_elm_vanity[idx] = n_tok[ITEM_SP_RESIST_ELM_VANITY + idx];
-            // @ts-expect-error TS(2304): Cannot find name 'elm_ratio'.
+            // @ts-expect-error TS(2304): Cannot find name 'idx'.
             elm_ratio[idx] = zokusei[n_A_BodyZokusei * 10 + 1][idx] + 100;
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
+            // @ts-expect-error TS(2304): Cannot find name 'idx'.
             regist_ratio[idx] = Math.floor(elm_ratio[idx] - Math.floor(regist_elm_vanity[idx] * elm_ratio[idx]) / 100);
         }
         // @ts-expect-error TS(2304): Cannot find name 'tpl'.
@@ -635,7 +633,7 @@ $(function () {
         $(".content").append(div);
         // @ts-expect-error TS(2304): Cannot find name 'dd'.
         dd = $("#equip dd");
-        // @ts-expect-error TS(2304): Cannot find name 'dd'.
+        // @ts-expect-error TS(2304): Cannot find name 'i'.
         for (i = 0; i < dd.length; i++) {
             // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
             $(dd[i]).text($(dd[i]).text().replace(/ *\(\+\d+以上\)/g, ""))

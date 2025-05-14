@@ -30,7 +30,7 @@ export function RebuildStatusSelect(jobId) {
     HtmlRemoveOptionAll(objDex);
     HtmlRemoveOptionAll(objLuk);
 
-    // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+    // @ts-expect-error TS(2304): Cannot find name 'GetStatusMax'.
     stMax = GetStatusMax(n_A_JOB, n_A_PassSkill8[13]);
 
     for (st = 1; st <= stMax; st++) {
@@ -163,7 +163,7 @@ export function CalcStatusPoint(bIgnoreAutoCalc) {
 
     // 初期ステータスポイントの決定
     var stPointEarned = 48;
-    // @ts-expect-error TS(2304): Cannot find name 'n_A_PassSkill8'.
+    // @ts-expect-error TS(2304): Cannot find name 'IsReincarnatedJob'.
     if (IsReincarnatedJob(jobId) && n_A_PassSkill8[13] == 0) {
         stPointEarned = 100;
     }
@@ -204,9 +204,9 @@ export function CalcStatusPoint(bIgnoreAutoCalc) {
         document.calcForm.A_BaseLV.value = blv - 1;
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'myInnerHtml'.
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     myInnerHtml("A_STPOINT", stPointEarned - stPointUsed, 0);
-    // @ts-expect-error TS(2304): Cannot find name 'myInnerHtml'.
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     myInnerHtml("OBJID_SPAN_STATUS_T_STATUS_POINT", stTSPointEarned - stTSPointUsed, 0);
 
     // 特性ステータス仮処理
@@ -613,7 +613,7 @@ export function GetPAtk() {
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CON) / 5);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_P_ATK_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_P_ATK_PLUS];
     value += GetEquippedTotalSPEquip(ITEM_SP_P_ATK_PLUS);
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_P_ATK_PLUS);
@@ -625,7 +625,7 @@ export function GetPAtk() {
     value += g_objCharaConfCustomSpecStatus.GetConf(CCharaConfCustomSpecStatus.CONF_ID_P_ATK_PLUS)
 
     // 「インペリアルガード」スキル「アタックスタンス」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ATTACK_STANCE'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
         // 盾装備時限定
@@ -635,19 +635,19 @@ export function GetPAtk() {
     }
 
     // 「アビスチェイサー」スキル「アビススレイヤー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ABYSS_SLAYER'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_ABYSS_SLAYER)) > 0) {
         value += 2 * sklLv;
     }
 
     // 「インクイジター」スキル「強靭な信念」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_KYOZINNA_SHINNEN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_KYOZINNA_SHINNEN)) > 0) {
         value += [0, 1, 3, 5, 10, 15][sklLv];
     }
 
     // 「トルバドゥール／トルヴェール」スキル「ステージマナー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_STAGE_MANNER'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_STAGE_MANNER)) > 0) {
 
         // 弓・楽器・鞭装備時装備時限定
@@ -661,21 +661,21 @@ export function GetPAtk() {
     }
 
     // 「天帝」スキル「兵法修練」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HYOHO_SHUREN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_HYOHO_SHUREN)) > 0) {
         value += (1 * Math.min(5, sklLv)) + (2 * Math.min(5, Math.max(0, sklLv - 5)));
     }
 
     // 四次職支援「コンペテンティア」による効果
     // SKILL_ID_CONPETENTIA
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_CONPETENTIA' does not exist on t... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CONPETENTIA]) > 0) {
         value += 20 + 2 * bufLv;
     }
 
     // 四次職支援「プロンテラマーチ」による効果
     // 「自身の周辺31 x 31セルにトルバドゥールかトルヴェールの異性のパーティーメンバーがいる場合、P.Atk増加量が 1.5倍になる」効果は未実装
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_PRONTERA_MARCH' does not exist o... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_PRONTERA_MARCH]) > 0) {
         const values = [0, 1, 3, 5, 8, 12];
         if (bufLv < values.length) {
@@ -684,37 +684,37 @@ export function GetPAtk() {
     }
 
     // 四次職支援「武士符」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_BUSHI_FU' does not exist on type... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_BUSHI_FU]) > 0) {
         value += 2 * bufLv;
     }
 
     // 「スピリットハンドラー」スキル「スピリットマスタリー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SPIRIT_MASTERY'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_SPIRIT_MASTERY)) > 0) {
         value += [0, 1, 2, 3, 4, 5, 6, 7, 9, 12, 15][sklLv];
     }
 
     // 「スピリットハンドラー」スキル「三霊一体」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SANREI_ITTAI'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_SANREI_ITTAI)) > 0) {
         value += 3 * sklLv;
     }
 
     // 「スピリットハンドラー」スキル「にゃんブレッシング」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_NYAN_BRESSING' does not exist on... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_NYAN_BRESSING]) > 0) {
         value += 5 * bufLv;
     }
 
     // 「ハイパーノービス」スキル「独学 -戦闘学-」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_DOKUGAKU_SENTOGAKU'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_DOKUGAKU_SENTOGAKU)) > 0) {
         value += [0, 1, 2, 3, 4, 5, 6, 7, 9, 12, 15][sklLv];
     }
 
     // 「ナイトウォッチ」スキル「P.F.I」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_PFI'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_PFI)) > 0) {
         // 銃装備時のみ
         switch (n_A_WeaponType) {
@@ -729,7 +729,7 @@ export function GetPAtk() {
     }
 
     // 「ナイトウォッチ」スキル「ヒドゥンカード」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HIDDEN_CARD'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_HIDDEN_CARD)) > 0) {
         value += sklLv + 5;
     }
@@ -749,7 +749,7 @@ export function GetSMatk() {
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CON) / 5);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_S_MATK_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_S_MATK_PLUS];
     value += GetEquippedTotalSPEquip(ITEM_SP_S_MATK_PLUS);
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_S_MATK_PLUS);
@@ -761,13 +761,13 @@ export function GetSMatk() {
     value += g_objCharaConfCustomSpecStatus.GetConf(CCharaConfCustomSpecStatus.CONF_ID_S_MATK_PLUS)
 
     // アークメイジスキル「両手杖修練」
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_RYOTETUSE_SHUREN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_RYOTETUSE_SHUREN)) > 0) {
 
         // 両手杖時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
+        // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_STUFF'.
         if (n_A_WeaponType == ITEM_KIND_STUFF) {
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_STUFF2HAND'.
+            // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
             if (n_tok[ITEM_SP_STUFF2HAND]) {
 
                 valWork = 2 * sklLv - 1;
@@ -788,7 +788,7 @@ export function GetSMatk() {
     }
 
     // 「インペリアルガード」スキル「アタックスタンス」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ATTACK_STANCE'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
         // 盾装備時限定
@@ -798,13 +798,13 @@ export function GetSMatk() {
     }
 
     // 「アビスチェイサー」スキル「アビススレイヤー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ABYSS_SLAYER'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_ABYSS_SLAYER)) > 0) {
         value += 2 * sklLv;
     }
 
     // 「トルバドゥール／トルヴェール」スキル「ステージマナー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_STAGE_MANNER'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_STAGE_MANNER)) > 0) {
 
         // 弓・楽器・鞭装備時装備時限定
@@ -818,33 +818,33 @@ export function GetSMatk() {
     }
 
     // 「ソウルアセティック」スキル「護符修練」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_GOFU_SHUREN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_GOFU_SHUREN)) > 0) {
         value += 1 * sklLv;
     }
 
     // 「ソウルアセティック」スキル「四方五行陣状態」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SHIHO_FU_ZYOTAI'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_SHIHO_FU_ZYOTAI)) >= 5) {
         value += 2 * (sklLv - 4);
     }
 
     // 四次職支援「コンペテンティア」による効果
     // SKILL_ID_CONPETENTIA
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_CONPETENTIA' does not exist on t... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CONPETENTIA]) > 0) {
         value += 20 + 2 * bufLv;
     }
 
     // 四次職支援「スペルエンチャンティング」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_SPELL_ENCHANTING' does not exist... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_SPELL_ENCHANTING]) > 0) {
         value += 5 * bufLv;
     }
 
     // 四次職支援「夕焼けのセレナーデ」による効果
     // 「自身の周辺31 x 31セルにトルバドゥールかトルヴェールの異性のパーティーメンバーがいる場合、S.Matk増加量が 1.5倍になる」効果は未実装
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_YUYAKENO_SERENADE' does not exis... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_YUYAKENO_SERENADE]) > 0) {
         const values = [0, 1, 3, 5, 8, 12];
         if (bufLv < values.length) {
@@ -853,31 +853,31 @@ export function GetSMatk() {
     }
 
     // 四次職支援「法師符」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_HOSHI_FU' does not exist on type... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_HOSHI_FU]) > 0) {
         value += 2 * bufLv;
     }
 
     // 「スピリットハンドラー」スキル「スピリットマスタリー」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SPIRIT_MASTERY'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_SPIRIT_MASTERY)) > 0) {
         value += [0, 1, 2, 3, 4, 5, 6, 7, 9, 12, 15][sklLv];
     }
 
     // 「スピリットハンドラー」スキル「三霊一体」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SANREI_ITTAI'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_SANREI_ITTAI)) > 0) {
         value += 3 * sklLv;
     }
 
     // 「スピリットハンドラー」スキル「にゃんブレッシング」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_NYAN_BRESSING' does not exist on... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_NYAN_BRESSING]) > 0) {
         value += 5 * bufLv;
     }
 
     // 「ハイパーノービス」スキル「独学 -魔導学-」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_DOKUGAKU_MADOGAKU'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_DOKUGAKU_MADOGAKU)) > 0) {
         value += [0, 1, 2, 3, 4, 5, 6, 7, 9, 12, 15][sklLv];
     }
@@ -897,7 +897,7 @@ export function GetCRate() {
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CRT) / 3);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_C_RATE_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_C_RATE_PLUS];
     value += GetEquippedTotalSPEquip(ITEM_SP_C_RATE_PLUS);
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_C_RATE_PLUS);
@@ -910,7 +910,7 @@ export function GetCRate() {
 
     // 四次職支援「プレセンスアキエース」による効果
     // SKILL_ID_PRESENSE_AKYACE
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_PRESENSE_AKYACE' does not exist ... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_PRESENSE_AKYACE]) > 0) {
         value += 5 * bufLv;
     }
@@ -934,7 +934,7 @@ export function GetRes() {
     value += 5 * Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_STA) / 3);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_RES_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_RES_PLUS];
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_RES_PLUS);
@@ -944,7 +944,7 @@ export function GetRes() {
     value += g_objCharaConfCustomSpecStatus.GetConf(CCharaConfCustomSpecStatus.CONF_ID_RES_PLUS)
 
     // 「インペリアルガード」スキル「盾修練」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_TATE_SHUREN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_TATE_SHUREN)) > 0) {
 
         // 盾装備時限定
@@ -954,20 +954,20 @@ export function GetRes() {
     }
 
     // 「インクイジター」スキル「堅固な信念」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_KENKONA_SHINNEN'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_KENKONA_SHINNEN)) > 0) {
         value += [0, 10, 20, 40, 70, 100][sklLv];
     }
 
     // 四次職支援「防御装置有効化」による効果
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2551): Property 'CONF_ID_BOGYO_SOCHI_YUKOKA' does not exi... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_BOGYO_SOCHI_YUKOKA]) > 0) {
         value += [0, 20, 30, 40, 60, 100][bufLv];
     }
 
     // 四次職支援「ミュージカルインタールード」による効果
     // 「自身の周辺31 x 31セルにトルバドゥールかトルヴェールの異性のパーティーメンバーがいる場合、Res増加量が 1.5倍になる」効果は未実装
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_MUSICAL_INTERLUDE' does not exis... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_MUSICAL_INTERLUDE]) > 0) {
         const values = [0, 20, 30, 40, 60, 100];
         if (bufLv < values.length) {
@@ -991,7 +991,7 @@ export function GetMres() {
     value += 5 * Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_WIS) / 3);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MRES_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_MRES_PLUS];
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_MRES_PLUS);
@@ -1016,7 +1016,7 @@ export function GetHPlus() {
     value += GetTotalSpecStatus(MIG_PARAM_ID_CRT);
 
     // 装備効果
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_H_PLUS_PLUS'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     value += n_tok[ITEM_SP_H_PLUS_PLUS];
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_H_PLUS_PLUS);
@@ -1047,18 +1047,18 @@ export function GetMobRes(mobData) {
     ignore = 0;
 
     // アイテム特性による効果（とりあえず全種族だけ対応）
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_IGNORE_RES_RACE_ALL'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     ignore += n_tok[ITEM_SP_IGNORE_RES_RACE_ALL];
 
     // 四次職支援「アルグトゥステルム」による効果
     // SKILL_ID_ARUGUTUS_TERUM
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_ARUGUTUS_TERUM' does not exist o... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_ARUGUTUS_TERUM]) > 0) {
         ignore += 5 * bufLv;
     }
 
     // シャドウクロス「ポテントベナム」による効果
-    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_POTENT_VENOM'.
+    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
     if ((bufLv = UsedSkillSearch(SKILL_ID_POTENT_VENOM)) > 0) {
         ignore += 20 + bufLv;
     }
@@ -1088,12 +1088,12 @@ export function GetMobMres(mobData) {
     ignore = 0;
 
     // アイテム特性による効果（とりあえず全種族だけ対応）
-    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_IGNORE_MRES_RACE_ALL'.
+    // @ts-expect-error TS(2304): Cannot find name 'n_tok'.
     ignore += n_tok[ITEM_SP_IGNORE_MRES_RACE_ALL];
 
     // 四次職支援「アルグトゥスヴィタ」による効果
     // SKILL_ID_ARUGUTUS_VITA
-    // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+    // @ts-expect-error TS(2339): Property 'CONF_ID_ARUGUTUS_VITA' does not exist on... Remove this comment to see the full error message
     if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_ARUGUTUS_VITA]) > 0) {
         ignore += 5 * bufLv;
     }
@@ -1288,7 +1288,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_HIT_PLUS:
 
             // 「インペリアルガード」スキル「槍＆片手剣修練」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_YARI_KATATE_KEN_SHUREN'... Remove this comment to see the full error message
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_YARI_KATATE_KEN_SHUREN)) > 0) {
 
                 // 片手剣・片手槍・両手槍装備時限定
@@ -1302,19 +1302,19 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「アビスチェイサー」スキル「アビススレイヤー」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ABYSS_SLAYER'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_ABYSS_SLAYER)) > 0) {
                 spVal += 50 * Math.floor((sklLv + 1) / 2);
             }
 
             // 「天帝」スキル「兵法修練」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HYOHO_SHUREN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_HYOHO_SHUREN)) > 0) {
                 spVal += [0, 3, 6, 9, 12, 15, 20, 25, 30, 40, 50][sklLv];
             }
 
             // 「ナイトウォッチ」スキル「インテンシブエイム」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_INTENSIVE_AIM'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_INTENSIVE_AIM)) > 0) {
                 spVal += 250;
             }
@@ -1324,7 +1324,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_FLEE_PLUS:
 
             // 「シャドウクロス」スキル「シャドウセンス」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SHADOW_SENSE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_SHADOW_SENSE)) > 0) {
 
                 spVal += 10 * sklLv;
@@ -1340,7 +1340,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_CRI_PLUS:
 
             // 「シャドウクロス」スキル「シャドウセンス」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SHADOW_SENSE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_SHADOW_SENSE)) > 0) {
 
                 // 右手短剣、カタール装備時限定
@@ -1369,7 +1369,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「ナイトウォッチ」スキル「インテンシブエイム」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_INTENSIVE_AIM'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_INTENSIVE_AIM)) > 0) {
                 spVal += 50;
             }
@@ -1379,7 +1379,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MAXHP_UP:
 
             // 「インクイジター」スキル「堅固な信念」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_KENKONA_SHINNEN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_KENKONA_SHINNEN)) > 0) {
                 spVal += 10;
             }
@@ -1388,7 +1388,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_ATK_PLUS:
 
             // 「インペリアルガード」スキル「ガードスタンス」による効果（ペナルティ）
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_GUARD_STANCE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_GUARD_STANCE)) > 0) {
 
                 // 盾装備時限定
@@ -1398,13 +1398,13 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「インクイジター」スキル「強靭な信念」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_KYOZINNA_SHINNEN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_KYOZINNA_SHINNEN)) > 0) {
                 spVal += 100;
             }
 
             // 「ナイトウォッチ」スキル「インテンシブエイム」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_INTENSIVE_AIM'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_INTENSIVE_AIM)) > 0) {
                 spVal += 100;
             }
@@ -1415,7 +1415,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_DEF_PLUS:
 
             // 「インペリアルガード」スキル「ガードスタンス」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_GUARD_STANCE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_GUARD_STANCE)) > 0) {
 
                 // 盾装備時限定
@@ -1428,7 +1428,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「インペリアルガード」スキル「アタックスタンス」による効果（ペナルティ）
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_ATTACK_STANCE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
                 // 盾装備時限定
@@ -1438,13 +1438,13 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 四次職支援「クライマックスインパクト」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_CLIMAX_IMPACT' does not exist on... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CLIMAX_IMPACT]) > 0) {
                 spVal += 300;
             }
 
             // 四次職支援「防御装置有効化」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2551): Property 'CONF_ID_BOGYO_SOCHI_YUKOKA' does not exi... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_BOGYO_SOCHI_YUKOKA]) > 0) {
                 spVal += 300;
             }
@@ -1453,7 +1453,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MDEF_PLUS:
 
             // 四次職支援「クライマックスインパクト」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_CLIMAX_IMPACT' does not exist on... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CLIMAX_IMPACT]) > 0) {
                 spVal += 50;
             }
@@ -1462,7 +1462,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_LONGRANGE_DAMAGE_UP:
 
             // 「マイスター」スキル「ラッシュ状態」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_RUSH_STATE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_RUSH_STATE)) > 0) {
                 spVal += 2 * sklLv;
             }
@@ -1483,7 +1483,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「ナイトウォッチ」スキル「ヒドゥンカード」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HIDDEN_CARD'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_HIDDEN_CARD)) > 0) {
                 spVal += 100 + sklLv * 10;
             }
@@ -1495,7 +1495,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_LARGE:
 
             // 「カーディナル」スキル「鈍器＆本修練」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_DONKI_HON_SHUREN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_DONKI_HON_SHUREN)) > 0) {
 
                 // 鈍器、本装備時限定
@@ -1509,7 +1509,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「アビスチェイサー」スキル「短剣＆弓修練」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_TANKEN_YUMI_SHUREN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_TANKEN_YUMI_SHUREN)) > 0) {
 
                 // 短剣、弓装備時限定
@@ -1544,7 +1544,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_HUMAN_NOT_PLAYER:
 
             // 「インクイジター」スキル「信仰の意志」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SHINKONO_ISHI'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_SHINKONO_ISHI)) > 0) {
 
                 // 爪装備時限定
@@ -1574,7 +1574,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_RESIST_ELM_WATER:
 
             // 四次職支援「クライマックスインパクト」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_CLIMAX_IMPACT' does not exist on... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CLIMAX_IMPACT]) > 0) {
                 spVal += 25;
             }
@@ -1584,7 +1584,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_RESIST_ELM_UNDEAD:
 
             // 「インペリアルガード」スキル「ホーリーシールド」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HOLY_SHIELD'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_HOLY_SHIELD)) > 0) {
 
                 // 盾装備時限定
@@ -1614,7 +1614,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PERFECT_ATTACK_UP:
 
             // 「インクイジター」スキル「忠実な信念」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CHUZITSUNA_SHINNEN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_CHUZITSUNA_SHINNEN)) > 0) {
                 spVal += [0, 1, 3, 5, 10, 15][sklLv];
             }
@@ -1623,7 +1623,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MATK_PLUS_TYPE_NOTSTUFF:
 
             // 「アークメイジ」スキル「クライマックスハリケーン状態」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CLIMAX_HURRICANE_STATE'... Remove this comment to see the full error message
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_CLIMAX_HURRICANE_STATE)) > 0) {
                 spVal += 200;
             }
@@ -1632,7 +1632,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_ASPD_PLUS:
 
             // 「インクイジター」スキル「忠実な信念」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CHUZITSUNA_SHINNEN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_CHUZITSUNA_SHINNEN)) > 0) {
                 spVal += 1;
             }
@@ -1643,7 +1643,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PHYSICAL_RESIST_SIZE_LARGE:
 
             // 「ドラゴンナイト」スキル「ツーハンドディフェンディング」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_TWOHAND_DEFENDING'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_TWOHAND_DEFENDING)) > 0) {
 
                 // 両手武器装備時限定
@@ -1657,7 +1657,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「マイスター」スキル「ツーアックスディフェンディング」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_TWO_AXE_DEFENDING'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_TWO_AXE_DEFENDING)) > 0) {
 
                 // 両手斧装備時限定
@@ -1674,7 +1674,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_LARGE:
 
             // 「アビスチェイサー」スキル「魔法剣修練」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_MAHOKEN_SHUREN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_MAHOKEN_SHUREN)) > 0) {
 
                 // 短剣、片手剣装備時限定
@@ -1700,7 +1700,7 @@ export function ApplySpecModify(spid, spVal) {
                 spVal += 10 + bufLv;
             }
             // 「マイスター」スキル「ラッシュ状態」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_RUSH_STATE'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_RUSH_STATE)) > 0) {
                 spVal += 2 * sklLv;
             }
@@ -1755,7 +1755,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_UNDEAD:
 
             // 「カーディナル」スキル「フィドスアニムス」習得による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_FIDOS_ANIMUS'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_FIDOS_ANIMUS)) > 0) {
 
                 // 聖属性魔法
@@ -1777,7 +1777,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「アークメイジ」スキル「クライマックスハリケーン状態」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CLIMAX_HURRICANE_STATE'... Remove this comment to see the full error message
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_CLIMAX_HURRICANE_STATE)) > 0) {
 
                 // 風属性魔法
@@ -1787,7 +1787,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「インペリアルガード」スキル「ホーリーシールド」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_HOLY_SHIELD'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_HOLY_SHIELD)) > 0) {
 
                 // 盾装備時限定
@@ -1801,7 +1801,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「エレメンタルマスター」スキル「魔法本修練」による効果
-            // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_MAHO_HON_SHUREN'.
+            // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
             if ((sklLv = UsedSkillSearch(SKILL_ID_MAHO_HON_SHUREN)) > 0) {
 
                 // 本装備時限定
@@ -1827,7 +1827,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 四次職支援「クライマックスインパクト」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_CLIMAX_IMPACT' does not exist on... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CLIMAX_IMPACT]) > 0) {
                 // 水属性魔法
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
@@ -1841,7 +1841,7 @@ export function ApplySpecModify(spid, spVal) {
             }
 
             // 「ハイパーノービス」スキル「ジャックフロストノヴァ」によるデバフ効果
-            // @ts-expect-error TS(2304): Cannot find name 'n_B_IJYOU'.
+            // @ts-expect-error TS(2304): Cannot find name 'MOB_CONF_DEBUF_ID_JACK_FROST_NOV... Remove this comment to see the full error message
             if (n_B_IJYOU[MOB_CONF_DEBUF_ID_JACK_FROST_NOVA]) {
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
                     spVal += 15;
@@ -1861,7 +1861,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_PSYCO:
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_UNDEAD:
             // 四次職支援「五行符」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_GOGYO_FU' does not exist on type... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_GOGYO_FU]) > 0) {
                 arrayWork = [
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_FIRE,
@@ -1890,7 +1890,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_UNDEAD:
 
             // 「ハイパーノービス」スキル「ジャックフロストノヴァ」によるデバフ効果
-            // @ts-expect-error TS(2304): Cannot find name 'n_B_IJYOU'.
+            // @ts-expect-error TS(2304): Cannot find name 'MOB_CONF_DEBUF_ID_JACK_FROST_NOV... Remove this comment to see the full error message
             if (n_B_IJYOU[MOB_CONF_DEBUF_ID_JACK_FROST_NOVA]) {
                 if ([ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
                     spVal += 15;
@@ -1912,7 +1912,7 @@ export function ApplySpecModify(spid, spVal) {
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_PSYCO:
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_UNDEAD:
             // 四次職支援「五行符」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'CONF_ID_GOGYO_FU' does not exist on type... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_GOGYO_FU]) > 0) {
                 arrayWork = [
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_VANITY,

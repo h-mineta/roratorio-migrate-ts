@@ -79,64 +79,41 @@ function CBattleCalcResult(this: any) {
     /**
      * 無名イニシャライザ.
      */
-    (function () {
+    ((function (this: any) {
 
         var zeroUnit = [0, 0, 0];
 
         // データを初期化
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.skillId = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.skillLv = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.castVary = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.castFixed = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.delayMotion = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.delaySkill = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.delayForce = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.delayInput = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.damageInterval = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.objectLifeTime = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.coolTime = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.attackInterval = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.actRate = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.hitRate = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.perfectRate = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.criRate = 0;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.hitCountArray = [];
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.dividedHitCountArray = [];
 
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.dmgUnitArray = [
             zeroUnit.slice(),
             zeroUnit.slice(),
         ];
 
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.dmgPerfectArray = [];
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.parentSkillId = undefined;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.bAutoSpell = false;
-        // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.childResultArray = [];
 
-    }).call(this);
+    })).call(this);
 
 
 
@@ -149,8 +126,7 @@ function CBattleCalcResult(this: any) {
         var nameWork = "";
         var nameText = "";
 
-        // @ts-expect-error TS(7006): Parameter 'nameF' implicitly has an 'any' type.
-        var funcAddName = function (nameF) {
+        var funcAddName = function (nameF: any) {
             if (nameText.length > 0) {
                 nameText += "（" + nameF + "）";
             }
@@ -187,8 +163,7 @@ function CBattleCalcResult(this: any) {
      * 子要素を追加する.
      * @param resultChild 子要素
      */
-    // @ts-expect-error TS(7006): Parameter 'resultChild' implicitly has an 'any' ty... Remove this comment to see the full error message
-    this.AddChild = function (resultChild) {
+    this.AddChild = function (resultChild: any) {
         this.childResultArray.push(resultChild.Clone());
     };
 
@@ -219,8 +194,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(7006): Parameter 'idxKind' implicitly has an 'any' type.
-    this._GetDamageSummaryKM = function (idxKind, idxMath) {
+    this._GetDamageSummaryKM = function (idxKind: any, idxMath: any) {
 
         var dmg = this.dmgUnitArray[idxKind][idxMath];
         var divHit = this.dividedHitCountArray[idxKind][idxMath];
@@ -247,8 +221,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryMin = function (bCollectChild) {
+    this.GetDamageSummaryMin = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -270,8 +243,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算ダメージ（平均）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryAve = function (bCollectChild) {
+    this.GetDamageSummaryAve = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -293,8 +265,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算ダメージ（最大）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryMax = function (bCollectChild) {
+    this.GetDamageSummaryMax = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -316,8 +287,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算クリティカルダメージ（最小）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryCriMin = function (bCollectChild) {
+    this.GetDamageSummaryCriMin = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -339,8 +309,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算クリティカルダメージ（平均）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryCriAve = function (bCollectChild) {
+    this.GetDamageSummaryCriAve = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -362,8 +331,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素加算フラグ
      * @return 概算クリティカルダメージ（最大）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryCriMax = function (bCollectChild) {
+    this.GetDamageSummaryCriMax = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -395,8 +363,7 @@ function CBattleCalcResult(this: any) {
      * @param bIgnoreActRate 発生率を無視して計算するフラグ
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryMinPerAtk = function (bCollectChild, bIgnoreActRate) {
+    this.GetDamageSummaryMinPerAtk = function (bCollectChild: any, bIgnoreActRate: any) {
 
         var idx = 0;
         var ret = null;
@@ -447,8 +414,7 @@ function CBattleCalcResult(this: any) {
      * 概算ダメージ（一撃平均）の取得.
      * @return 概算ダメージ（平均）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryAvePerAtk = function (bCollectChild) {
+    this.GetDamageSummaryAvePerAtk = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -484,8 +450,7 @@ function CBattleCalcResult(this: any) {
      * 概算ダメージ（一撃最大）の取得.
      * @return 概算ダメージ（最大）
      */
-    // @ts-expect-error TS(7006): Parameter 'bCollectChild' implicitly has an 'any' ... Remove this comment to see the full error message
-    this.GetDamageSummaryMaxPerAtk = function (bCollectChild) {
+    this.GetDamageSummaryMaxPerAtk = function (bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -530,8 +495,7 @@ function CBattleCalcResult(this: any) {
      * @param bCollectChild 子要素を持つ場合 true
      * @return 概算ダメージ（最小）
      */
-    // @ts-expect-error TS(7006): Parameter 'castVary' implicitly has an 'any' type.
-    this.GetDamageSummaryMinPerSec = function (castVary, castFixed, attackInterval, bCollectChild, bIgnoreActRate) {
+    this.GetDamageSummaryMinPerSec = function (castVary: any, castFixed: any, attackInterval: any, bCollectChild: any, bIgnoreActRate: any) {
 
         var idx = 0;
         var ret = null;
@@ -594,8 +558,7 @@ function CBattleCalcResult(this: any) {
      * 概算ダメージ（秒間平均）の取得.
      * @return 概算ダメージ（平均）
      */
-    // @ts-expect-error TS(7006): Parameter 'castVary' implicitly has an 'any' type.
-    this.GetDamageSummaryAvePerSec = function (castVary, castFixed, attackInterval, bCollectChild) {
+    this.GetDamageSummaryAvePerSec = function (castVary: any, castFixed: any, attackInterval: any, bCollectChild: any) {
 
         var idx = 0;
         var ret = null;
@@ -642,8 +605,7 @@ function CBattleCalcResult(this: any) {
      * 概算ダメージ（秒間最大）の取得.
      * @return 概算ダメージ（最大）
      */
-    // @ts-expect-error TS(7006): Parameter 'castVary' implicitly has an 'any' type.
-    this.GetDamageSummaryMaxPerSec = function (castVary, castFixed, attackInterval, bCollectChild) {
+    this.GetDamageSummaryMaxPerSec = function (castVary: any, castFixed: any, attackInterval: any, bCollectChild: any) {
 
         var idx = 0;
         var ret = null;

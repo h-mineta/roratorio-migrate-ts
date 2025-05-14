@@ -104,7 +104,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 三段掌発動率の取得（三弾掌発動時はASは発動しない）
     //----------------------------------------------------------------
     var wAS_3dan = 0;
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
+    // @ts-expect-error TS(2304): Cannot find name 'GetActRateSandansho'.
     wAS_3dan = GetActRateSandansho(n_A_ActiveSkillIdNum, mobData);
 
     //----------------------------------------------------------------
@@ -1186,7 +1186,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
 
 
         SET_ZOKUSEI(mobData, attackMethodConfArrayAS);
-        // @ts-expect-error TS(2322): Type 'number' is not assignable to type 'boolean'.
         n_Enekyori = 0;
 
 
@@ -1256,7 +1255,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
                 if (n_AS_SKILL[i][3] == 0) str_bSUB += __DIG3(wDMG[0]) + "～" + __DIG3(wDMG[2]) + "(" + (Math.floor(n_AS_SKILL[i][2]) / 10) + "％)<BR>";
                 else if (n_AS_SKILL[i][3] == 10 || n_AS_SKILL[i][3] == 11) str_bSUB += __DIG3(wDMG[0]) + " (" + __DIG3(wDMG[0] / n_AS_SKILL[i][1]) + "×" + n_AS_SKILL[i][1] + ")(" + (Math.floor(n_AS_SKILL[i][2]) / 10) + "％)<BR>";
                 n_AS_SKILL[i][2] = n_AS_SKILL[i][2] / 10;
-                // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
                 if (n_Enekyori == 2) {
                     if (n_AS_SKILL[i][2] >= 100) n_AS_DMG[i][0] = wDMG[0];
                     else n_AS_DMG[i][0] = 0;
@@ -1264,7 +1262,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
                     n_AS_DMG_OverHP[i][1] = mobData[3] * BK_HIT / 100 * n_AS_SKILL[i][2] / 100;
                     n_AS_DMG[i][2] = wDMG[2];
                 }
-                // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
                 if (n_Enekyori == 0 || n_Enekyori == 1) {
                     if (n_AS_SKILL[i][2] >= 100 && BK_HIT >= 100 && w_HIT >= 100) n_AS_DMG[i][0] = wDMG[0];
                     else n_AS_DMG[i][0] = 0;
@@ -1299,11 +1296,8 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
                 n_AS_DMG[i][2] = wDMG[2];
             }
         } else if (n_AS_SKILL[i][3] == -2) {
-            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             g_damageTextArray[0].push("＋");
-            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             g_damageTextArray[1].push("＋");
-            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             g_damageTextArray[2].push("＋");
             if (n_AS_SKILL[i][2] >= 100 && w_HIT >= 100) n_AS_DMG[i][0] = wDMG[0];
             else n_AS_DMG[i][0] = 0;
@@ -1536,8 +1530,7 @@ function OnClickExtractSettingAutoSpell() {
  *-----------------------------------------------------------------------------------------------
  * @param objTbody 構築対象のＴＢＯＤＹ要素
  ************************************************************************************************/
-// @ts-expect-error TS(7006): Parameter 'objTbody' implicitly has an 'any' type.
-function BuildUpSettingHtmlAutoSpell(objTbody) {
+function BuildUpSettingHtmlAutoSpell(objTbody: any) {
     var str = "";
 
 
@@ -1607,8 +1600,7 @@ function BuildUpSettingHtmlAutoSpell(objTbody) {
 
         // 名称ソート実行
         AutoSpellSkill.sort(
-            // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-            function (a, b) {
+            function (a: any, b: any) {
                 if (a[AUTO_SPELL_DATA_INDEX_SORT_NAME] < b[AUTO_SPELL_DATA_INDEX_SORT_NAME]) return -1;
                 if (a[AUTO_SPELL_DATA_INDEX_SORT_NAME] > b[AUTO_SPELL_DATA_INDEX_SORT_NAME]) return 1;
                 return 0;
@@ -1660,8 +1652,7 @@ function BuildUpSettingHtmlAutoSpell(objTbody) {
         //----------------------------------------------------------------
         // IDソート実行
         AutoSpellSkill.sort(
-            // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-            function (a, b) {
+            function (a: any, b: any) {
                 if (a[AUTO_SPELL_DATA_INDEX_ID] < b[AUTO_SPELL_DATA_INDEX_ID]) return -1;
                 if (a[AUTO_SPELL_DATA_INDEX_ID] > b[AUTO_SPELL_DATA_INDEX_ID]) return 1;
                 return 0;
@@ -1721,8 +1712,7 @@ function BuildUpSettingHtmlAutoSpell(objTbody) {
  *-----------------------------------------------------------------------------------------------
  * @param bCalculate 再計算フラグ
  ************************************************************************************************/
-// @ts-expect-error TS(7006): Parameter 'bCalculate' implicitly has an 'any' typ... Remove this comment to see the full error message
-export function OnChangeSettingAutoSpell(bCalculate) {
+export function OnChangeSettingAutoSpell(bCalculate: any) {
 
     // 再計算フラグが指定されている場合は、再計算を行う
     if (bCalculate) AutoCalc("OnChangeSettingAutoSpell");

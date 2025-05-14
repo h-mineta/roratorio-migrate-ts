@@ -26,19 +26,15 @@ CGlobalConstManager.DefineEnum(
 /**
  * 攻撃手段オプションデータクラス.
  */
-// @ts-expect-error TS(7006): Parameter 'valueC' implicitly has an 'any' type.
-function CAttackMethodOptionData(valueC, labelC) {
+function CAttackMethodOptionData(this: any, valueC: any, labelC: any) {
 
     // 値
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.value = ((valueC !== undefined) ? valueC : 0);
 
     // ラベル
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.label = ((labelC !== undefined) ? labelC : "");
 
     // 後続のオプションリスト
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.nextOptionList = null;
 
 
@@ -47,8 +43,7 @@ function CAttackMethodOptionData(valueC, labelC) {
      * 値を設定する.
      * @param value 値
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetValue = function (value) {
+    this.SetValue = function (value: any) {
         this.value = value;
     };
 
@@ -56,7 +51,6 @@ function CAttackMethodOptionData(valueC, labelC) {
      * 値を取得する.
      * @return 値
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetValue = function () {
         return this.value;
     };
@@ -67,8 +61,7 @@ function CAttackMethodOptionData(valueC, labelC) {
      * ラベルを設定する.
      * @param label ラベル
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetLabel = function (label) {
+    this.SetLabel = function (label: any) {
         this.label = label;
     };
 
@@ -76,7 +69,6 @@ function CAttackMethodOptionData(valueC, labelC) {
      * ラベルを取得する.
      * @return ラベル
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetLabel = function () {
         return this.label;
     };
@@ -87,8 +79,7 @@ function CAttackMethodOptionData(valueC, labelC) {
      * 後続のオプションリストを設定する.
      * @param nextOptionList 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetNextOptionList = function (nextOptionList) {
+    this.SetNextOptionList = function (nextOptionList: any) {
         this.nextOptionList = nextOptionList;
     };
 
@@ -96,7 +87,6 @@ function CAttackMethodOptionData(valueC, labelC) {
      * 後続のオプションリストを取得する.
      * @return 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetNextOptionList = function () {
         return this.nextOptionList;
     };
@@ -107,30 +97,24 @@ function CAttackMethodOptionData(valueC, labelC) {
 /**
  * 攻撃手段オプションリストクラス.
  */
-function CAttackMethodOptionList() {
+function CAttackMethodOptionList(this: any) {
 
     // 種別
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.type = 0;
 
     // ラベル
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.label = "";
 
     // オプションデータマップ
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.optionDataMap = new Map();
 
     // デフォルトで選択されるオプションデータの値
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.defaultOptionDataValue = 0;
 
     // html 部品の attribute として設定されるデータの配列
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.htmlAttrArrayArray = [];
 
     // 後続のオプションリスト（TYPE_INPUT用）
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.nextOptionList = null;
 
 
@@ -139,8 +123,7 @@ function CAttackMethodOptionList() {
      * 種別を設定する.
      * @param type 種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetType = function (type) {
+    this.SetType = function (type: any) {
         this.type = type;
     };
 
@@ -148,7 +131,6 @@ function CAttackMethodOptionList() {
      * 種別を取得する.
      * @return 種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetType = function () {
         return this.type;
     };
@@ -159,8 +141,7 @@ function CAttackMethodOptionList() {
      * ラベルを設定する.
      * @param label ラベル
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetLabel = function (label) {
+    this.SetLabel = function (label: any) {
         this.label = label;
     };
 
@@ -168,7 +149,6 @@ function CAttackMethodOptionList() {
      * ラベルを取得する.
      * @return ラベル
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetLabel = function () {
         return this.label;
     };
@@ -180,8 +160,7 @@ function CAttackMethodOptionList() {
      * @param key キー
      * @param optData オプションデータ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.AddOptionData = function (key, optData) {
+    this.AddOptionData = function (key: any, optData: any) {
         // 型変換されないので、最初から文字列として登録する
         this.optionDataMap.set("" + key, optData);
     };
@@ -191,8 +170,7 @@ function CAttackMethodOptionList() {
      * @param key キー
      * @return オプションデータ
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.GetOptionData = function (key) {
+    this.GetOptionData = function (key: any) {
         // 最初から文字列として登録しているので、文字列で処理する
         return this.optionDataMap.get("" + key);
     };
@@ -202,8 +180,7 @@ function CAttackMethodOptionList() {
      * @param func 処理関数（value, key, map）
      * @remark key は文字列に変換して登録してある
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.ForEachOptionData = function (func) {
+    this.ForEachOptionData = function (func: any) {
         this.optionDataMap.forEach(func);
     };
 
@@ -213,8 +190,7 @@ function CAttackMethodOptionList() {
      * デフォルトで選択されるオプションデータの値を設定する.
      * @param defaultOptionDataValue デフォルトで選択されるオプションデータの値
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetDefaultOptionDataValue = function (defaultOptionDataValue) {
+    this.SetDefaultOptionDataValue = function (defaultOptionDataValue: any) {
         this.defaultOptionDataValue = defaultOptionDataValue;
     };
 
@@ -222,7 +198,6 @@ function CAttackMethodOptionList() {
      * デフォルトで選択されるオプションデータの値を取得する.
      * @return デフォルトで選択されるオプションデータの値
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDefaultOptionDataValue = function () {
         return this.defaultOptionDataValue;
     };
@@ -233,8 +208,7 @@ function CAttackMethodOptionList() {
      * html 部品の attribute 配列を設定する.
      * @param htmlAttrArrayArray 種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetHtmlAttrArrayArray = function (htmlAttrArrayArray) {
+    this.SetHtmlAttrArrayArray = function (htmlAttrArrayArray: any) {
         this.htmlAttrArrayArray = htmlAttrArrayArray;
     };
 
@@ -242,7 +216,6 @@ function CAttackMethodOptionList() {
      * html 部品の attribute 配列を取得する.
      * @return 種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetHtmlAttrArrayArray = function () {
         return this.htmlAttrArrayArray;
     };
@@ -253,8 +226,7 @@ function CAttackMethodOptionList() {
      * 後続のオプションリストを設定する.
      * @param nextOptionList 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetNextOptionList = function (nextOptionList) {
+    this.SetNextOptionList = function (nextOptionList: any) {
         this.nextOptionList = nextOptionList;
     };
 
@@ -262,7 +234,6 @@ function CAttackMethodOptionList() {
      * 後続のオプションリストを取得する.
      * @return 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetNextOptionList = function () {
         return this.nextOptionList;
     };
@@ -273,18 +244,15 @@ function CAttackMethodOptionList() {
 /**
  * 攻撃手段データクラス.
  */
-function CAttackMethodData() {
+function CAttackMethodData(this: any) {
 
     // スキルID
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.skillId = 0;
 
     // ソース種別
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.sourceType = 0;
 
     // 後続のオプションリスト
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.nextOptionList = null;
 
 
@@ -293,7 +261,6 @@ function CAttackMethodData() {
      * 攻撃手段フルIDを取得する.
      * @return 攻撃手段フルID
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetFullId = function () {
 
         var fullId = 0;
@@ -326,8 +293,7 @@ function CAttackMethodData() {
      * スキルIDを設定する.
      * @param skillId スキルID
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetSkillId = function (skillId) {
+    this.SetSkillId = function (skillId: any) {
         this.skillId = skillId;
     };
 
@@ -335,7 +301,6 @@ function CAttackMethodData() {
      * スキルIDを取得する.
      * @return スキルID
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetSkillId = function () {
         return this.skillId;
     };
@@ -346,8 +311,7 @@ function CAttackMethodData() {
      * ソース種別を設定する.
      * @param sourceType ソース種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetSourceType = function (sourceType) {
+    this.SetSourceType = function (sourceType: any) {
         this.sourceType = sourceType;
     };
 
@@ -355,7 +319,6 @@ function CAttackMethodData() {
      * ソース種別を取得する.
      * @return ソース種別
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetSourceType = function () {
         return this.sourceType;
     };
@@ -366,7 +329,6 @@ function CAttackMethodData() {
      * 表示名を取得する.
      * @return 攻撃手段フルID
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetDispName = function () {
 
         var dispName = "";
@@ -392,8 +354,7 @@ function CAttackMethodData() {
      * 後続のオプションリストを設定する.
      * @param nextOptionList 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
-    this.SetNextOptionList = function (nextOptionList) {
+    this.SetNextOptionList = function (nextOptionList: any) {
         this.nextOptionList = nextOptionList;
     };
 
@@ -401,7 +362,6 @@ function CAttackMethodData() {
      * 後続のオプションリストを取得する.
      * @return 後続のオプションリスト
      */
-    // @ts-expect-error TS(2683): 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.GetNextOptionList = function () {
         return this.nextOptionList;
     };
@@ -412,8 +372,7 @@ function CAttackMethodData() {
  * @param fullId 攻撃手段フルID
  * @return スキルID
  */
-// @ts-expect-error TS(7006): Parameter 'fullId' implicitly has an 'any' type.
-CAttackMethodData.GetSkillIdFromFullId = function (fullId) {
+CAttackMethodData.GetSkillIdFromFullId = function (fullId: any) {
 
     var skillId = 0;
 
@@ -779,8 +738,7 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelect = function () {
  * @param objectIndex オプションのインデックス
  * @param selectedValueArray 選択された値の配列
  */
-// @ts-expect-error TS(7006): Parameter 'objectIndex' implicitly has an 'any' ty... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubMethod = function (objectIndex, selectedValueArray) {
+CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubMethod = function (objectIndex: any, selectedValueArray: any) {
 
     var valueToRestore = 0;
 
@@ -810,8 +768,7 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubMethod = function 
  * @param valueToRestore 復元候補の値
  * @return 再構築された選択部品オブジェクト
  */
-// @ts-expect-error TS(7006): Parameter 'valueToRestore' implicitly has an 'any'... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubCreateMethodSelect = function (valueToRestore) {
+CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubCreateMethodSelect = function (valueToRestore: any) {
 
     var idx = 0;
 
@@ -864,8 +821,7 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubCreateMethodSelect
  * @param selectedValueArray 選択された値の配列
  * @return 再構築された選択部品オブジェクト
  */
-// @ts-expect-error TS(7006): Parameter 'objectIndex' implicitly has an 'any' ty... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOption = function (objectIndex, attackMethodOptList, selectedValueArray) {
+CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOption = function (objectIndex: any, attackMethodOptList: any, selectedValueArray: any) {
 
     var idx = 0;
 
@@ -927,24 +883,20 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOption = function 
  * @param valueToRestore 復元候補の値
  * @return 再構築された選択部品オブジェクト
  */
-// @ts-expect-error TS(7006): Parameter 'objectIndex' implicitly has an 'any' ty... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = function (objectIndex, attackMethodOptList, selectedValueArray, valueToRestore) {
+CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = function (objectIndex: any, attackMethodOptList: any, selectedValueArray: any, valueToRestore: any) {
 
     var idx = 0;
 
     var htmlAttrArrayArray = null;
     var optDataArray = null;
-    // @ts-expect-error TS(7034): Variable 'selectableValueArray' implicitly has typ... Remove this comment to see the full error message
-    var selectableValueArray = null;
+    var selectableValueArray: any = null;
 
     var skillid = 0;
     var skillLv = 0;
     var valueWork = 0;
-    // @ts-expect-error TS(7034): Variable 'optionableValueArray' implicitly has typ... Remove this comment to see the full error message
-    var optionableValueArray = null;
+    var optionableValueArray: any = null;
 
-    // @ts-expect-error TS(7034): Variable 'objSelect' implicitly has type 'any' in ... Remove this comment to see the full error message
-    var objSelect = null;
+    var objSelect: any = null;
 
 
 
@@ -1030,11 +982,9 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
 
             // すべての選択肢データをループ処理
             attackMethodOptList.ForEachOptionData(
-                // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-                function (valueF, keyF, mapF) {
+                function (valueF: any, keyF: any, mapF: any) {
 
                     // 特殊処理が必要で、かつ、選択肢として許容されていない場合は、処理終了
-                    // @ts-expect-error TS(7005): Variable 'optionableValueArray' implicitly has an ... Remove this comment to see the full error message
                     if (optionableValueArray) {
                         if (optionableValueArray.indexOf(valueF.value) < 0) {
                             return;
@@ -1042,7 +992,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
                     }
 
                     // 選択肢を追加
-                    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
                     HtmlCreateElementOption(valueF.value, valueF.label, objSelect);
 
                     // 選択可能な値の配列に追加
@@ -1055,7 +1004,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
             objSelect.value = attackMethodOptList.GetDefaultOptionDataValue();
 
             // 復元候補の値が設定可能な場合は、値を復元する
-            // @ts-expect-error TS(7005): Variable 'selectableValueArray' implicitly has an ... Remove this comment to see the full error message
             if (selectableValueArray.indexOf(valueToRestore) >= 0) {
                 objSelect.value = valueToRestore;
             }
@@ -1084,7 +1032,7 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
                 case SKILL_ID_CART_TORNADO:
 
                     // カート積載可能量を計算
-                    // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CART_KAIZO'.
+                    // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
                     valueWork = 8000 + 500 * UsedSkillSearch(SKILL_ID_CART_KAIZO);
 
                     // オブジェクトの最大値の変更
@@ -1173,8 +1121,7 @@ CAttackMethodAreaComponentManager.OnChangeAttackMethod = function () {
 /**
  * 設定変更イベントハンドラ（攻撃手段オプション）.
  */
-// @ts-expect-error TS(7006): Parameter 'objectIndex' implicitly has an 'any' ty... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.OnChangeAttackMethodOption = function (objectIndex) {
+CAttackMethodAreaComponentManager.OnChangeAttackMethodOption = function (objectIndex: any) {
 
     var idx = 0;
 
@@ -1255,7 +1202,7 @@ CAttackMethodAreaComponentManager.OnChangeAutoCalc = function () {
 CAttackMethodAreaComponentManager.OnChangeDigit3 = function () {
 
     // 設定値取得
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlGetObjectCheckedById'.
+    // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
     const checked = HtmlGetObjectCheckedById("OBJID_CHECK_DIGIT3", "checked");
 
     // セーブコントローラへ保存
@@ -1303,8 +1250,7 @@ CAttackMethodAreaComponentManager.OnChangeCastSimInterval = function () {
  * @return 処理の成否
  * @remark 範囲外の値やオプションが未指定の場合は、自動補正する
  */
-// @ts-expect-error TS(7006): Parameter 'attackMethodConf' implicitly has an 'an... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.SetAttackMethodConf = function (attackMethodConf) {
+CAttackMethodAreaComponentManager.SetAttackMethodConf = function (attackMethodConf: any) {
 
     var idx = 0;
 
@@ -1452,8 +1398,7 @@ CAttackMethodAreaComponentManager.GetAttackMethodConf = function () {
  * @param fullId フルID
  * @return 攻撃手段データ
  */
-// @ts-expect-error TS(7006): Parameter 'fullId' implicitly has an 'any' type.
-CAttackMethodAreaComponentManager.GetAttackMethodData = function (fullId) {
+CAttackMethodAreaComponentManager.GetAttackMethodData = function (fullId: any) {
 
     var idx = 0;
 
@@ -1802,15 +1747,15 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
         // 検索用のSPタグを用意
         spTagArray = [
-            // @ts-expect-error TS(2304): Cannot find name 'CMigEquipableSpTag'.
+            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_EFFECT_ID_USABL... Remove this comment to see the full error message
             new CMigEquipableSpTag().SetSpId(MIG_EQUIPABLE_SP_EFFECT_ID_USABLE_SKILL),
-            // @ts-expect-error TS(2304): Cannot find name 'CMigEquipableSpTag'.
+            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_EFFECT_ID_USABL... Remove this comment to see the full error message
             new CMigEquipableSpTag().SetSpId(MIG_EQUIPABLE_SP_EFFECT_ID_USABLE_SKILL_AS_REFINED),
-            // @ts-expect-error TS(2304): Cannot find name 'CMigEquipableSpTag'.
+            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_... Remove this comment to see the full error message
             new CMigEquipableSpTag().SetSpId(MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_SPELL),
-            // @ts-expect-error TS(2304): Cannot find name 'CMigEquipableSpTag'.
+            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_... Remove this comment to see the full error message
             new CMigEquipableSpTag().SetSpId(MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_SPELL_AS_LEARNED),
-            // @ts-expect-error TS(2304): Cannot find name 'CMigEquipableSpTag'.
+            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_... Remove this comment to see the full error message
             new CMigEquipableSpTag().SetSpId(MIG_EQUIPABLE_SP_EFFECT_ID_AUTO_SPELL_AS_REFINED),
         ];
 
@@ -1848,8 +1793,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
                 // 倍率を計算（倍率は、すべてのスキルに同一値が適用される）
                 effectiveMultiply = collectedMultiplyArray.reduce(
-                    // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-                    function (a, b) {
+                    function (a: any, b: any) {
                         return Math.max(a, b);
                     }
                 );
@@ -1943,18 +1887,15 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
  * 有効な攻撃手段データ配列を取得する（サブ　重複データ削除用）.
  * @param attackMethodDataArray 有効な攻撃手段データ配列
  */
-// @ts-expect-error TS(7006): Parameter 'attackMethodDataArray' implicitly has a... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubDistinctData = function (attackMethodDataArray) {
+CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubDistinctData = function (attackMethodDataArray: any) {
 
     var idxFore = 0;
     var idxBack = 0;
 
     var attackMethodData = null;
     var attackMethodDataWork = null;
-    // @ts-expect-error TS(7034): Variable 'attackMethodOptList' implicitly has type... Remove this comment to see the full error message
-    var attackMethodOptList = null;
-    // @ts-expect-error TS(7034): Variable 'attackMethodOptListWork' implicitly has ... Remove this comment to see the full error message
-    var attackMethodOptListWork = null;
+    var attackMethodOptList: any = null;
+    var attackMethodOptListWork: any = null;
     var bExistAllFore = false;
     var bExistAllBack = false;
 
@@ -1986,8 +1927,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubDistinctDa
 
                 // 前方データのすべての要素が、後方データに含まれるかの判定
                 attackMethodOptList.ForEachOptionData(
-                    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-                    function (valueF, keyF, mapF) {
+                    function (valueF: any, keyF: any, mapF: any) {
                         // @ts-expect-error TS(2447): The '&=' operator is not allowed for boolean types... Remove this comment to see the full error message
                         bExistAllFore &= (attackMethodOptListWork.GetOptionData(keyF) !== undefined);
                     }
@@ -1995,8 +1935,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubDistinctDa
 
                 // 後方データのすべての要素が、当該データに含まれるかの判定
                 attackMethodOptListWork.ForEachOptionData(
-                    // @ts-expect-error TS(7006): Parameter 'valueF' implicitly has an 'any' type.
-                    function (valueF, keyF, mapF) {
+                    function (valueF: any, keyF: any, mapF: any) {
                         // @ts-expect-error TS(2447): The '&=' operator is not allowed for boolean types... Remove this comment to see the full error message
                         bExistAllBack &= (attackMethodOptList.GetOptionData(keyF) !== undefined);
                     }
@@ -2037,8 +1976,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubDistinctDa
  * 有効な攻撃手段データ配列を取得する（サブ　オプション展開用）.
  * @param attackMethodDataArray 有効な攻撃手段データ配列
  */
-// @ts-expect-error TS(7006): Parameter 'attackMethodDataArray' implicitly has a... Remove this comment to see the full error message
-CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOptions = function (attackMethodDataArray) {
+CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOptions = function (attackMethodDataArray: any) {
 
     var idx = 0;
     var idxOpt = 0;
@@ -2049,8 +1987,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
     var valueWork = 0;
     var arrayWork = 0;
 
-    // @ts-expect-error TS(7006): Parameter 'minF' implicitly has an 'any' type.
-    var funcCreateNumberDataArrayArray = function (minF, maxF, bZeroOffF) {
+    var funcCreateNumberDataArrayArray = function (minF: any, maxF: any, bZeroOffF: any) {
 
         var idxF = 0;
         var arrayF = [];
@@ -2069,8 +2006,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
         return arrayF;
     };
 
-    // @ts-expect-error TS(7006): Parameter 'attackMethodOptListBeforeF' implicitly ... Remove this comment to see the full error message
-    var funcSetNextOptionList = function (attackMethodOptListBeforeF, attackMethodOptListNextF) {
+    var funcSetNextOptionList = function (attackMethodOptListBeforeF: any, attackMethodOptListNextF: any) {
 
         // 前段のリストに登録
         switch (attackMethodOptListBeforeF.GetType()) {
@@ -2082,8 +2018,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 // 引数で受け取ったオプションリストの、すべてのオプションデータに対して、
                 // 生成したオプションリストを、後続のオプションリストとして登録する
                 attackMethodOptListBeforeF.ForEachOptionData(
-                    // @ts-expect-error TS(7006): Parameter 'valueFF' implicitly has an 'any' type.
-                    function (valueFF, keyFF, mapFF) {
+                    function (valueFF: any, keyFF: any, mapFF: any) {
                         valueFF.SetNextOptionList(attackMethodOptListNextF);
                     }
                 );
@@ -2100,8 +2035,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
         }
     }
 
-    // @ts-expect-error TS(7006): Parameter 'attackMethodOptListBeforeF' implicitly ... Remove this comment to see the full error message
-    var funcCreateOptionList = function (attackMethodOptListBeforeF, listLabelF, dataArrayArrayF, defaultValueF) {
+    var funcCreateOptionList = function (attackMethodOptListBeforeF: any, listLabelF: any, dataArrayArrayF: any, defaultValueF: any) {
 
         var idxF = 0;
         var idxOptF = 0;
@@ -2135,8 +2069,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
         return attackMethodOptListF;
     };
 
-    // @ts-expect-error TS(7006): Parameter 'attackMethodOptListBeforeF' implicitly ... Remove this comment to see the full error message
-    var funcCreateOptionListAsSkillLvSelect = function (attackMethodOptListBeforeF, skillIdF, bZeroOff, defaultValueF) {
+    var funcCreateOptionListAsSkillLvSelect = function (attackMethodOptListBeforeF: any, skillIdF: any, bZeroOff: any, defaultValueF: any) {
 
         var nameF = "";
         var maxLvF = 0;
@@ -2158,8 +2091,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
         );
     };
 
-    // @ts-expect-error TS(7006): Parameter 'attackMethodOptListBeforeF' implicitly ... Remove this comment to see the full error message
-    var funcCreateOptionListAsLearnLvSelect = function (attackMethodOptListBeforeF, skillIdF, defaultValueF) {
+    var funcCreateOptionListAsLearnLvSelect = function (attackMethodOptListBeforeF: any, skillIdF: any, defaultValueF: any) {
 
         var nameF = "";
         var maxLvF = 0;
@@ -2181,8 +2113,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
         );
     };
 
-    // @ts-expect-error TS(7006): Parameter 'attackMethodOptListBeforeF' implicitly ... Remove this comment to see the full error message
-    var funcCreateOptionListAsInput = function (attackMethodOptListBeforeF, listLabelF, htmlAttrArrayArrayF, defaultValueF) {
+    var funcCreateOptionListAsInput = function (attackMethodOptListBeforeF: any, listLabelF: any, htmlAttrArrayArrayF: any, defaultValueF: any) {
 
         var idxF = 0;
         var idxOptF = 0;
@@ -2284,7 +2215,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
             // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CART_TERMINATION'.
             case SKILL_ID_CART_TERMINATION:
                 // カート積載可能量を計算
-                // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CART_KAIZO'.
+                // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
                 valueWork = 8000 + 500 * UsedSkillSearch(SKILL_ID_CART_KAIZO);
                 // オプションリストを生成、追加
                 attackMethodOptList = funcCreateOptionListAsInput(attackMethodOptList,
@@ -2304,7 +2235,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
             // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CART_TORNADO'.
             case SKILL_ID_CART_TORNADO:
                 // カート積載可能量を計算
-                // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_CART_KAIZO'.
+                // @ts-expect-error TS(2304): Cannot find name 'UsedSkillSearch'.
                 valueWork = 8000 + 500 * UsedSkillSearch(SKILL_ID_CART_KAIZO);
                 // オプションリストを生成、追加
                 attackMethodOptList = funcCreateOptionListAsInput(attackMethodOptList,
@@ -2627,7 +2558,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionListAsLearnLvSelect(attackMethodOptList, SKILL_ID_SPIRAL_PIERCE, -1);
                 // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SPEAR_BOOMERANG'.
                 attackMethodOptList = funcCreateOptionListAsLearnLvSelect(attackMethodOptList, SKILL_ID_SPEAR_BOOMERANG, 0);
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+                // @ts-expect-error TS(2304): Cannot find name 'MIG_JOB_ID_DRAGON_KNIGHT'.
                 if (n_A_JOB == MIG_JOB_ID_DRAGON_KNIGHT) {
                     // ドラゴンナイトの場合
                     attackMethodOptList = funcCreateOptionList(attackMethodOptList,
@@ -2659,7 +2590,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
             case SKILL_ID_SPIRAL_PIERCE:
             // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_MADNESS_CRUSHER'.
             case SKILL_ID_MADNESS_CRUSHER:
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+                // @ts-expect-error TS(2304): Cannot find name 'MIG_JOB_ID_DRAGON_KNIGHT'.
                 if (n_A_JOB == MIG_JOB_ID_DRAGON_KNIGHT) {
                     // ドラゴンナイトの場合
                     attackMethodOptList = funcCreateOptionList(attackMethodOptList,
@@ -2984,10 +2915,10 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionListAsLearnLvSelect(attackMethodOptList,
                     // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_AXE_BOOMERANG'.
                     SKILL_ID_AXE_BOOMERANG,
-                    // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+                    // @ts-expect-error TS(2304): Cannot find name 'JOB_SERIES_ID_ROGUE'.
                     ((GetHigherJobSeriesID(n_A_JOB) == JOB_SERIES_ID_ROGUE) ? 0 : 3)
                 );
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
+                // @ts-expect-error TS(2304): Cannot find name 'MIG_JOB_ID_MEISTER'.
                 if (n_A_JOB === MIG_JOB_ID_MEISTER) {
                     attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                         "ABRバトルウォリアー",

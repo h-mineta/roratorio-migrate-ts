@@ -105,17 +105,17 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     objTd.setAttribute("colspan", "2");
 
     // 設定欄展開用チェックボックス
-    // @ts-expect-error TS(2304): Cannot find name 'objInput'.
+    // @ts-expect-error TS(2552): Cannot find name 'objInput'. Did you mean 'oninput... Remove this comment to see the full error message
     objInput = HtmlCreateElement("input", objTd);
-    // @ts-expect-error TS(2304): Cannot find name 'objInput'.
+    // @ts-expect-error TS(2552): Cannot find name 'objInput'. Did you mean 'oninput... Remove this comment to see the full error message
     objInput.setAttribute("type", "checkbox");
-    // @ts-expect-error TS(2304): Cannot find name 'objInput'.
+    // @ts-expect-error TS(2552): Cannot find name 'objInput'. Did you mean 'oninput... Remove this comment to see the full error message
     objInput.setAttribute("id", "OBJID_MONSTER_MAP_AREA_EXTRACT_CHECKBOX");
-    // @ts-expect-error TS(2304): Cannot find name 'objInput'.
+    // @ts-expect-error TS(2552): Cannot find name 'objInput'. Did you mean 'oninput... Remove this comment to see the full error message
     objInput.setAttribute("onclick", "CMonsterMapAreaComponentManager.OnClickExtractSwitch()");
     if (switchChecked) {
         // 部品を再構築しているので、チェック状態の再設定が必要
-        // @ts-expect-error TS(2304): Cannot find name 'objInput'.
+        // @ts-expect-error TS(2552): Cannot find name 'objInput'. Did you mean 'oninput... Remove this comment to see the full error message
         objInput.setAttribute("checked", "checked");
     }
 
@@ -123,7 +123,7 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     objLabel = HtmlCreateElement("label", objTd);
     // @ts-expect-error TS(2304): Cannot find name 'objLabel'.
     objLabel.setAttribute("for", "OBJID_MONSTER_MAP_AREA_EXTRACT_CHECKBOX");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
+    // @ts-expect-error TS(2304): Cannot find name 'objLabel'.
     HtmlCreateTextNode("マップ指定", objLabel);
 
 
@@ -590,8 +590,7 @@ CMonsterMapAreaComponentManager.GetMonsterId = function () {
  * @param bResetWhenFailed 選択失敗時にリセットするかのフラグ
  * @return 実際に選択されたIDの配列
  */
-// @ts-expect-error TS(7006): Parameter 'categoryId' implicitly has an 'any' typ... Remove this comment to see the full error message
-CMonsterMapAreaComponentManager.ChangeSelect = function (categoryId, mapId, monsterId, bResetWhenFailed) {
+CMonsterMapAreaComponentManager.ChangeSelect = function (categoryId: any, mapId: any, monsterId: any, bResetWhenFailed: any) {
 
     var selectedArray = null;
 
@@ -625,8 +624,7 @@ CMonsterMapAreaComponentManager.ResetSelect = function () {
  * @param objId オブジェクトID
  * @param objDisp 表示オブジェクト
  */
-// @ts-expect-error TS(7006): Parameter 'objId' implicitly has an 'any' type.
-CMonsterMapAreaComponentManager.SetDispObject = function (objId, objDisp) {
+CMonsterMapAreaComponentManager.SetDispObject = function (objId: any, objDisp: any) {
 
     var objTarget = null;
 
@@ -645,8 +643,7 @@ CMonsterMapAreaComponentManager.SetDispObject = function (objId, objDisp) {
  * 表示オブジェクトを更新する.
  * @param objId オブジェクトID
  */
-// @ts-expect-error TS(7006): Parameter 'objId' implicitly has an 'any' type.
-CMonsterMapAreaComponentManager.RefreshtDispObject = function (objId) {
+CMonsterMapAreaComponentManager.RefreshtDispObject = function (objId: any) {
 
     var objTarget = null;
     var objDisp = null;

@@ -546,8 +546,7 @@ export class CSaveDataManager {
      * @returns {int} パースした文字数
      * @throws {Error} パース中に異常が検出された場合
      */
-    // @ts-expect-error TS(7006): Parameter 'dataText' implicitly has an 'any' type.
-    parseDataText(dataText) {
+    parseDataText(dataText: any) {
 
         let offset = 0;
 
@@ -715,64 +714,49 @@ export class CSaveDataManager {
         }
 
         // 処理呼び出し用ラッパ
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyCommon = (thisF, unitTypeF) => {
+        const funcCallApplyCommon = (thisF: any, unitTypeF: any) => {
             thisF.#applyDataToControlsChara(unitTypeF, idxMap.get(unitTypeF));
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyCompositBuff = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyCompositBuff = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsCompositBuff(unitTypeF, idxMap.get(unitTypeF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyEquipable = (thisF, eqpRgnF) => {
+        const funcCallApplyEquipable = (thisF: any, eqpRgnF: any) => {
             thisF.#applyDataToControlsEquipable(eqpRgnF, idxMapEqpRgns.get(eqpRgnF), mapDefEquipables);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyEquipableShadow = (thisF, eqpRgnF) => {
+        const funcCallApplyEquipableShadow = (thisF: any, eqpRgnF: any) => {
             thisF.#applyDataToControlsEquipableShadow(eqpRgnF, idxMapEqpRgns.get(eqpRgnF), mapDefEquipables);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplySkillLv = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplySkillLv = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsXXXXLv(unitTypeF, idxMap.get(unitTypeF), CSaveDataConst.propNameSkillLv, dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyBuffLv = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyBuffLv = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsXXXXLv(unitTypeF, idxMap.get(unitTypeF), CSaveDataConst.propNameBuffLv, dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyTimeBuffID = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyTimeBuffID = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsXXXXLv(unitTypeF, idxMap.get(unitTypeF), CSaveDataConst.propNameTimeBuffID, dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyAutoSpell = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyAutoSpell = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsAutoSpell(unitTypeF, idxMap.get(unitTypeF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyConfig = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyConfig = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsConfig(unitTypeF, idxMap.get(unitTypeF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyMob = (thisF, dataKindF) => {
+        const funcCallApplyMob = (thisF: any, dataKindF: any) => {
             thisF.#applyDataToControlsMob(dataKindF, idxMap.get(dataKindF));
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyConfigSpec = (thisF, dataKindF, dataArrayF) => {
+        const funcCallApplyConfigSpec = (thisF: any, dataKindF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsConfigSpec(dataKindF, idxMapSpecs.get(dataKindF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyMobConfPlayer = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyMobConfPlayer = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsMobConfPlayer(unitTypeF, idxMap.get(unitTypeF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyMobConfPlayer2 = (thisF, unitTypeF, dataArrayF) => {
+        const funcCallApplyMobConfPlayer2 = (thisF: any, unitTypeF: any, dataArrayF: any) => {
             thisF.#applyDataToControlsMobConfPlayer2(unitTypeF, idxMap.get(unitTypeF), dataArrayF);
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyMobConfInput = (thisF, unitTypeF) => {
+        const funcCallApplyMobConfInput = (thisF: any, unitTypeF: any) => {
             thisF.#applyDataToControlsMobConfInput(unitTypeF, idxMap.get(unitTypeF));
         };
-        // @ts-expect-error TS(7006): Parameter 'thisF' implicitly has an 'any' type.
-        const funcCallApplyAttackConf = (thisF, unitTypeF) => {
+        const funcCallApplyAttackConf = (thisF: any, unitTypeF: any) => {
             thisF.#applyDataToControlsAttackConf(unitTypeF, idxMap.get(unitTypeF));
         };
 
@@ -785,9 +769,7 @@ export class CSaveDataManager {
         //		n_A_Arrow = (itemIDArrow !== undefined) ? (floorBigInt32(itemIDArrow) - ITEM_ID_ARROW_NONE) : ARROW_ID_NONE;
         //		HtmlSetObjectValueById("OBJID_SELECT_ARROW", n_A_Arrow);
 
-        // @ts-expect-error TS(7034): Variable 'arrowArray' implicitly has type 'any[]' ... Remove this comment to see the full error message
-        let arrowArray = [];
-        // @ts-expect-error TS(7005): Variable 'arrowArray' implicitly has an 'any[]' ty... Remove this comment to see the full error message
+        let arrowArray: any = [];
         funcCallApplyConfig(this, SaveDataUnit.TYPE_EQUIP_ARROW, arrowArray);
 
         // 適切な順序で処理関数を呼び出す
@@ -903,12 +885,10 @@ export class CSaveDataManager {
 
         // 画面表示リフレッシュ処理（既存移植）
         OnClickSkillSWLearned();
-        // @ts-expect-error TS(7005): Variable 'arrowArray' implicitly has an 'any[]' ty... Remove this comment to see the full error message
         if (arrowArray[0] === undefined) {
             n_A_Arrow = 0;
         }
         else {
-            // @ts-expect-error TS(7005): Variable 'arrowArray' implicitly has an 'any[]' ty... Remove this comment to see the full error message
             n_A_Arrow = (arrowArray[0] - 1);
         }
         // @ts-expect-error TS(2304): Cannot find name 'HtmlSetObjectValueById'.
@@ -962,8 +942,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsChara(unitType, idxUnit) {
+    #applyDataToControlsChara(unitType: any, idxUnit: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1038,8 +1017,7 @@ export class CSaveDataManager {
      * @param {string} objID 対応するHTMLオブジェクトのID
      * @param {int} propValue プロパティ値（32-bit整数値）
      */
-    // @ts-expect-error TS(7006): Parameter 'saveDataUnit' implicitly has an 'any' t... Remove this comment to see the full error message
-    #applyToControlsCharaJobID(saveDataUnit, objID, propValue) {
+    #applyToControlsCharaJobID(saveDataUnit: any, objID: any, propValue: any) {
 
         // 職業選択セレクトボックスの設定
         // @ts-expect-error TS(2304): Cannot find name 'HtmlSetObjectValueById'.
@@ -1061,8 +1039,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnitEqpRgn データユニットの配列インデックス
      * @param {Map} mapDefEquipables 装備定義のマップ
      */
-    // @ts-expect-error TS(7006): Parameter 'equipRegionKind' implicitly has an 'any... Remove this comment to see the full error message
-    #applyDataToControlsEquipable(equipRegionKind, idxUnitEqpRgn, mapDefEquipables) {
+    #applyDataToControlsEquipable(equipRegionKind: any, idxUnitEqpRgn: any, mapDefEquipables: any) {
 
         // 装備領域IDのマップ
         const eqpRgnIDMapMap = new Map([
@@ -1117,8 +1094,7 @@ export class CSaveDataManager {
         ]);
 
         // カード設定用関数（旧処理の移植）
-        // @ts-expect-error TS(7006): Parameter 'objIdPrifixF' implicitly has an 'any' t... Remove this comment to see the full error message
-        const funcLoadAndSetCard = (objIdPrifixF, slotNoF, enchListIdF, cardIdF) => {
+        const funcLoadAndSetCard = (objIdPrifixF: any, slotNoF: any, enchListIdF: any, cardIdF: any) => {
 
             // データ補正
             enchListIdF = (enchListIdF === undefined) ? 0 : enchListIdF;
@@ -1362,8 +1338,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnitEqpRgn データユニットの配列インデックス
      * @param {Map} mapDefEquipables 装備定義のマップ
      */
-    // @ts-expect-error TS(7006): Parameter 'equipRegionKind' implicitly has an 'any... Remove this comment to see the full error message
-    #applyDataToControlsEquipableShadow(equipRegionKind, idxUnitEqpRgn, mapDefEquipables) {
+    #applyDataToControlsEquipableShadow(equipRegionKind: any, idxUnitEqpRgn: any, mapDefEquipables: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnitEqpRgn === undefined) || (idxUnitEqpRgn < 0) || (idxUnitEqpRgn >= this.#saveDataUnitArray.length)) {
@@ -1476,8 +1451,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      * @param {Array} dataArrayF データ値を保存しておくグローバル空間の配列（n_A_PassSkill等）
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsCompositBuff(unitType, idxUnit, dataArrayF) {
+    #applyDataToControlsCompositBuff(unitType: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1534,8 +1508,7 @@ export class CSaveDataManager {
      * @param {string} propName 対応するプロパティの名称
      * @param {Array} dataArrayF データ値を保存しておくグローバル空間の配列（n_A_PassSkill等）
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsXXXXLv(unitType, idxUnit, propName, dataArrayF) {
+    #applyDataToControlsXXXXLv(unitType: any, idxUnit: any, propName: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1586,8 +1559,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      * @param {Array} dataArrayF データ値を保存しておくグローバル空間の配列（n_A_PassSkill等）
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsAutoSpell(unitType, idxUnit, dataArrayF) {
+    #applyDataToControlsAutoSpell(unitType: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1652,8 +1624,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      * @param {Array} dataArrayF データ値を保存しておくグローバル空間の配列（n_A_PassSkill等）
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsConfig(unitType, idxUnit, dataArrayF) {
+    #applyDataToControlsConfig(unitType: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1732,8 +1703,7 @@ export class CSaveDataManager {
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      * @param {Array} dataArrayF データ値を保存しておくグローバル空間の配列（n_A_PassSkill等）
      */
-    // @ts-expect-error TS(7006): Parameter 'dataKind' implicitly has an 'any' type.
-    #applyDataToControlsConfigSpec(dataKind, idxUnit, dataArrayF) {
+    #applyDataToControlsConfigSpec(dataKind: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1815,8 +1785,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsMob(unitType, idxUnit) {
+    #applyDataToControlsMob(unitType: any, idxUnit: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1850,8 +1819,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsMobConfPlayer(unitType, idxUnit, dataArrayF) {
+    #applyDataToControlsMobConfPlayer(unitType: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -1930,8 +1898,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsMobConfPlayer2(unitType, idxUnit, dataArrayF) {
+    #applyDataToControlsMobConfPlayer2(unitType: any, idxUnit: any, dataArrayF: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -2010,8 +1977,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsMobConfInput(unitType, idxUnit) {
+    #applyDataToControlsMobConfInput(unitType: any, idxUnit: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
@@ -2072,8 +2038,7 @@ export class CSaveDataManager {
      * @param {int} unitType ユニットのタイプ値
      * @param {int|undefined} idxUnit データユニットの配列インデックス
      */
-    // @ts-expect-error TS(7006): Parameter 'unitType' implicitly has an 'any' type.
-    #applyDataToControlsAttackConf(unitType, idxUnit) {
+    #applyDataToControlsAttackConf(unitType: any, idxUnit: any) {
 
         // データユニットが存在しない場合は、処理しない
         if ((idxUnit === undefined) || (idxUnit < 0) || (idxUnit >= this.#saveDataUnitArray.length)) {
