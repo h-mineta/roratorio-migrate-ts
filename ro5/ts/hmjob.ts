@@ -102,38 +102,35 @@ export function RebuildStatusSelect(jobId) {
  * ステータスポイントを計算する
  * @param bIgnoreAutoCalc 自動計算回避フラグ
  */
-// @ts-expect-error TS(7006): Parameter 'bIgnoreAutoCalc' implicitly has an 'any... Remove this comment to see the full error message
-export function CalcStatusPoint(bIgnoreAutoCalc) {
+export function CalcStatusPoint(bIgnoreAutoCalc: boolean) {
+    const form = (document as any).calcForm;
 
-    // @ts-expect-error TS(1101): 'with' statements are not allowed in strict mode.
-    with (document.calcForm) {
-        // ベースレベルの自動計算チェックボックスの状態を取得
-        if (BLVauto.checked == 0) {
-            bIgnoreAutoCalc = true;
-        }
-
-        // 職業ＩＤを取得する
-        var jobId = eval(A_JOB.value);
-
-        // ベースレベルを取得する
-        var blvSelected = eval(A_BaseLV.value);
-
-        // ステータス値を取得する
-        var stValSTR = eval(A_STR.value);
-        var stValAGI = eval(A_AGI.value);
-        var stValVIT = eval(A_VIT.value);
-        var stValINT = eval(A_INT.value);
-        var stValDEX = eval(A_DEX.value);
-        var stValLUK = eval(A_LUK.value);
-
-        // 特性ステータス値を取得する
-        var stValPOW = eval(A_POW.value);
-        var stValSTA = eval(A_STA.value);
-        var stValWIS = eval(A_WIS.value);
-        var stValSPL = eval(A_SPL.value);
-        var stValCON = eval(A_CON.value);
-        var stValCRT = eval(A_CRT.value);
+    // ベースレベルの自動計算チェックボックスの状態を取得
+    if (form.BLVauto.checked == 0) {
+        bIgnoreAutoCalc = true;
     }
+
+    // 職業ＩＤを取得する
+    var jobId = eval(form.A_JOB.value);
+
+    // ベースレベルを取得する
+    var blvSelected = eval(form.A_BaseLV.value);
+
+    // ステータス値を取得する
+    var stValSTR = eval(form.A_STR.value);
+    var stValAGI = eval(form.AGI.value);
+    var stValVIT = eval(form.A_VIT.value);
+    var stValINT = eval(form.A_INT.value);
+    var stValDEX = eval(form.A_DEX.value);
+    var stValLUK = eval(form.A_LUK.value);
+
+    // 特性ステータス値を取得する
+    var stValPOW = eval(form.A_POW.value);
+    var stValSTA = eval(form.A_STA.value);
+    var stValWIS = eval(form.A_WIS.value);
+    var stValSPL = eval(form.A_SPL.value);
+    var stValCON = eval(form.A_CON.value);
+    var stValCRT = eval(form.A_CRT.value);
 
     // 消費ステータスポイントを計算する
     var stPointUsed = 0;

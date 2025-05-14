@@ -6,11 +6,15 @@
         "@types/pako": "^2.0.3",
         "jest": "^29.7.0",
         "ts-jest": "^29.3.2",
+        "ts-loader": "^9.5.2",
         "ts-migrate": "^0.1.35",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "webpack": "^5.99.8",
+        "webpack-cli": "^6.0.1"
     },
     "dependencies": {
         "html2canvas": "^1.4.1",
+        "pako": "^2.1.0",
         "zstddec": "^0.1.0"
     }
 }

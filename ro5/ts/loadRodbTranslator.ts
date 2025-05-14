@@ -1,5 +1,5 @@
-import pako = require("pako");
 import { AutoCalc } from "./head";
+import * as pako from "pako";
 
 // Base64デコード関数（URLセーフに対応）
 function base64ToUint8Array(base64: string): Uint8Array {
