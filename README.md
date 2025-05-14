@@ -34,3 +34,15 @@ ROラトリオHUBをWebサイトとして公開するためのブランチです
 masterブランチに対するMergeをトリガーとして自動的にデプロイされます。
 
 ![](./.github/repository_guide/branch-work.drawio.svg)
+
+# Migrate TS(Type Script)
+```bash
+npm install
+
+# 既存パッケージの更新確認する場合はncuを入れる
+sudo npm install -g npm-check-updates
+ncu
+ncu -u
+
+
+```

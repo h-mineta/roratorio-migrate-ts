@@ -1,90 +1,105 @@
 /**
  * 計算機の状態をCookieにセーブ、あるいはロードする
  */
-// @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-$(function () {
 
+// Cookie操作用ユーティリティ
+const Cookie = {
+    get(name: string): string | null {
+        const match = document.cookie.match(new RegExp('(?:^|; )' + encodeURIComponent(name) + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : null;
+    },
+    set(name: string, value: string, days = 365) {
+        const expires = new Date();
+        expires.setDate(expires.getDate() + days);
+        document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/`;
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
     /**
      * ----------------------------------------
      * カスタム表示の処理
      * ----------------------------------------
      */
     const custom_display_ids = [
-        "#OBJID_FLOATING_INFO_AREA_EXTRACT_CHECKBOX",
-        "#OBJID_SELECT_FLOATING_INFO_AREA_COUNT",
-        "#OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE",
-        "#OBJID_SELECT_FLOATING_INFO_0", "#OBJID_SELECT_EXTRA_INFO_1",
-        "#OBJID_SELECT_FLOATING_INFO_1", "#OBJID_SELECT_EXTRA_INFO_2",
-        "#OBJID_SELECT_FLOATING_INFO_2", "#OBJID_SELECT_EXTRA_INFO_3",
-        "#OBJID_SELECT_FLOATING_INFO_3", "#OBJID_SELECT_EXTRA_INFO_4",
-        "#OBJID_SELECT_FLOATING_INFO_4", "#OBJID_SELECT_EXTRA_INFO_5",
-    ]
+        "OBJID_FLOATING_INFO_AREA_EXTRACT_CHECKBOX",
+        "OBJID_SELECT_FLOATING_INFO_AREA_COUNT",
+        "OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE",
+        "OBJID_SELECT_FLOATING_INFO_0", "OBJID_SELECT_EXTRA_INFO_1",
+        "OBJID_SELECT_FLOATING_INFO_1", "OBJID_SELECT_EXTRA_INFO_2",
+        "OBJID_SELECT_FLOATING_INFO_2", "OBJID_SELECT_EXTRA_INFO_3",
+        "OBJID_SELECT_FLOATING_INFO_3", "OBJID_SELECT_EXTRA_INFO_4",
+        "OBJID_SELECT_FLOATING_INFO_4", "OBJID_SELECT_EXTRA_INFO_5",
+    ];
     let custom_display_status: any = [];
+
     const bake_custom_display = () => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        $.cookie("custom-display", custom_display_status.join(":"), { expires: 365 });
-    }
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    if ($.cookie("custom-display")) {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        custom_display_status = $.cookie("custom-display").split(":");
+        Cookie.set("custom-display", custom_display_status.join(":"), 365);
+    };
+
+    // Cookieからロード
+    const customDisplayCookie = Cookie.get("custom-display");
+    if (customDisplayCookie) {
+        custom_display_status = customDisplayCookie.split(":");
         if (~~custom_display_status[0]) {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            $(custom_display_ids[0]).click();
+            const el = document.getElementById(custom_display_ids[0]) as HTMLInputElement;
+            if (el && !el.checked) el.click();
         }
-        for (i = 1; i < custom_display_status.length; i++) {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            $(custom_display_ids[i]).val(custom_display_status[i]);
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            $(custom_display_ids[i]).trigger("change");
+        for (let i = 1; i < custom_display_status.length; i++) {
+            const el = document.getElementById(custom_display_ids[i]) as HTMLInputElement | HTMLSelectElement;
+            if (el) {
+                if ("value" in el) el.value = custom_display_status[i];
+                el.dispatchEvent(new Event("change"));
+            }
         }
     }
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("click", "#OBJID_FLOATING_INFO_AREA_EXTRACT_CHECKBOX", (e: any) => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        custom_display_status[0] = $(e.target).prop("checked") ? 1 : 0;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        if ($(e.target).prop("checked")) {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[1] = $("#OBJID_SELECT_FLOATING_INFO_AREA_COUNT").val();
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[2] = $("#OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE").val();
+
+    // チェックボックスクリック
+    document.getElementById("OBJID_FLOATING_INFO_AREA_EXTRACT_CHECKBOX")?.addEventListener("click", (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        custom_display_status[0] = target.checked ? 1 : 0;
+        if (target.checked) {
+            const countEl = document.getElementById("OBJID_SELECT_FLOATING_INFO_AREA_COUNT") as HTMLInputElement | HTMLSelectElement;
+            const fontSizeEl = document.getElementById("OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE") as HTMLInputElement | HTMLSelectElement;
+            custom_display_status[1] = countEl?.value ?? "";
+            custom_display_status[2] = fontSizeEl?.value ?? "";
         }
         bake_custom_display();
     });
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("change", "#OBJID_SELECT_FLOATING_INFO_AREA_COUNT", (e: any) => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        custom_display_status[1] = $(e.target).val();
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        custom_display_status = custom_display_status.slice(0, 3 + 2 * parseInt($(e.target).val()))
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        for (i = 3; i < 3 + 2 * parseInt($(e.target).val()); i++) {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[i] = $(custom_display_ids[i]).val() || 0;
+
+    // カウント変更
+    document.getElementById("OBJID_SELECT_FLOATING_INFO_AREA_COUNT")?.addEventListener("change", (e: Event) => {
+        const target = e.target as HTMLInputElement | HTMLSelectElement;
+        custom_display_status[1] = target.value;
+        const count = parseInt(target.value);
+        custom_display_status = custom_display_status.slice(0, 3 + 2 * count);
+        for (let i = 3; i < 3 + 2 * count; i++) {
+            const el = document.getElementById(custom_display_ids[i]) as HTMLInputElement | HTMLSelectElement;
+            custom_display_status[i] = el?.value || 0;
         }
         bake_custom_display();
     });
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("change", "#OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE", (e: any) => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        custom_display_status[2] = $(e.target).val();
+
+    // フォントサイズ変更
+    document.getElementById("OBJID_SELECT_FLOATING_INFO_AREA_FONT_SIZE")?.addEventListener("change", (e: Event) => {
+        const target = e.target as HTMLInputElement | HTMLSelectElement;
+        custom_display_status[2] = target.value;
         bake_custom_display();
     });
-    for (i = 0; i < 5; i++) {
+
+    // 各表示項目の変更
+    for (let i = 0; i < 5; i++) {
         const idx = i;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        $(document).on("change", `#OBJID_SELECT_FLOATING_INFO_${i}`, (e: any) => {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[3 + 2 * idx] = $(e.target).val();
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[3 + 2 * idx + 1] = $(`#OBJID_SELECT_EXTRA_INFO_${idx + 1}`).val() || 0;
+        document.getElementById(`OBJID_SELECT_FLOATING_INFO_${i}`)?.addEventListener("change", (e: Event) => {
+            const target = e.target as HTMLInputElement | HTMLSelectElement;
+            custom_display_status[3 + 2 * idx] = target.value;
+            const extraEl = document.getElementById(`OBJID_SELECT_EXTRA_INFO_${idx + 1}`) as HTMLInputElement | HTMLSelectElement;
+            custom_display_status[3 + 2 * idx + 1] = extraEl?.value || 0;
             bake_custom_display();
         });
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        $(document).on("change", `#OBJID_SELECT_EXTRA_INFO_${i + 1}`, (e: any) => {
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            custom_display_status[3 + 2 * idx + 1] = $(e.target).val();
+        document.getElementById(`OBJID_SELECT_EXTRA_INFO_${i + 1}`)?.addEventListener("change", (e: Event) => {
+            const target = e.target as HTMLInputElement | HTMLSelectElement;
+            custom_display_status[3 + 2 * idx + 1] = target.value;
             bake_custom_display();
         });
     }
@@ -95,66 +110,60 @@ $(function () {
      * ----------------------------------------
      */
     const item_info_ids = [
-        "#OBJID_ITEM_INFO_EXTRACT_CHECKBOX",
-        "#OBJID_CHECK_ITEM_INFO_AUTO_FLAG",
-        "#OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG",
+        "OBJID_ITEM_INFO_EXTRACT_CHECKBOX",
+        "OBJID_CHECK_ITEM_INFO_AUTO_FLAG",
+        "OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG",
     ];
     let item_info_status: any = [];
-    // アイテム情報の状態をCookieにセーブする
+
     const bake_item_info = () => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        $.cookie("item_info", item_info_status.join(":"), { expires: 365 });
-    }
-    // Cookieからアイテム情報の状態をロードする
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    if ($.cookie("item_info")) {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status = $.cookie("item_info").split(":");
-        for (i = 0; i < item_info_status.length; i++) {
+        Cookie.set("item_info", item_info_status.join(":"), 365);
+    };
+
+    // Cookieからアイテム情報の状態をロード
+    const itemInfoCookie = Cookie.get("item_info");
+    if (itemInfoCookie) {
+        item_info_status = itemInfoCookie.split(":");
+        for (let i = 0; i < item_info_status.length; i++) {
+            const el = document.getElementById(item_info_ids[i]) as HTMLInputElement;
+            if (!el) continue;
             // ロードされた状態がチェック済み かつ 現在の状態が未チェックの場合
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            if (item_info_status[i] === "1" && !$(item_info_ids[i]).prop("checked")) {
-                // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-                $(item_info_ids[i]).click();
+            if (item_info_status[i] === "1" && !el.checked) {
+                el.click();
             }
             // ロードされた状態が未チェック かつ 現在の状態がチェック済みの場合
-            // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-            else if (item_info_status[i] === "0" && $(item_info_ids[i]).prop("checked")) {
-                // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-                $(item_info_ids[i]).click();
+            else if (item_info_status[i] === "0" && el.checked) {
+                el.click();
             }
         }
     }
-    // イベントリスナー追加 1
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("click", "#OBJID_ITEM_INFO_EXTRACT_CHECKBOX", (e: any) => {
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[0] = $(e.target).prop("checked") ? 1 : 0;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[1] = $("#OBJID_CHECK_ITEM_INFO_AUTO_FLAG").prop("checked") ? 1 : 0;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[2] = $("#OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG").prop("checked") ? 1 : 0;
-        bake_item_info();
-    });
-    // イベントリスナー追加 2
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("click", "#OBJID_CHECK_ITEM_INFO_AUTO_FLAG", (e: any) => {
-        item_info_status[0] = 1;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[1] = $(e.target).prop("checked") ? 1 : 0;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[2] = $("#OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG").prop("checked") ? 1 : 0;
-        bake_item_info();
-    });
-    // イベントリスナー追加 3
-    // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-    $(document).on("click", "#OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG", (e: any) => {
-        item_info_status[0] = 1;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[1] = $("#OBJID_CHECK_ITEM_INFO_AUTO_FLAG").prop("checked") ? 1 : 0;
-        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
-        item_info_status[2] = $(e.target).prop("checked") ? 1 : 0;
+
+    // アイテム情報チェックボックス
+    document.getElementById("OBJID_ITEM_INFO_EXTRACT_CHECKBOX")?.addEventListener("click", (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        item_info_status[0] = target.checked ? 1 : 0;
+        const autoFlag = document.getElementById("OBJID_CHECK_ITEM_INFO_AUTO_FLAG") as HTMLInputElement;
+        const focusFlag = document.getElementById("OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG") as HTMLInputElement;
+        item_info_status[1] = autoFlag?.checked ? 1 : 0;
+        item_info_status[2] = focusFlag?.checked ? 1 : 0;
         bake_item_info();
     });
 
+    document.getElementById("OBJID_CHECK_ITEM_INFO_AUTO_FLAG")?.addEventListener("click", (e: Event) => {
+        item_info_status[0] = 1;
+        const target = e.target as HTMLInputElement;
+        item_info_status[1] = target.checked ? 1 : 0;
+        const focusFlag = document.getElementById("OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG") as HTMLInputElement;
+        item_info_status[2] = focusFlag?.checked ? 1 : 0;
+        bake_item_info();
+    });
+
+    document.getElementById("OBJID_CHECK_ITEM_INFO_APPLY_AUTO_FOCUS_FLAG")?.addEventListener("click", (e: Event) => {
+        item_info_status[0] = 1;
+        const target = e.target as HTMLInputElement;
+        const autoFlag = document.getElementById("OBJID_CHECK_ITEM_INFO_AUTO_FLAG") as HTMLInputElement;
+        item_info_status[1] = autoFlag?.checked ? 1 : 0;
+        item_info_status[2] = target.checked ? 1 : 0;
+        bake_item_info();
+    });
 });

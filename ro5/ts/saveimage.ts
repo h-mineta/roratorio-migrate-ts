@@ -1,6 +1,9 @@
 // sample
 // https://ragnarokonline.gungho.jp/campaign_event/campaign/baselv220cp-2.html#modal
 // calcx.html?cx1cy1EtMmfo4Owqof.3M4X00cz11.32jYJlE0cz120022jAp3VvR1cz13.4fYl3cz14.4hj1cz15002Edw7Bot9w8cz16002yfJC0xiTd62cz170022j8nn3td2cz18.4fIm3cz19.32dhop8cz1a002GhcqRoQmQ6G8cz1b.4hM1cz1c.4hOacz1d00s0hPgX1h_1cz1e00c0jP1to02cz1f00s0jOfup0z0cz1g00c0jP2vq01cz1h00s0jPjsr0utcz1i.4mcA1Z_1127456b89a3cA128c0cA1vgfdejgh2cB1.sf_V___51d171n5n5nll5dldldl511cC1.ecR1.4S8cU1.cg003cW100Bcl3cZ121
+
+import { delayDownForDisp, g_perfectHitRate } from "./head";
+
 // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
 $(function () {
     const v = (selector: any) => {
@@ -20,10 +23,9 @@ $(function () {
     const ench_count = (selector: any, is_weapon = false) => {
         // @ts-expect-error TS(2304): Cannot find name 'count'.
         count = 0;
-        for (i = 1; i < 5; i++) {
+        for (var i = 1; i < 5; i++) {
             const card_id = v(`#DATA_${selector}_CARD_${i}`)
             if (i == 1 || is_weapon) {
-                // @ts-expect-error TS(2304): Cannot find name 'CARD_KIND_ENCHANT'.
                 if (CARD_KIND_ENCHANT == CardObjNew[card_id][1]) {
                     // @ts-expect-error TS(2304): Cannot find name 'count'.
                     count++;
@@ -40,7 +42,6 @@ $(function () {
     }
     const equip = (selector: any) => {
         const equip_id = t("#DATA_" + selector);
-        // @ts-expect-error TS(2304): Cannot find name 'ItemObjNew'.
         const equip_name = equip_id == 0 ? "-" : ItemObjNew[equip_id][8];
         const refined = v(`#${selector}_REFINE`);
         const transcendence = v(`#${selector}_TRANSCENDENCE`);
@@ -66,26 +67,20 @@ $(function () {
         return text;
     }
     const randopt_exists = (id: any) => {
-        // @ts-expect-error TS(2304): Cannot find name 'g_equipRndOptTable'.
         return g_equipRndOptTable[id].filter((v: any) => { return v[0] > 0 }).length > 0 ? "exists" : "";
     }
     const randopt = (id: any) => {
-        // @ts-expect-error TS(2304): Cannot find name 'text'.
-        text = "[ ";
+        let text = "[ ";
         // @ts-expect-error TS(2304): Cannot find name 'options'.
-        options = []
-        // @ts-expect-error TS(2304): Cannot find name 'g_equipRndOptTable'.
+        let options = []
         g_equipRndOptTable[id].forEach((value: any) => {
             if (value[0] != 0) {
-                // @ts-expect-error TS(2304): Cannot find name 'options'.
                 options.push(GetRndOptDispName(g_rndOptArray[value[0]][RND_OPT_DATA_INDEX_SPID]) + " " + value[1])
             }
         });
         // @ts-expect-error TS(2304): Cannot find name 'text'.
         text += options.join(", ")
-        // @ts-expect-error TS(2304): Cannot find name 'text'.
         text += " ]";
-        // @ts-expect-error TS(2304): Cannot find name 'text'.
         return text;
     }
     const shadow_exists = (selector: any) => {
@@ -100,7 +95,6 @@ $(function () {
         }
         // @ts-expect-error TS(2304): Cannot find name 'g_shadowEquipController'.
         const refined = g_shadowEquipController.getRefined(selector);
-        // @ts-expect-error TS(2304): Cannot find name 'ItemObjNew'.
         const shadow_name = ItemObjNew[shadow_id][8];
         // @ts-expect-error TS(2304): Cannot find name 'g_shadowEquipController'.
         const opt_info = g_shadowEquipController.getRndOptInfoArray(selector)
@@ -131,12 +125,9 @@ $(function () {
 
     // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
     $("#OBJID_BUTTON_IMAGE_SAVE_DATA_MIG").click(function () {
-        // @ts-expect-error TS(2304): Cannot find name 'regist_elm_vanity'.
-        regist_elm_vanity = [];
-        // @ts-expect-error TS(2304): Cannot find name 'elm_ratio'.
-        elm_ratio = [];
-        // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
-        regist_ratio = [];
+        let regist_elm_vanity = [];
+        let elm_ratio = [];
+        let regist_ratio = [];
         // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_COUNT'.
         for (idx = 0; idx < ELM_ID_COUNT; idx++) {
             // @ts-expect-error TS(2304): Cannot find name 'regist_elm_vanity'.
@@ -543,49 +534,29 @@ $(function () {
       <table class="elm">
         <thead>
           <tr>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="u">${GetElementText(0)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="m">${GetElementText(1)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="t">${GetElementText(2)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="h">${GetElementText(3)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="k">${GetElementText(4)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="d">${GetElementText(5)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="s">${GetElementText(6)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="y">${GetElementText(7)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="n">${GetElementText(8)}</th>
-          // @ts-expect-error TS(2304): Cannot find name 'GetElementText'.
           <th class="f">${GetElementText(9)}</th>
         </tr>
       </head>
       <tbody>
           <tr>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="u">${regist_ratio[0]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="m">${regist_ratio[1]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="t">${regist_ratio[2]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="h">${regist_ratio[3]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="k">${regist_ratio[4]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="d">${regist_ratio[5]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="s">${regist_ratio[6]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="y">${regist_ratio[7]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="n">${regist_ratio[8]}</td>
-            // @ts-expect-error TS(2304): Cannot find name 'regist_ratio'.
             <td class="f">${regist_ratio[9]}</td>
           </tr>
         </tbody>

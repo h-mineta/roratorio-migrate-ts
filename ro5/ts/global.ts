@@ -56,10 +56,10 @@ let g_charaData = {
 };
 
 // 計算機メインコントローラ（ro4以降）
-let g_confDataCustomStatusMIG = null;
-let g_confDataSpecMIG = null;
-let g_confDataCustomSkillMIG = null;
-let g_confDataCustomSpecStatusMIG = null;
+let g_confDataCustomStatusMIG: any | null = null;
+let g_confDataSpecMIG: any | null = null;
+let g_confDataCustomSkillMIG: any | null = null;
+let g_confDataCustomSpecStatusMIG: any | null = null;
 
 // @ts-expect-error TS(7006): Parameter 'bAsOnLoad' implicitly has an 'any' type... Remove this comment to see the full error message
 function ResetConfDataAllMIG(bAsOnLoad) {

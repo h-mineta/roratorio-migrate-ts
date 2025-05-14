@@ -629,7 +629,7 @@ export class CSaveDataManager {
             const dataUnitType = requiredTypes[idx];
 
             // 収集したマップに存在していれば問題なし
-            if (dataUnitMapByType.get(dataUnitType) !== undefined) {
+            if (dataUnitMapByType.get(dataUnitType.toString()) !== undefined) {
                 continue;
             }
 

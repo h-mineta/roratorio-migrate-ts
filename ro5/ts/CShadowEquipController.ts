@@ -144,11 +144,9 @@ class CShadowEquipController {
 
             // 精錬値選択オブジェクトの初期化
             const objItemRefined = equipBlockList[idx].querySelector(":scope .item-refined");
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
             HtmlRemoveAllChild(objItemRefined);
 
             for (let refined = 0; refined <= 10; refined++) {
-                // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
                 HtmlCreateElementOption(refined, "+" + refined, objItemRefined)
             }
         }
@@ -168,7 +166,6 @@ class CShadowEquipController {
         const objRoot = document.getElementById("OBJID_SHADOW_EQUIPS_MIG");
 
         // 装備領域名をサニタイジング
-        // @ts-expect-error TS(2550): Property 'replaceAll' does not exist on type 'stri... Remove this comment to see the full error message
         eqprgnName = ("" + eqprgnName).replaceAll(/[^-_a-zA-Z0-9]/g, "");
 
         // ブロック全体を取得
@@ -309,10 +306,8 @@ class CShadowEquipController {
 
         // アイテム選択欄の再構築
         const objItemSelect = objItemConf.querySelector(":scope .item-select");
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
         HtmlRemoveAllChild(objItemSelect);
         for (let idx = 0; idx < itemInfoArray.length; idx++) {
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
             HtmlCreateElementOption(itemInfoArray[idx][0], itemInfoArray[idx][1], objItemSelect);
         }
 
@@ -353,9 +348,7 @@ class CShadowEquipController {
         }
 
         // 再計算
-        // @ts-expect-error TS(2304): Cannot find name 'StAllCalc'.
         StAllCalc();
-        // @ts-expect-error TS(2554): Expected 1 arguments, but got 0.
         AutoCalc();
     }
 
@@ -530,7 +523,6 @@ class CShadowEquipController {
         }
 
         // 再計算
-        // @ts-expect-error TS(2304): Cannot find name 'StAllCalc'.
         StAllCalc();
     }
 
