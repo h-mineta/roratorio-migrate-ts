@@ -1,12 +1,9 @@
 import { AutoCalc, UsedSkillSearch, n_AS_MODE, n_AS_check_3dan, n_A_ActiveSkillIdNum, n_A_ActiveSkillLV, n_A_DMG, n_Delay, n_Enekyori, w_DMG, w_DMG_AS_OverHP, w_HIT_HYOUJI } from "./head";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
-import {
-    MIG_JOB_ID_HUNTER, MIG_JOB_ID_SNIPER
-} from "./data/mig.job.dat";
 
 //feature-migrate-ts
-import { getSkillById } from "./loadJSONL";
+import { getSkillTableById } from "./loadJSON";
 
 //================================================================================================
 //
@@ -36,8 +33,6 @@ for (let idx: number = 0, inc: number = 1; idx <= 1000; idx += inc) {
         inc = 10;
     }
 }
-
-
 
 //================================================================================================
 //
@@ -293,10 +288,10 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 通常攻撃時の、オートファイアリングランチャー追撃効果
     //----------------------------------------------------------------
-    skillLv = UsedSkillSearch(getSkillById("RA_FIRINGTRAP")?.id_num);
+    skillLv = UsedSkillSearch(getSkillTableById("RA_FIRINGTRAP")?.id_num);
     if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
         // オートスペルに、ベーシックグレネードを設定
-        skillLvSub = UsedSkillSearch(getSkillById("NW_BASIC_GRENADE")?.id_num);
+        skillLvSub = UsedSkillSearch(getSkillTableById("NW_BASIC_GRENADE")?.id_num);
         if (skillLvSub > 0) {
             funcAddAS();
             n_AS_SKILL[idx][0] = SKILL.ID_BASIC_GRENADE;
@@ -309,7 +304,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
             n_AS_SKILL[idx][3] = 0;
         }
         // オートスペルに、ヘイスティファイアインザホールを設定
-        skillLvSub = UsedSkillSearch(getSkillById("NW_HASTY_FIRE_IN_THE_HOLE")?.id_num);
+        skillLvSub = UsedSkillSearch(getSkillTableById("NW_HASTY_FIRE_IN_THE_HOLE")?.id_num);
         if (skillLvSub > 0) {
             funcAddAS();
             n_AS_SKILL[idx][0] = SKILL.ID_HASTY_FIRE_IN_THE_HOLE;
@@ -322,7 +317,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
             n_AS_SKILL[idx][3] = 0;
         }
         // オートスペルに、グレネーズドロッピングを設定
-        skillLvSub = UsedSkillSearch(getSkillById("NW_GRENADE_DROPPING")?.id_num);
+        skillLvSub = UsedSkillSearch(getSkillTableById("NW_GRENADE_DROPPING")?.id_num);
         if (skillLvSub > 0) {
             funcAddAS();
             n_AS_SKILL[idx][0] = SKILL.ID_GRENADES_DROPPING;
@@ -425,7 +420,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         }
 
         // 職業による補正（レンジャーならばＬｖ５発動）
-        if ((n_A_JOB != MIG_JOB_ID_HUNTER) && (n_A_JOB != MIG_JOB_ID_SNIPER)) {
+        if ((n_A_JOB != 10) && (n_A_JOB != 49)) {
             ASBlitzLv = 5;
         }
 
@@ -586,7 +581,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         // 流星落下の周辺追撃を設定
         funcAddAS();
         // 適用スキルの設定
-        n_AS_SKILL[idx][0] = getSkillById("SJ_FALLINGSTAR")?.id_num;
+        n_AS_SKILL[idx][0] = getSkillTableById("SJ_FALLINGSTAR")?.id_num;
         // 適用レベルの設定
         n_AS_SKILL[idx][1] = skillLvRyuseRakka;
         // 発動率の設定 千分率
@@ -1819,10 +1814,10 @@ function OnClickEasySetUpAutoSpell() {
 
         // 当該オートスペルが物理攻撃時オートスペルでない場合、処理しない
         switch (AutoSpellSkill[asId][5]) {
-            case AUTO_SPELL_TRIGGER_PHYSICAL_ATTACK:
-            case AUTO_SPELL_TRIGGER_SHORTRANGE_ATTACK:
-            case AUTO_SPELL_TRIGGER_LONGRANGE_ATTACK:
-            case AUTO_SPELL_TRIGGER_ANY_ATTACK:
+            case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_PHYSICAL_ATTACK:
+            case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_SHORTRANGE_ATTACK:
+            case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_LONGRANGE_ATTACK:
+            case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_ANY_ATTACK:
                 break;
             default:
                 continue;
@@ -1869,10 +1864,10 @@ function OnClickEasySetUpAutoSpell() {
 
             // 当該オートスペルが物理攻撃時オートスペルでない場合、処理しない
             switch (AutoSpellSkill[asId][5]) {
-                case AUTO_SPELL_TRIGGER_PHYSICAL_ATTACK:
-                case AUTO_SPELL_TRIGGER_SHORTRANGE_ATTACK:
-                case AUTO_SPELL_TRIGGER_LONGRANGE_ATTACK:
-                case AUTO_SPELL_TRIGGER_ANY_ATTACK:
+                case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_PHYSICAL_ATTACK:
+                case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_SHORTRANGE_ATTACK:
+                case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_LONGRANGE_ATTACK:
+                case EnumAutoSpellTrigger.AUTO_SPELL_TRIGGER_ANY_ATTACK:
                     break;
                 default:
                     continue;
@@ -2054,4 +2049,18 @@ function OnClickEasySetUpAutoSpell() {
 
     // オートスペル設定変更イベントを実行
     OnChangeSettingAutoSpell(true);
+}
+
+enum EnumAutoSpellTrigger {
+    AUTO_SPELL_TRIGGER_UNKNOWN = 0,
+    AUTO_SPELL_TRIGGER_PHYSICAL_ATTACK = 1,      // 物理攻撃時
+    AUTO_SPELL_TRIGGER_SHORTRANGE_ATTACK = 2,    // 近接攻撃時
+    AUTO_SPELL_TRIGGER_LONGRANGE_ATTACK = 3,     // 遠距離攻撃時
+    AUTO_SPELL_TRIGGER_ANY_ATTACK = 4,           // 物理・魔法攻撃時
+    AUTO_SPELL_TRIGGER_MAGICAL_ATTACK = 5,       // 魔法攻撃時
+    AUTO_SPELL_TRIGGER_PHYSICAL_DAMAGED = 6,     // 物理攻撃を受けた時
+    AUTO_SPELL_TRIGGER_SHORTRANGE_DAMAGED = 7,   // 近距離物理攻撃を受けた時
+    AUTO_SPELL_TRIGGER_LONGRANGE_DAMAGED = 8,    // 遠距離物理攻撃を受けた時
+    AUTO_SPELL_TRIGGER_MAGICAL_DAMAGED = 9,      // 魔法攻撃を受けた時
+    AUTO_SPELL_TRIGGER_ANY_DAMAGED = 10,         // 物理または魔法攻撃を受けた時
 }

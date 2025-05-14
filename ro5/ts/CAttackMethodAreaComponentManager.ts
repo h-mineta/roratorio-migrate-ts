@@ -1703,17 +1703,11 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
     // オートスペルスキル定義のリストを取得
     autoSpellIdArray = new Array().concat(
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayEquip'.
         GetEquippedSPValueArrayEquip(ITEM_SP_AUTO_SPELL),
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayEquip'.
         GetEquippedSPValueArrayEquip(ITEM_SP_AUTO_SPELL_LEVEL_UNSPECIFIED),
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayEquip'.
         GetEquippedSPValueArrayEquip(ITEM_SP_AUTO_SPELL_HIDDEN_DETAIL),
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayCardAndEl... Remove this comment to see the full error message
         GetEquippedSPValueArrayCardAndElse(ITEM_SP_AUTO_SPELL),
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayCardAndEl... Remove this comment to see the full error message
         GetEquippedSPValueArrayCardAndElse(ITEM_SP_AUTO_SPELL_LEVEL_UNSPECIFIED),
-        // @ts-expect-error TS(2304): Cannot find name 'GetEquippedSPValueArrayCardAndEl... Remove this comment to see the full error message
         GetEquippedSPValueArrayCardAndElse(ITEM_SP_AUTO_SPELL_HIDDEN_DETAIL)
     );
 

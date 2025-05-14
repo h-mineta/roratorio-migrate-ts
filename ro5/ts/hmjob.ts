@@ -1,13 +1,7 @@
-import { GetBaseLevelMax, GetBaseLevelMin, IsYojiJob } from "./data/mig.job.h";
-import { ApplyPhysicalSpecializeMonster } from "./head";
+import { ApplyPhysicalSpecializeMonster, GetBaseLevelMax, GetBaseLevelMin, IsYojiJob } from "./head";
 
-// @ts-expect-error TS(2304): Cannot find name 'g_pureStatus'.
-g_pureStatus = [];
-// @ts-expect-error TS(2304): Cannot find name 'g_bonusStatus'.
-g_bonusStatus = [];
-
-
-
+g_pureStatus: [] = [];
+g_bonusStatus: [] = [];
 
 // @ts-expect-error TS(7006): Parameter 'jobId' implicitly has an 'any' type.
 export function RebuildStatusSelect(jobId) {
@@ -621,9 +615,7 @@ export function GetPAtk() {
     // 装備効果
     // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_P_ATK_PLUS'.
     value += n_tok[ITEM_SP_P_ATK_PLUS];
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPEquip'.
     value += GetEquippedTotalSPEquip(ITEM_SP_P_ATK_PLUS);
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPCardAndElse'.
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_P_ATK_PLUS);
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_P_ATK_PLUS);
@@ -759,9 +751,7 @@ export function GetSMatk() {
     // 装備効果
     // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_S_MATK_PLUS'.
     value += n_tok[ITEM_SP_S_MATK_PLUS];
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPEquip'.
     value += GetEquippedTotalSPEquip(ITEM_SP_S_MATK_PLUS);
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPCardAndElse'.
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_S_MATK_PLUS);
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_S_MATK_PLUS);
@@ -909,9 +899,7 @@ export function GetCRate() {
     // 装備効果
     // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_C_RATE_PLUS'.
     value += n_tok[ITEM_SP_C_RATE_PLUS];
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPEquip'.
     value += GetEquippedTotalSPEquip(ITEM_SP_C_RATE_PLUS);
-    // @ts-expect-error TS(2304): Cannot find name 'GetEquippedTotalSPCardAndElse'.
     value += GetEquippedTotalSPCardAndElse(ITEM_SP_C_RATE_PLUS);
     // @ts-expect-error TS(2304): Cannot find name 'GetRndOptTotalValue'.
     value += GetRndOptTotalValue(ITEM_SP_C_RATE_PLUS);
@@ -1632,7 +1620,6 @@ export function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MATK_PLUS_TYPE_NOTSTUFF'... Remove this comment to see the full error message
         case ITEM_SP_MATK_PLUS_TYPE_NOTSTUFF:
 
             // 「アークメイジ」スキル「クライマックスハリケーン状態」による効果
@@ -1642,7 +1629,6 @@ export function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_ASPD_PLUS'.
         case ITEM_SP_ASPD_PLUS:
 
             // 「インクイジター」スキル「忠実な信念」習得による効果
@@ -1653,9 +1639,7 @@ export function ApplySpecModify(spid, spVal) {
             break;
 
         case ITEM_SP_PHYSICAL_RESIST_SIZE_SMALL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_RESIST_SIZE_MED... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_RESIST_SIZE_MEDIUM:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_RESIST_SIZE_LAR... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_RESIST_SIZE_LARGE:
 
             // 「ドラゴンナイト」スキル「ツーハンドディフェンディング」習得による効果
@@ -1722,7 +1706,6 @@ export function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_P_ATK_PLUS'.
         case ITEM_SP_P_ATK_PLUS:
 
             // 「未知なる力のブーツ」の純粋なステータスによる効果
@@ -1736,7 +1719,6 @@ export function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_S_MATK_PLUS'.
         case ITEM_SP_S_MATK_PLUS:
 
             // 「未知なる魔力のブーツ」の純粋なステータスによる効果
@@ -1751,42 +1733,25 @@ export function ApplySpecModify(spid, spVal) {
             break;
 
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_SOLID:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_U... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_UNDEAD:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_A... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_ANIMAL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_P... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_PLANT:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_I... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_INSECT:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_F... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_FISH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_D... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_DEMON:
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_HUMAN:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_A... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_ANGEL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_D... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_DRAGON:
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_HUMAN_NOT_PLAYER:
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_VANITY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WA... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_EA... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_EARTH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_FI... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_FIRE:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WI... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WIND:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_PO... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_POISON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HO... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HOLY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_DA... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_DARK:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_PS... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_PSYCO:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_UN... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_UNDEAD:
 
             // 「カーディナル」スキル「フィドスアニムス」習得による効果
@@ -1794,7 +1759,6 @@ export function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_FIDOS_ANIMUS)) > 0) {
 
                 // 聖属性魔法
-                // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HO... Remove this comment to see the full error message
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HOLY].indexOf(spid) >= 0) {
 
                     valWork = 1 * sklLv;
@@ -1817,7 +1781,6 @@ export function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_CLIMAX_HURRICANE_STATE)) > 0) {
 
                 // 風属性魔法
-                // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WI... Remove this comment to see the full error message
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WIND].indexOf(spid) >= 0) {
                     spVal += 50;
                 }
@@ -1831,7 +1794,6 @@ export function ApplySpecModify(spid, spVal) {
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
 
                     // 聖属性魔法
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HO... Remove this comment to see the full error message
                     if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_HOLY].indexOf(spid) >= 0) {
                         spVal += 5 * sklLv;
                     }
@@ -1847,15 +1809,10 @@ export function ApplySpecModify(spid, spVal) {
                     case ITEM_KIND_BOOK:
 
                         arrayWork = [
-                            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_FI... Remove this comment to see the full error message
                             ITEM_SP_MAGICAL_DAMAGE_UP_ELM_FIRE,
-                            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WA... Remove this comment to see the full error message
                             ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER,
-                            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WI... Remove this comment to see the full error message
                             ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WIND,
-                            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_EA... Remove this comment to see the full error message
                             ITEM_SP_MAGICAL_DAMAGE_UP_ELM_EARTH,
-                            // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_PO... Remove this comment to see the full error message
                             ITEM_SP_MAGICAL_DAMAGE_UP_ELM_POISON,
                         ];
 
@@ -1873,7 +1830,6 @@ export function ApplySpecModify(spid, spVal) {
             // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_CLIMAX_IMPACT]) > 0) {
                 // 水属性魔法
-                // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WA... Remove this comment to see the full error message
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
                     spVal += 25;
                 }
@@ -1887,7 +1843,6 @@ export function ApplySpecModify(spid, spVal) {
             // 「ハイパーノービス」スキル「ジャックフロストノヴァ」によるデバフ効果
             // @ts-expect-error TS(2304): Cannot find name 'n_B_IJYOU'.
             if (n_B_IJYOU[MOB_CONF_DEBUF_ID_JACK_FROST_NOVA]) {
-                // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WA... Remove this comment to see the full error message
                 if ([ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
                     spVal += 15;
                 }
@@ -1896,35 +1851,22 @@ export function ApplySpecModify(spid, spVal) {
             break;
 
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_VANITY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WATER:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_EARTH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_FIRE:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WIND:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_POISON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_HOLY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_DARK:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_PSYCO:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_UNDEAD:
             // 四次職支援「五行符」による効果
             // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_GOGYO_FU]) > 0) {
                 arrayWork = [
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_FIRE,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WATER,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WIND,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_EARTH,
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_VANITY,
                 ];
@@ -1937,29 +1879,19 @@ export function ApplySpecModify(spid, spVal) {
 
         // 属性攻撃ダメージ増加
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_VANITY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_W... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_WATER:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_E... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_EARTH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_F... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_FIRE:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_W... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_WIND:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_P... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_POISON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_H... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_HOLY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_D... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_DARK:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_P... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_PSYCO:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_U... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_UNDEAD:
 
             // 「ハイパーノービス」スキル「ジャックフロストノヴァ」によるデバフ効果
             // @ts-expect-error TS(2304): Cannot find name 'n_B_IJYOU'.
             if (n_B_IJYOU[MOB_CONF_DEBUF_ID_JACK_FROST_NOVA]) {
-                // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_W... Remove this comment to see the full error message
                 if ([ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_WATER].indexOf(spid) >= 0) {
                     spVal += 15;
                 }

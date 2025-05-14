@@ -1,11 +1,11 @@
 "use strict";
 
-import { GetJobName } from "./data/mig.job.h"
 import { n_AS_SKILL, AS_PLUS, AUTO_SPELL_SETTING_COUNT, OBJID_OFFSET_AS_SKILL_ID, AS_Calc } from "./calcautospell";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
 import { CAttackMethodAreaComponentManager } from "./CAttackMethodAreaComponentManager";
 import { ApplyCRateAmplify, ApplyMresResist, ApplyPAtkLeftHandPenalty, ApplyResResist, ApplySMatkAmplify, GetHPlus, GetPAtk, GetTotalSpecStatus } from "./hmjob";
+import { getJobTableByIdName, getJobTableByIdNum, Job } from "./loadJSON";
 
 // データ収集用
 // バトルデータインデックス
@@ -16650,7 +16650,7 @@ export function Click_PassSkillSW() {
         str = '<TABLE Border>';
         str += '<TR><TD ColSpan="4" id="A1TD" Bgcolor="#DDDDFF" class="title">';
         str += '<input id="OBJID_CHECK_A1_SKILL_SW" type="checkbox" name="A1_SKILLSW" onClick="Click_PassSkillSW()">';
-        str += `<label for="OBJID_CHECK_A1_SKILL_SW">${GetJobName(n_A_JOB)}固有自己支援・パッシブ持続系</label>`;
+        str += `<label for="OBJID_CHECK_A1_SKILL_SW">${getJobName(n_A_JOB)}固有自己支援・パッシブ持続系</label>`;
         str += '<span id="A1used"></span>';
         str += '</TD></TR>';
         for (var i = 0; i <= end; i += 2) str += '<TR><TD id="P_Skill' + i + '"></TD><TD id="P_Skill' + i + 's"></TD><TD id="P_Skill' + (i + 1) + '"></TD><TD id="P_Skill' + (i + 1) + 's"></TD></TR>';
@@ -17220,7 +17220,7 @@ export function Click_PassSkillSW() {
         str = '<TABLE Border>';
         str += '<TR><TD ColSpan="4" id="A1TD" Bgcolor="#DDDDFF" class="title">';
         str += '<input id="OBJID_CHECK_A1_SKILL_SW" type="checkbox" name="A1_SKILLSW" onClick="Click_PassSkillSW()">';
-        str += `<label for="OBJID_CHECK_A1_SKILL_SW">${GetJobName(n_A_JOB)}固有自己支援・パッシブ持続系</label>`;
+        str += `<label for="OBJID_CHECK_A1_SKILL_SW">${getJobName(n_A_JOB)}固有自己支援・パッシブ持続系</label>`;
         str += '<span id="A1used"></span>';
         str += '</TD></TR>';
         str += '</TABLE>';
@@ -26919,4 +26919,143 @@ function ApplyReceiveDamageAmplify(mobData, dmg) {
     }
 
     return dmg;
+}
+
+/**
+ * ジョブ名を取得する.
+ * @param jobId ジョブＩＤ
+ */
+export function getJobName(jobId: number): string {
+    return g_constDataManager.GetName(CONST_DATA_KIND_JOB, jobId);
+}
+
+/**
+ * ベースレベルの最小値を取得する.
+ * @param jobId ジョブＩＤ
+ */
+export function GetBaseLevelMin(jobId: number) {
+    let jobIdName: string | undefined = getJobTableByIdNum(jobId)?._mig_id_name
+    switch (jobIdName) {
+        case "MIG_JOB_ID_DRAGON_KNIGHT":
+        case "MIG_JOB_ID_SHADOW_CROSS":
+        case "MIG_JOB_ID_CARDINAL":
+        case "MIG_JOB_ID_WIND_HAWK":
+        case "MIG_JOB_ID_ARCH_MAGE":
+        case "MIG_JOB_ID_MEISTER":
+        case "MIG_JOB_ID_IMPERIAL_GUARD":
+        case "MIG_JOB_ID_ABYSS_CHASER":
+        case "MIG_JOB_ID_INQUISITOR":
+        case "MIG_JOB_ID_TROUBADOUR":
+        case "MIG_JOB_ID_TROUVERE":
+        case "MIG_JOB_ID_ELEMENTAL_MASTER":
+        case "MIG_JOB_ID_BIOLO":
+        case "MIG_JOB_ID_SKY_EMPEROR":
+        case "MIG_JOB_ID_SOUL_ASCETIC":
+        case "MIG_JOB_ID_SHINKIROU":
+        case "MIG_JOB_ID_SHIRANUI":
+        case "MIG_JOB_ID_NIGHT_WATCH":
+        case "MIG_JOB_ID_HYPER_NOVICE":
+        case "MIG_JOB_ID_SPIRIT_HANDLER":
+            return 200;
+
+        case "JOB_ID_RUNEKNIGHT":
+        case "JOB_ID_GILOTINCROSS":
+        case "JOB_ID_ARCBISHOP":
+        case "JOB_ID_RANGER":
+        case "JOB_ID_WARLOCK":
+        case "JOB_ID_MECHANIC":
+        case "JOB_ID_ROYALGUARD":
+        case "JOB_ID_SHADOWCHASER":
+        case "JOB_ID_SHURA":
+        case "JOB_ID_MINSTREL":
+        case "JOB_ID_WANDERER":
+        case "JOB_ID_SORCERER":
+        case "JOB_ID_GENETIC":
+            return 90;
+
+        case "JOB_ID_KAGERO":
+        case "JOB_ID_OBORO":
+        case "JOB_ID_SUPERNOVICE_PLUS":
+        case "JOB_ID_REBELLION":
+        case "JOB_ID_STAR_EMPEROR":
+        case "JOB_ID_SOUL_REAPER":
+            return 99;
+
+        case "JOB_ID_SUPERNOVICE":
+            return 45;
+
+        default:
+            return 1;
+    }
+
+    return 1;
+}
+
+
+/**
+ * ベースレベルの最大値を取得する.
+ * @param jobId ジョブＩＤ
+ */
+export function GetBaseLevelMax(jobId: number) {
+    let jobIdName: string | undefined = getJobTableByIdNum(jobId)?._mig_id_name
+    switch (jobIdName) {
+        case "MIG_JOB_ID_DRAGON_KNIGHT":
+        case "MIG_JOB_ID_SHADOW_CROSS":
+        case "MIG_JOB_ID_CARDINAL":
+        case "MIG_JOB_ID_WIND_HAWK":
+        case "MIG_JOB_ID_ARCH_MAGE":
+        case "MIG_JOB_ID_MEISTER":
+        case "MIG_JOB_ID_IMPERIAL_GUARD":
+        case "MIG_JOB_ID_ABYSS_CHASER":
+        case "MIG_JOB_ID_INQUISITOR":
+        case "MIG_JOB_ID_TROUBADOUR":
+        case "MIG_JOB_ID_TROUVERE":
+        case "MIG_JOB_ID_ELEMENTAL_MASTER":
+        case "MIG_JOB_ID_BIOLO":
+        case "MIG_JOB_ID_SKY_EMPEROR":
+        case "MIG_JOB_ID_SOUL_ASCETIC":
+        case "MIG_JOB_ID_SHINKIROU":
+        case "MIG_JOB_ID_SHIRANUI":
+        case "MIG_JOB_ID_NIGHT_WATCH":
+        case "MIG_JOB_ID_HYPER_NOVICE":
+        case "MIG_JOB_ID_SPIRIT_HANDLER":
+            return 260;
+
+        case "JOB_ID_RUNEKNIGHT":
+        case "JOB_ID_GILOTINCROSS":
+        case "JOB_ID_ARCBISHOP":
+        case "JOB_ID_RANGER":
+        case "JOB_ID_WARLOCK":
+        case "JOB_ID_MECHANIC":
+        case "JOB_ID_ROYALGUARD":
+        case "JOB_ID_SHADOWCHASER":
+        case "JOB_ID_SHURA":
+        case "JOB_ID_MINSTREL":
+        case "JOB_ID_WANDERER":
+        case "JOB_ID_SORCERER":
+        case "JOB_ID_GENETIC":
+        case "JOB_ID_KAGERO":
+        case "JOB_ID_OBORO":
+        case "JOB_ID_REBELLION":
+        case "JOB_ID_STAR_EMPEROR":
+        case "JOB_ID_SOUL_REAPER":
+        case "JOB_ID_SUMMONER":
+        case "JOB_ID_SUPERNOVICE_PLUS":
+            return 200;
+
+        default:
+            return 99;
+    }
+
+    return 1;
+}
+
+
+export function IsYojiJob(jobId: number): boolean {
+    let job: Job | undefined = getJobTableByIdNum(jobId)
+
+    if (job && job.job_type_name == "fourth_job") {
+        return true;
+    }
+    return false;
 }
