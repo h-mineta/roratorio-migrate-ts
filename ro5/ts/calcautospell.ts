@@ -1,4 +1,4 @@
-import { UsedSkillSearch, n_A_ActiveSkillLV } from "./head";
+import { AutoCalc, UsedSkillSearch, n_AS_MODE, n_AS_check_3dan, n_A_ActiveSkill, n_A_ActiveSkillLV, n_A_DMG, n_Delay, n_Enekyori, w_DMG, w_DMG_AS_OverHP, w_HIT_HYOUJI } from "./head";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
 import {
@@ -6,7 +6,7 @@ import {
 } from "./data/mig.job.dat";
 
 //feature-migrate-ts
-import { getSkillById } from "./LoadJSONL";
+import { getSkillById } from "./loadJSONL";
 
 //================================================================================================
 //
@@ -117,7 +117,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_DUPLELIGHT);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0)) {
 
         // オートスペルに、デュプレライト物理部分（グラハムライト）を設定
@@ -173,7 +172,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLv = UsedSkillSearch(SKILL.ID_AUTO_SHADOW_SPELL);
     skillKind = UsedSkillSearch(SKILL.ID_MAGIC_SETTING_FOR_AUTO_SHADOW_SPELL);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0) && (skillKind != 0)) {
 
         var wASS = [
@@ -220,7 +218,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_SERVANT_WEAPON);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
 
         // オートスペルに、サーヴァントウェポンを設定
@@ -248,7 +245,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         [SPILIT.SUPPORT_SKILL_ID_DEEP_POISONING, SKILL.ID_POISON_BUSTER],
     ]);
     let boltSkillId = SERE_SUPPORT_SKILL_TO_BOLT_SKILL.get(skillKind);
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (boltSkillId && n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) {
         funcAddAS();
         n_AS_SKILL[idx][0] = boltSkillId;
@@ -266,7 +262,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 公式サイトでは「アビス球体攻撃」と表記される
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_FROM_THE_ABYSS);
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
         // オートスペルに、フロムジアビスを設定
         funcAddAS();
@@ -299,7 +294,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 通常攻撃時の、オートファイアリングランチャー追撃効果
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(getSkillById("RA_FIRINGTRAP")?.id_num);
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
         // オートスペルに、ベーシックグレネードを設定
         skillLvSub = UsedSkillSearch(getSkillById("NW_BASIC_GRENADE")?.id_num);
@@ -346,7 +340,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ビーストストレイフィング時の、ダブルストレイフィング追撃あり時の効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_BEAST_STRAIFING) && (attackMethodConfArray[0].GetOptionValue(0) == 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_DOUBLE_STRAFING;
@@ -359,7 +352,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ハンドレッドスピア時の、スピアブーメラン追撃効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_HANDRED_SPEAR) && (attackMethodConfArray[0].GetOptionValue(1)) >= 1) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_SPEAR_BOOMERANG;
@@ -372,7 +364,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ダークイリュージョン時の、クロスインパクト追撃効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_DARK_ILLUSION) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_CROSS_IMPACT;
@@ -385,7 +376,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // パワースイング時の、アックスブーメラン追撃効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_POWER_SWING) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         // 斧系限定の効果
         switch (n_A_WeaponType) {
@@ -409,7 +399,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     let skillLvBlitz = UsedSkillSearch(SKILL.ID_BLITZ_BEAT);
 
     // 自動狼の場合
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_WUG_STRIKE;
@@ -419,7 +408,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     }
 
     // 自動鷹の場合
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     else if ((n_A_ActiveSkill == 0) && (n_A_WeaponType == ITEM_KIND_BOW) && (skillLvBlitz > 0)) {
 
         funcAddAS();
@@ -459,7 +447,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_TORIKAINO_YOBIKO);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
 
         funcAddAS();
@@ -477,7 +464,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_SORATOBU_GARAPAGO);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
 
         funcAddAS();
@@ -494,7 +480,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_FURUBITA_MEISAIUSAGI);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
 
         if ((itemCount > 0) && (n_A_HEAD_DEF_PLUS >= 9)) {
@@ -522,7 +507,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     let skillLvQuickDraw = UsedSkillSearch(SKILL.ID_AS_QUICKDRAW);
     let skillLvChainAction = UsedSkillSearch(SKILL.ID_CHAIN_ACTION);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
         && (n_A_WeaponType == ITEM_KIND_HANDGUN) && (skillLvChainAction > 0)) {
 
@@ -548,7 +532,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvQuickDraw = UsedSkillSearch(SKILL.ID_AS_QUICKDRAW);
     skillLvEternalChain = UsedSkillSearch(SKILL.ID_ETERNAL_CHAIN);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
         && (ITEM_KIND_HANDGUN <= n_A_WeaponType) && (n_A_WeaponType <= ITEM_KIND_GRENADEGUN)
         && (skillLvEternalChain > 0)) {
@@ -573,7 +556,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 通常攻撃時の、流星落下追撃効果
     //----------------------------------------------------------------
     var skillLvRyuseRakka = UsedSkillSearch(SKILL.ID_RYUSE_RAKKA);
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvRyuseRakka > 0)) {
         // 流星落下の初撃を設定
         funcAddAS();
@@ -632,7 +614,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 鋭敏な嗅覚時の、ウォーグバイト追撃効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
+
     if ((n_A_ActiveSkill == SKILL.ID_EIBINNA_KYUKAKU) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_WUG_BITE;
@@ -645,7 +627,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ヘスペルスリット時の、ピンポイントアタック追撃効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
+
     if (n_A_ActiveSkill == SKILL.ID_HESPERUS_SLIT) {
         var w = 1;
         if (UsedSkillSearch(SKILL.ID_INSPIRATION)) w += 2;
@@ -662,7 +644,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 閃光連撃時の、連撃
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_SENKO_RENGEKI) {
         if (attackMethodConfArray[0].GetOptionValue(0) != 0) {
             funcAddAS();
@@ -698,7 +679,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 三段コンボ時の、連撃
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_MONK) || (n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_CHAMP)) {
 
         funcAddAS();
@@ -724,7 +704,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         }
 
         // モンクの場合
-        // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
         if (n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_MONK) {
             if (attackMethodConfArray[0].GetOptionValue(2) != 0) {
                 funcAddAS();
@@ -765,7 +744,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 双龍コンボ時の、連撃
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_COMBO_SORYUKYAKU) {
 
         funcAddAS();
@@ -821,7 +799,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ギガントセット　ジョイントコンボ時の、連撃
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_COMBO_GIGANTSET_JOINT_BEAT) {
 
         funcAddAS();
@@ -851,7 +828,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ギガントセット　スパイラルコンボ時の、連撃
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_COMBO_GIGANTSET_SPIRAL_PIERCE) {
 
         funcAddAS();
@@ -876,7 +852,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     sereKind = UsedSkillSearch(SKILL.ID_SERE);
     sereMode = UsedSkillSearch(SKILL.ID_SERE_MODE);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkill == SKILL.ID_SPELL_FIST) {
 
         if (sereMode == 1) {
@@ -921,7 +896,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
                         // 発動率
                         n_AS_SKILL[idx][2] = Math.floor(n_A_JobLV * 10 / 2);
                         // 遠距離攻撃では、発動率半減
-                        // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
                         if (n_Enekyori == 1) {
                             n_AS_SKILL[idx][2] = n_AS_SKILL[idx][2] / 2;
                         }
@@ -971,7 +945,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 通常攻撃、スペルフィストにおける、装備オートスペル効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if (n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkill == SKILL.ID_SPELL_FIST) {
 
         // 通常オートスペル
@@ -1007,7 +980,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
             n_AS_SKILL[idx][2] = AUTO_SPELL_PROB_ARRAY[n_A_PassSkill5[OBJID_OFFSET_AS_SKILL_PROB + asidx]];
 
             // 遠距離攻撃の場合は、発動率半減
-            // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
             if (n_Enekyori == 1) {
                 n_AS_SKILL[idx][2] = n_AS_SKILL[idx][2] / 2;
             }
@@ -1055,7 +1027,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ボルト使用時の、ダブルキャスティング効果
     //----------------------------------------------------------------
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     switch (n_A_ActiveSkill) {
 
         case SKILL.ID_FIRE_BOLT:
@@ -1089,7 +1060,6 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLv = UsedSkillSearch(SKILL.ID_AUTO_MAGICIAN_SPELL);
     skillKind = UsedSkillSearch(SKILL.ID_MAGIC_SETTING_FOR_AUTO_SPELL);
 
-    // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
     if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) || (n_A_ActiveSkill == SKILL.ID_SPELL_FIST)) {
 
         if ((skillLv > 0) && (skillKind != 0)) {
@@ -1117,7 +1087,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
 
             // 発動レベルの設定
             n_AS_SKILL[idx][1] = 3;
-            skillLvEffectOfSagenoTamashi = UsedSkillSearch(SKILL.ID_SAGENO_TAMASHI_MAHONO_SHUTOKU_LEVEL);
+            let skillLvEffectOfSagenoTamashi = UsedSkillSearch(SKILL.ID_SAGENO_TAMASHI_MAHONO_SHUTOKU_LEVEL);
             if (skillLvEffectOfSagenoTamashi > 0) {
                 n_AS_SKILL[idx][1] = skillLvEffectOfSagenoTamashi;
             }
@@ -1175,6 +1145,8 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
 
 
 
+
+    /*
 
 
     n_AS_SKILL[idx][0] = -1;
@@ -1405,12 +1377,13 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         str_bSUBname += "<B><Font size=2>通常</Font></B><BR>";
         str_bSUB += "<BR>";
     }
+    */
 }
 
 
 export function AS_PLUS() {
 
-    w_DMG_AS_OverHP = w_DMG[1];
+    let w_DMG_AS_OverHP = w_DMG[1];
 
     if (!n_AS_check_3dan) {
 
@@ -1445,8 +1418,8 @@ export function AS_PLUS() {
 //
 //================================================================================================
 export const OBJID_OFFSET_AS_SKILL_ID = 100;			// オブジェクトＩＤのオフセット（オートスペル　スキルＩＤ）
-export const OOBJID_OFFSET_AS_SKILL_LV = 200;			// オブジェクトＩＤのオフセット（オートスペル　スキルレベル）
-export const OOBJID_OFFSET_AS_SKILL_PROB = 300;		// オブジェクトＩＤのオフセット（オートスペル　スキル発動率）
+export const OBJID_OFFSET_AS_SKILL_LV = 200;			// オブジェクトＩＤのオフセット（オートスペル　スキルレベル）
+export const OBJID_OFFSET_AS_SKILL_PROB = 300;		// オブジェクトＩＤのオフセット（オートスペル　スキル発動率）
 
 //================================================================================================
 //
@@ -1801,6 +1774,7 @@ function OnClickEasySetUpAutoSpell() {
     var asidx = 0;
     var asIdArray = new Array();
 
+    let cardCount: any;
 
     //----------------------------------------------------------------
     // 初めに、デフォルト（なし）に設定しておく

@@ -3,8 +3,12 @@
 
 //----------------------------------------------------------------
 // オプションリストの種別
+
+import { CSaveController } from "./CSaveController";
+import { AutoCalc, calc, CanonOBJ, KunaiOBJ, SyurikenOBJ } from "./head";
+import { CSaveDataConst } from "./savedata/CSaveDataConst";
+
 //----------------------------------------------------------------
-// @ts-expect-error TS(2304): Cannot find name 'CGlobalConstManager'.
 CGlobalConstManager.DefineEnum(
     "EnumAttackMethodOptionListType",
     [
@@ -440,7 +444,7 @@ CAttackMethodData.GetSkillIdFromFullId = function (fullId) {
 /**
  * 攻撃手段エリアコンポーネントマネージャクラス.
  */
-function CAttackMethodAreaComponentManager() {
+export function CAttackMethodAreaComponentManager() {
 
 }
 
@@ -477,21 +481,17 @@ CAttackMethodAreaComponentManager.RebuildControls = function () {
 
 
     // 自動計算フラグを保持しておく
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlGetObjectValueByIdAsInteger'... Remove this comment to see the full error message
     checkedAutoCalc = HtmlGetObjectValueByIdAsInteger("OBJID_INPUT_ATTACK_METHOD_AUTO_CALC", 0);
 
 
     // 設定欄を初期化
     objRoot = document.getElementById("ID_ATTACK_METHOD_AREA");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
     HtmlRemoveAllChild(objRoot);
 
     // 設定欄テーブルを再構築
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTable = HtmlCreateElement("table", objRoot);
     objTable.setAttribute("border", 1);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTbody = HtmlCreateElement("tbody", objTable);
 
 
@@ -499,13 +499,10 @@ CAttackMethodAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // ヘッダ部分を構築
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("攻撃方法", objTd);
 
 
@@ -513,10 +510,8 @@ CAttackMethodAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 選択欄部分を生成
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("id", "OBJID_TD_ATTACK_METHOD_ROOT");
 
@@ -524,7 +519,6 @@ CAttackMethodAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 補足説明欄部分を生成（行のみ生成）
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
     objTr.setAttribute("id", "OBJID_TR_ATTACK_METHOD_NOTICE");
 
@@ -533,23 +527,18 @@ CAttackMethodAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 計算ボタン部分を生成
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objInput = HtmlCreateElement("input", objTd);
     objInput.setAttribute("id", "OBJID_BUTTON_CALC");
     objInput.setAttribute("type", "button");
     objInput.setAttribute("value", "計算する");
-    objInput.addEventListener("click", calc);
+    objInput.addEventListener("click", calc());
 
     //--------------------------------
     // 注意事項部分を生成
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("id", "OBJID_TD_CALC_BUTTON_NOTICE");
 
@@ -633,7 +622,6 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
 
     // ルートオブジェクト配下を全削除
     objRoot = document.getElementById("OBJID_TD_ATTACK_METHOD_ROOT");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
     HtmlRemoveAllChild(objRoot);
 
 
@@ -643,18 +631,13 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
     //--------------------------------
 
     // 設定テーブルを再構築
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTable = HtmlCreateElement("table", objRoot);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTbody = HtmlCreateElement("tbody", objTable);
 
     // 選択部品追加
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.appendChild(CAttackMethodAreaComponentManager.selectObjectArray[0]);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.appendChild(CAttackMethodAreaComponentManager.selectObjectArray[1]);
 
@@ -665,27 +648,21 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
     //--------------------------------
 
     // 設定テーブルを再構築
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTable = HtmlCreateElement("table", objRoot);
     objTable.setAttribute("style", "font-size : smaller;");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTbody = HtmlCreateElement("tbody", objTable);
 
     // その他のオプション
     for (idx = 2; idx < CAttackMethodAreaComponentManager.selectObjectArray.length; idx++) {
 
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
         objTr = HtmlCreateElement("tr", objTbody);
 
         // 字下げ
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
         objTd = HtmlCreateElement("td", objTr);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
         HtmlCreateTextNode("　", objTd);
 
         // 生成されていれば、ラベルも追加
         if (CAttackMethodAreaComponentManager.labelObjectArray[idx]) {
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objTd = HtmlCreateElement("td", objTr);
             objTd.style.whiteSpace = "nowrap";
             objTd.appendChild(CAttackMethodAreaComponentManager.labelObjectArray[idx]);
@@ -696,7 +673,6 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
             colspan = 2;
         }
 
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
         objTd = HtmlCreateElement("td", objTr);
         objTd.setAttribute("colspan", colspan);
         objTd.appendChild(CAttackMethodAreaComponentManager.selectObjectArray[idx]);
@@ -712,7 +688,6 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
 
     // trオブジェクト配下を全削除
     objTr = document.getElementById("OBJID_TR_ATTACK_METHOD_NOTICE");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
     HtmlRemoveAllChild(objTr);
 
     // 専用関数を呼び出し、補足説明オブジェクトを取得
@@ -726,7 +701,6 @@ CAttackMethodAreaComponentManager.RefreshControls = function () {
         objTr.removeAttribute("style");
 
         // tdオブジェクトを生成し、補足説明オブジェクトを子要素に追加する
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
         objTd = HtmlCreateElement("td", objTr);
         objTd.appendChild(objNoticeBlock);
     }
@@ -850,7 +824,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubCreateMethodSelect
 
 
     // セレクトボックスを生成
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSelect = HtmlCreateElement("select", null);
     objSelect.setAttribute("onchange", "CAttackMethodAreaComponentManager.OnChangeAttackMethod()");
 
@@ -872,7 +845,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubCreateMethodSelect
         }
 
         // 選択肢を追加
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(dataId, attackMethodData.GetDispName(), objSelect);
     }
 
@@ -919,7 +891,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOption = function 
 
         // ラベル部品、選択部品のオブジェクト配列に設定
         if (attackMethodOptList.GetLabel().length > 0) {
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             CAttackMethodAreaComponentManager.labelObjectArray[objectIndex] = HtmlCreateTextNode(attackMethodOptList.GetLabel(), null);
         }
         CAttackMethodAreaComponentManager.selectObjectArray[objectIndex] = objSelect;
@@ -983,14 +954,12 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
         // セレクトボックスタイプ
         // @ts-expect-error TS(2304): Cannot find name 'ATTACK_METHOD_OPTION_LIST_TYPE_S... Remove this comment to see the full error message
         case ATTACK_METHOD_OPTION_LIST_TYPE_SELECT:
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objSelect = HtmlCreateElement("select", null);
             break;
 
         // 入力タイプ
         // @ts-expect-error TS(2304): Cannot find name 'ATTACK_METHOD_OPTION_LIST_TYPE_I... Remove this comment to see the full error message
         case ATTACK_METHOD_OPTION_LIST_TYPE_INPUT:
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objSelect = HtmlCreateElement("input", null);
             break;
     }
@@ -1067,7 +1036,6 @@ CAttackMethodAreaComponentManager.RebuildAttackMethodSelectSubOptionSubCreate = 
                     // 特殊処理が必要で、かつ、選択肢として許容されていない場合は、処理終了
                     // @ts-expect-error TS(7005): Variable 'optionableValueArray' implicitly has an ... Remove this comment to see the full error message
                     if (optionableValueArray) {
-                        // @ts-expect-error TS(7005): Variable 'optionableValueArray' implicitly has an ... Remove this comment to see the full error message
                         if (optionableValueArray.indexOf(valueF.value) < 0) {
                             return;
                         }
@@ -1272,7 +1240,6 @@ CAttackMethodAreaComponentManager.OnChangeAttackMethodOption = function (objectI
 CAttackMethodAreaComponentManager.OnChangeAutoCalc = function () {
 
     // 設定値取得
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlGetObjectValueByIdAsInteger'... Remove this comment to see the full error message
     const value = HtmlGetObjectValueByIdAsInteger("OBJID_INPUT_ATTACK_METHOD_AUTO_CALC", 0);
 
     // セーブコントローラへ保存
@@ -1304,7 +1271,6 @@ CAttackMethodAreaComponentManager.OnChangeDigit3 = function () {
 CAttackMethodAreaComponentManager.OnChangeAttackInterval = function () {
 
     // 設定値取得
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlGetObjectValueByIdAsInteger'... Remove this comment to see the full error message
     const value = HtmlGetObjectValueByIdAsInteger("OBJID_SELECT_ACTIVE_INTERVAL", 14);
 
     // セーブコントローラへ保存
@@ -1320,7 +1286,6 @@ CAttackMethodAreaComponentManager.OnChangeAttackInterval = function () {
 CAttackMethodAreaComponentManager.OnChangeCastSimInterval = function () {
 
     // 設定値取得
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlGetObjectValueByIdAsInteger'... Remove this comment to see the full error message
     const value = HtmlGetObjectValueByIdAsInteger("OBJID_SELECT_CASTSIM_INTERVAL", 10);
 
     // セーブコントローラへ保存
@@ -1372,7 +1337,6 @@ CAttackMethodAreaComponentManager.SetAttackMethodConf = function (attackMethodCo
             // この位置で補正する
 
             // 補正は、移行テストの移行前処理でのテスト時に限る
-            // @ts-expect-error TS(2304): Cannot find name '_DATA_MIGRATION_MODE'.
             if ((_DATA_MIGRATION_MODE) && (!_DEBUG)) {
 
                 // 使用可能スキルの場合
@@ -1558,7 +1522,6 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
     //--------------------------------
     // 当該職業で習得できるスキルの追加
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'CONST_DATA_KIND_JOB'.
     attackSkillIdArray = g_constDataManager.GetDataObject(CONST_DATA_KIND_JOB, n_A_JOB).GetAttackSkillIdArray();
 
     for (idx = 0; idx < attackSkillIdArray.length; idx++) {
@@ -1625,7 +1588,6 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
     );
 
     // 攻撃スクロールの追加
-    // @ts-expect-error TS(2304): Cannot find name 'n_A_PassSkill7'.
     if (n_A_PassSkill7[15]) {
         usableSkillIdArray = usableSkillIdArray.concat([
             // @ts-expect-error TS(2304): Cannot find name 'USABEL_SKILL_ID_FIRE_BOLT_5'.
@@ -1756,32 +1718,26 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
     );
 
     // 特殊条件で追加されるスキルの追加（移行後はおそらく削除可能）
-    // @ts-expect-error TS(2304): Cannot find name 'CardNumSearch'.
     if (CardNumSearch(164) && GetHigherJobSeriesID(n_A_JOB) == 9) {
         autoSpellIdArray.push(95);
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'CardNumSearch'.
     if (CardNumSearch(277) && GetLowerJobSeriesID(n_A_JOB) == 1) {
         autoSpellIdArray.push(96);
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'CardNumSearch'.
     if (CardNumSearch(707)) {
         autoSpellIdArray.push(167);
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'EquipNumSearch'.
     if (EquipNumSearch(1096)) {
         autoSpellIdArray.push(108);
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'EquipNumSearch'.
     if (EquipNumSearch(2124)) {
         autoSpellIdArray.push(154);
     }
 
-    // @ts-expect-error TS(2304): Cannot find name 'EquipNumSearch'.
     if (EquipNumSearch(2427)) {
         autoSpellIdArray.push(163);
         autoSpellIdArray.push(164);
@@ -1793,17 +1749,14 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
         autoSpellId = autoSpellIdArray[idx];
 
         // 当該オートスペルが設定対象外の場合、処理しない
-        // @ts-expect-error TS(2304): Cannot find name 'AutoSpellSkill'.
         if (AutoSpellSkill[autoSpellId][AUTO_SPELL_DATA_INDEX_ATTACKABLE] != 1) {
             continue;
         }
 
         // 実際のスキルＩＤを取得
-        // @ts-expect-error TS(2304): Cannot find name 'AutoSpellSkill'.
         skillId = AutoSpellSkill[autoSpellId][AUTO_SPELL_DATA_INDEX_SKILL_ID];
 
         // スキル最大レベルを取得
-        // @ts-expect-error TS(2304): Cannot find name 'AutoSpellSkill'.
         skillLvMax = AutoSpellSkill[autoSpellId][AUTO_SPELL_DATA_INDEX_SKILL_LEVEL];
 
         // 有効なレベルの配列を生成
@@ -1847,7 +1800,6 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
     // TODO: データ移行後の処理
     // 計算したSP効果を、移行前のデータ形式に変換して、加算する
-    // @ts-expect-error TS(2304): Cannot find name 'IsEnableMigrationBlockNewProcess... Remove this comment to see the full error message
     if (IsEnableMigrationBlockNewProcess()) {
 
         //----------------------------------------------------------------
@@ -1870,9 +1822,7 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
         // 無視する属性指定を用意（発動トリガなど）
         ignoreAttrArray = [
-            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_ATTRIBUTE_ID_ME... Remove this comment to see the full error message
             MIG_EQUIPABLE_SP_ATTRIBUTE_ID_METHOD,
-            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_ATTRIBUTE_ID_TI... Remove this comment to see the full error message
             MIG_EQUIPABLE_SP_ATTRIBUTE_ID_TIMING,
             // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_ATTRIBUTE_ID_PR... Remove this comment to see the full error message
             MIG_EQUIPABLE_SP_ATTRIBUTE_ID_PROB,
@@ -1882,7 +1832,6 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
 
         // 収集する属性指定を用意（スキルIDとレベル）
         collectAttrArray = [
-            // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_ATTRIBUTE_ID_SK... Remove this comment to see the full error message
             MIG_EQUIPABLE_SP_ATTRIBUTE_ID_SKILL,
             // @ts-expect-error TS(2304): Cannot find name 'MIG_EQUIPABLE_SP_ATTRIBUTE_ID_LE... Remove this comment to see the full error message
             MIG_EQUIPABLE_SP_ATTRIBUTE_ID_LEVEL,
@@ -1892,7 +1841,6 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArray = function (
         for (idx = 0; idx < spTagArray.length; idx++) {
 
             // キャラクタデータから該当するデータをすべて収集
-            // @ts-expect-error TS(2304): Cannot find name 'g_charaDataManager'.
             collectedArrayArray = g_charaDataManager.GetCharaData(MIG_CHARA_MANAGER_ID_MAIN).EnumSpAttributes(spTagArray[idx], collectAttrArray, ignoreAttrArray);
 
             for (idxCollected = 0; idxCollected < collectedArrayArray.length; idxCollected++) {
@@ -3813,19 +3761,12 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "レインボーホーン",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "なし"],		// 属性は common.js で EnumElmId として定義されている
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv1:水属性"],  // ELM_ID_VANITY = 0 から
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2:風属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv3:地属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4:火属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv5:闇属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv6:聖属性"],
                     ],
                     0
@@ -4246,19 +4187,12 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "レインボーホーン",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "なし"],		// 属性は common.js で EnumElmId として定義されている
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv1:水属性"],  // ELM_ID_VANITY = 0 から
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2:風属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv3:地属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4:火属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv5:闇属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv6:聖属性"],
                     ],
                     0
@@ -4281,19 +4215,12 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "レインボーホーン",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "なし"],		// 属性は common.js で EnumElmId として定義されている
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv1:水属性"],  // ELM_ID_VANITY = 0 から
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2:風属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv3:地属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4:火属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv5:闇属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv6:聖属性"],
                     ],
                     0
@@ -4312,19 +4239,12 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "グレネードフラグメント",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "なし"],		// 属性は common.js で EnumElmId として定義されている
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv1:水属性"],  // ELM_ID_VANITY = 0 から
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2:風属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv3:地属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4:火属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv5:闇属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv6:聖属性"],
                     ],
                     0
@@ -4339,19 +4259,12 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "グレネードフラグメント",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "なし"],		// 属性は common.js で EnumElmId として定義されている
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv1:水属性"],  // ELM_ID_VANITY = 0 から
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2:風属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv3:地属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4:火属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv5:闇属性"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv6:聖属性"],
                     ],
                     0
@@ -4592,21 +4505,13 @@ CAttackMethodAreaComponentManager.GetEffectiveAttackMethodDataArraySubExtractOpt
                 attackMethodOptList = funcCreateOptionList(attackMethodOptList,
                     "暖かい風",
                     [
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_VANITY'.
                         [ELM_ID_VANITY, "無し"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_EARTH'.
                         [ELM_ID_EARTH, "Lv1 地"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WIND'.
                         [ELM_ID_WIND, "Lv2 風"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_WATER'.
                         [ELM_ID_WATER, "Lv3 水"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_FIRE'.
                         [ELM_ID_FIRE, "Lv4 火"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_PSYCO'.
                         [ELM_ID_PSYCO, "Lv5 念"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_DARK'.
                         [ELM_ID_DARK, "Lv6 闇"],
-                        // @ts-expect-error TS(2304): Cannot find name 'ELM_ID_HOLY'.
                         [ELM_ID_HOLY, "Lv7 聖"],
                     ],
                     0
@@ -4663,22 +4568,16 @@ CAttackMethodAreaComponentManager.CreateNoticeBlock = function () {
         // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_IGNITION_BREAK'.
         case SKILL_ID_IGNITION_BREAK:
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objSpan = HtmlCreateElement("span", null);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("※『スキル倍率を-1する』設定の詳細については、", objSpan);
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             HtmlCreateElement("br", objSpan);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objA = HtmlCreateElement("a", objSpan);
             objA.setAttribute("href", "../form/20101123ib.html#ib");
             objA.setAttribute("target", "_blank");
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("こちら", objA);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("をご参照ください。", objSpan);
 
             break;
@@ -4690,10 +4589,8 @@ CAttackMethodAreaComponentManager.CreateNoticeBlock = function () {
         // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_COMBO_SORYUKYAKU'.
         case SKILL_ID_COMBO_SORYUKYAKU:
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objSpan = HtmlCreateElement("span", null);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("※天羅と號砲はoff以外に設定すると下に繋がりません。", objSpan);
 
             break;
@@ -4705,20 +4602,15 @@ CAttackMethodAreaComponentManager.CreateNoticeBlock = function () {
         // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_SEVERE_RAINSTORM_EX'.
         case SKILL_ID_SEVERE_RAINSTORM_EX:
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objSpan = HtmlCreateElement("span", null);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("※設定の説明は", objSpan);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
             objA = HtmlCreateElement("a", objSpan);
             objA.setAttribute("href", "../form/20110623severe.html");
             objA.setAttribute("target", "_blank");
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("こちら", objA);
 
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
             HtmlCreateTextNode("をご参照ください。", objSpan);
 
             break;

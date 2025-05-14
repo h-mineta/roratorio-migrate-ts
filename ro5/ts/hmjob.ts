@@ -1,3 +1,6 @@
+import { GetBaseLevelMax, GetBaseLevelMin, IsYojiJob } from "./data/mig.job.h";
+import { ApplyPhysicalSpecializeMonster } from "./head";
+
 // @ts-expect-error TS(2304): Cannot find name 'g_pureStatus'.
 g_pureStatus = [];
 // @ts-expect-error TS(2304): Cannot find name 'g_bonusStatus'.
@@ -7,7 +10,7 @@ g_bonusStatus = [];
 
 
 // @ts-expect-error TS(7006): Parameter 'jobId' implicitly has an 'any' type.
-function RebuildStatusSelect(jobId) {
+export function RebuildStatusSelect(jobId) {
 
     var objStr = null;
     var objAgi = null;
@@ -26,34 +29,22 @@ function RebuildStatusSelect(jobId) {
     objDex = document.getElementById("OBJID_SELECT_STATUS_DEX");
     objLuk = document.getElementById("OBJID_SELECT_STATUS_LUK");
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objStr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objAgi);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objVit);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objInt);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objDex);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
     HtmlRemoveOptionAll(objLuk);
 
     // @ts-expect-error TS(2304): Cannot find name 'n_A_JOB'.
     stMax = GetStatusMax(n_A_JOB, n_A_PassSkill8[13]);
 
     for (st = 1; st <= stMax; st++) {
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objStr);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objAgi);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objVit);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objInt);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objDex);
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
         HtmlCreateElementOption(st, st, objLuk);
     }
 
@@ -87,7 +78,6 @@ function RebuildStatusSelect(jobId) {
     objArray.push(document.getElementById("OBJID_SELECT_STATUS_CRT"));
 
     for (idxObj = 0; idxObj < objArray.length; idxObj++) {
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveOptionAll'.
         HtmlRemoveOptionAll(objArray[idxObj]);
     }
 
@@ -95,7 +85,6 @@ function RebuildStatusSelect(jobId) {
 
     for (st = 0; st <= stMax; st++) {
         for (idxObj = 0; idxObj < objArray.length; idxObj++) {
-            // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElementOption'.
             HtmlCreateElementOption(st, st, objArray[idxObj]);
         }
     }
@@ -120,7 +109,7 @@ function RebuildStatusSelect(jobId) {
  * @param bIgnoreAutoCalc 自動計算回避フラグ
  */
 // @ts-expect-error TS(7006): Parameter 'bIgnoreAutoCalc' implicitly has an 'any... Remove this comment to see the full error message
-function CalcStatusPoint(bIgnoreAutoCalc) {
+export function CalcStatusPoint(bIgnoreAutoCalc) {
 
     // @ts-expect-error TS(1101): 'with' statements are not allowed in strict mode.
     with (document.calcForm) {
@@ -252,7 +241,7 @@ function CalcStatusPoint(bIgnoreAutoCalc) {
  * @return 必要コスト
  */
 // @ts-expect-error TS(7006): Parameter 'statusValue' implicitly has an 'any' ty... Remove this comment to see the full error message
-function GetStatusIncrementCost(statusValue) {
+export function GetStatusIncrementCost(statusValue) {
     if (statusValue <= 100) return Math.floor((statusValue - 2) / 10) + 2;
     if (statusValue <= 105) return 16;
     if (statusValue <= 110) return 20;
@@ -268,7 +257,7 @@ function GetStatusIncrementCost(statusValue) {
  * @return 必要コストの相和
  */
 // @ts-expect-error TS(7006): Parameter 'statusValue' implicitly has an 'any' ty... Remove this comment to see the full error message
-function GetStatusTotalCost(statusValue) {
+export function GetStatusTotalCost(statusValue) {
 
     var statusPoint = 0;
 
@@ -287,7 +276,7 @@ function GetStatusTotalCost(statusValue) {
  * @return 獲得ステー足すポイント
  */
 // @ts-expect-error TS(7006): Parameter 'baseLevel' implicitly has an 'any' type... Remove this comment to see the full error message
-function GetEarningStatusPoint(baseLevel) {
+export function GetEarningStatusPoint(baseLevel) {
 
     if (baseLevel <= 1) {
         return 0;
@@ -343,7 +332,7 @@ function GetEarningStatusPoint(baseLevel) {
  * ステータス補正を画面出力する.
  */
 // @ts-expect-error TS(7006): Parameter 'baseLv' implicitly has an 'any' type.
-function DisplayStatusBonusAll(baseLv, valSTR, valAGI, valVIT, valINT, valDEX, valLUK, valPOW, valSTA, valWIS, valSPL, valCON, valCRT) {
+export function DisplayStatusBonusAll(baseLv, valSTR, valAGI, valVIT, valINT, valDEX, valLUK, valPOW, valSTA, valWIS, valSPL, valCON, valCRT) {
 
     var valWork = 0;
     var objStatus = null;
@@ -429,7 +418,7 @@ function DisplayStatusBonusAll(baseLv, valSTR, valAGI, valVIT, valINT, valDEX, v
 /**
  * 導出ステータスを画面出力する.
  */
-function DisplayReferStatusAll() {
+export function DisplayReferStatusAll() {
 
     var valWork = 0;
     var objStatus = null;
@@ -480,8 +469,7 @@ function DisplayReferStatusAll() {
  * 純粋な基本ステータスの全合計を取得する.
  * @reutnr 純粋な基本ステータスの全合計
  */
-function GetTotalPureBasicStatus() {
-    // @ts-expect-error TS(2304): Cannot find name 'SU_STR'.
+export function GetTotalPureBasicStatus() {
     return (SU_STR + SU_AGI + SU_VIT + SU_DEX + SU_INT + SU_LUK);
 }
 
@@ -496,7 +484,7 @@ function GetTotalPureBasicStatus() {
 //================================================================================================================================
 
 // @ts-expect-error TS(7006): Parameter 'valPOW' implicitly has an 'any' type.
-function StoreSpecStatusBonusAll(valPOW, valSTA, valWIS, valSPL, valCON, valCRT) {
+export function StoreSpecStatusBonusAll(valPOW, valSTA, valWIS, valSPL, valCON, valCRT) {
 
     var value = 0;
 
@@ -537,24 +525,17 @@ function StoreSpecStatusBonusAll(valPOW, valSTA, valWIS, valSPL, valCON, valCRT)
  * @param {*} paramId MIG_PARAM_ID_{POW|STA|WIS|SPL|CON|CRT}
  * @returns
  */
-// @ts-expect-error TS(7006): Parameter 'paramId' implicitly has an 'any' type.
-function GetTotalSpecStatus(paramId) {
+export function GetTotalSpecStatus(paramId: any) {
 
     var value = 0;
 
     // 基礎値
     switch (paramId) {
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_POW'.
         case MIG_PARAM_ID_POW:
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_STA'.
         case MIG_PARAM_ID_STA:
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_WIS'.
         case MIG_PARAM_ID_WIS:
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_SPL'.
         case MIG_PARAM_ID_SPL:
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CON'.
         case MIG_PARAM_ID_CON:
-        // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CRT'.
         case MIG_PARAM_ID_CRT:
             // @ts-expect-error TS(2304): Cannot find name 'g_pureStatus'.
             value += g_pureStatus[paramId] + g_bonusStatus[paramId];
@@ -569,7 +550,7 @@ function GetTotalSpecStatus(paramId) {
  * @return 獲得ステータスポイント
  */
 // @ts-expect-error TS(7006): Parameter 'baseLv' implicitly has an 'any' type.
-function GetEarningTSStatusPoint(baseLv) {
+export function GetEarningTSStatusPoint(baseLv) {
     var stPoint = 0;
     if (baseLv < 200) {
         return 0;
@@ -581,7 +562,7 @@ function GetEarningTSStatusPoint(baseLv) {
 }
 
 // @ts-expect-error TS(7006): Parameter 'baseLv' implicitly has an 'any' type.
-function GetTStatusPoint(baseLv) {
+export function GetTStatusPoint(baseLv) {
     // @ts-expect-error TS(2304): Cannot find name 'stPoint'.
     stPoint = GetEarningTSStatusPoint(baseLv);
     // 消費ポイントを計算
@@ -608,19 +589,16 @@ function GetTStatusPoint(baseLv) {
  * 四次特性ステータス適用関数.
  */
 // @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplySpecStatusModifications(charaData, n_tok) {
-    // @ts-expect-error TS(2304): Cannot find name 'CHARA_DATA_INDEX_STATUS_ATK'.
+export function ApplySpecStatusModifications(charaData, n_tok) {
     charaData[CHARA_DATA_INDEX_STATUS_ATK] += 5 * GetTotalSpecStatus(MIG_PARAM_ID_POW);
 
-    // @ts-expect-error TS(2304): Cannot find name 'CHARA_DATA_INDEX_HIT'.
     charaData[CHARA_DATA_INDEX_HIT] += 2 * GetTotalSpecStatus(MIG_PARAM_ID_CON);
-    // @ts-expect-error TS(2304): Cannot find name 'CHARA_DATA_INDEX_FLEE'.
     charaData[CHARA_DATA_INDEX_FLEE] += 2 * GetTotalSpecStatus(MIG_PARAM_ID_CON);
 }
 
 // 元の処理の構造上、同時に処理できないもの
 // @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplySpecStatusModifyMATK(charaData, n_tok) {
+export function ApplySpecStatusModifyMATK(charaData, n_tok) {
     // @ts-expect-error TS(2304): Cannot find name 'CHARA_DATA_INDEX_STATUS_MATK'.
     charaData[CHARA_DATA_INDEX_STATUS_MATK] += 5 * GetTotalSpecStatus(MIG_PARAM_ID_SPL);
 }
@@ -629,7 +607,7 @@ function ApplySpecStatusModifyMATK(charaData, n_tok) {
 
 
 
-function GetPAtk() {
+export function GetPAtk() {
 
     var value = 0;
     var sklLv = 0;
@@ -637,9 +615,7 @@ function GetPAtk() {
     var valWork = 0;
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_POW'.
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_POW) / 3);
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CON'.
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CON) / 5);
 
     // 装備効果
@@ -661,7 +637,6 @@ function GetPAtk() {
     if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
         // 盾装備時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
         if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
             value += [0, 1, 3, 5, 10, 15][sklLv];
         }
@@ -684,13 +659,9 @@ function GetPAtk() {
     if ((sklLv = UsedSkillSearch(SKILL_ID_STAGE_MANNER)) > 0) {
 
         // 弓・楽器・鞭装備時装備時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
         switch (n_A_WeaponType) {
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_BOW'.
             case ITEM_KIND_BOW:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_MUSICAL'.
             case ITEM_KIND_MUSICAL:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_WHIP'.
             case ITEM_KIND_WHIP:
                 value += [0, 1, 3, 5, 10, 15][sklLv];
                 break;
@@ -754,17 +725,11 @@ function GetPAtk() {
     // @ts-expect-error TS(2304): Cannot find name 'SKILL_ID_PFI'.
     if ((sklLv = UsedSkillSearch(SKILL_ID_PFI)) > 0) {
         // 銃装備時のみ
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
         switch (n_A_WeaponType) {
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_HANDGUN'.
             case ITEM_KIND_HANDGUN:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_RIFLE'.
             case ITEM_KIND_RIFLE:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SHOTGUN'.
             case ITEM_KIND_SHOTGUN:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_GATLINGGUN'.
             case ITEM_KIND_GATLINGGUN:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_GRENADEGUN'.
             case ITEM_KIND_GRENADEGUN:
                 value += sklLv;
                 break;
@@ -780,7 +745,7 @@ function GetPAtk() {
     return value;
 }
 
-function GetSMatk() {
+export function GetSMatk() {
 
     var value = 0;
     var sklLv = 0;
@@ -788,9 +753,7 @@ function GetSMatk() {
     var valWork = 0;
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_SPL'.
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_SPL) / 3);
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CON'.
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CON) / 5);
 
     // 装備効果
@@ -839,7 +802,6 @@ function GetSMatk() {
     if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
         // 盾装備時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
         if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
             value += [0, 1, 3, 5, 10, 15][sklLv];
         }
@@ -856,13 +818,9 @@ function GetSMatk() {
     if ((sklLv = UsedSkillSearch(SKILL_ID_STAGE_MANNER)) > 0) {
 
         // 弓・楽器・鞭装備時装備時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
         switch (n_A_WeaponType) {
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_BOW'.
             case ITEM_KIND_BOW:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_MUSICAL'.
             case ITEM_KIND_MUSICAL:
-            // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_WHIP'.
             case ITEM_KIND_WHIP:
                 value += [0, 1, 3, 5, 10, 15][sklLv];
                 break;
@@ -938,7 +896,7 @@ function GetSMatk() {
     return value;
 }
 
-function GetCRate() {
+export function GetCRate() {
 
     var value = 0;
     var bufLv = 0;
@@ -946,7 +904,6 @@ function GetCRate() {
 
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CRT'.
     value += Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_CRT) / 3);
 
     // 装備効果
@@ -975,7 +932,7 @@ function GetCRate() {
     return value;
 }
 
-function GetRes() {
+export function GetRes() {
 
     var value = 0;
     var sklLv = 0;
@@ -985,9 +942,7 @@ function GetRes() {
 
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_STA'.
     value += GetTotalSpecStatus(MIG_PARAM_ID_STA);
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_STA'.
     value += 5 * Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_STA) / 3);
 
     // 装備効果
@@ -1005,7 +960,6 @@ function GetRes() {
     if ((sklLv = UsedSkillSearch(SKILL_ID_TATE_SHUREN)) > 0) {
 
         // 盾装備時限定
-        // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
         if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
             value += 10 * sklLv;
         }
@@ -1038,16 +992,14 @@ function GetRes() {
     return value;
 }
 
-function GetMres() {
+export function GetMres() {
 
     var value = 0;
 
 
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_WIS'.
     value += GetTotalSpecStatus(MIG_PARAM_ID_WIS);
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_WIS'.
     value += 5 * Math.floor(GetTotalSpecStatus(MIG_PARAM_ID_WIS) / 3);
 
     // 装備効果
@@ -1066,14 +1018,13 @@ function GetMres() {
 
 
 
-function GetHPlus() {
+export function GetHPlus() {
 
     var value = 0;
 
 
 
     // ステータス値
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_CRT'.
     value += GetTotalSpecStatus(MIG_PARAM_ID_CRT);
 
     // 装備効果
@@ -1094,7 +1045,7 @@ function GetHPlus() {
 
 
 // @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetMobRes(mobData) {
+export function GetMobRes(mobData) {
 
     var value = 0;
     var bufLv = 0;
@@ -1135,7 +1086,7 @@ function GetMobRes(mobData) {
 }
 
 // @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function GetMobMres(mobData) {
+export function GetMobMres(mobData) {
 
     var value = 0;
     var bufLv = 0;
@@ -1177,7 +1128,7 @@ function GetMobMres(mobData) {
  * 導出特性ステータス P.Atk による物理ダメージ増幅効果の適用.
  */
 // @ts-expect-error TS(7006): Parameter 'dmg' implicitly has an 'any' type.
-function ApplyPAtkAmplify(dmg) {
+export function ApplyPAtkAmplify(dmg) {
 
     var patk = 0;
     var amped = 0;
@@ -1200,7 +1151,7 @@ function ApplyPAtkAmplify(dmg) {
  * 導出特性ステータス S.Matk による魔法ダメージ増幅効果の適用.
  */
 // @ts-expect-error TS(7006): Parameter 'dmg' implicitly has an 'any' type.
-function ApplySMatkAmplify(dmg) {
+export function ApplySMatkAmplify(dmg) {
 
     var smatk = 0;
     var amped = 0;
@@ -1223,7 +1174,7 @@ function ApplySMatkAmplify(dmg) {
  * 導出特性ステータス C.Rate によるクリティカルダメージ増幅効果の適用.
  */
 // @ts-expect-error TS(7006): Parameter 'criDmgRate' implicitly has an 'any' typ... Remove this comment to see the full error message
-function ApplyCRateAmplify(criDmgRate) {
+export function ApplyCRateAmplify(criDmgRate) {
 
     var crate = 0;
     var amped = 0;
@@ -1248,7 +1199,7 @@ function ApplyCRateAmplify(criDmgRate) {
  * 導出特性ステータス Res によるダメージ減衰効果の適用.
  */
 // @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyResResist(mobData, dmg) {
+export function ApplyResResist(mobData, dmg) {
 
     var res = 0;
     var resistedRatio = 0;
@@ -1279,7 +1230,7 @@ function ApplyResResist(mobData, dmg) {
  * 導出特性ステータス Mres によるダメージ減衰効果の適用.
  */
 // @ts-expect-error TS(7006): Parameter 'mobData' implicitly has an 'any' type.
-function ApplyMresResist(mobData, dmg) {
+export function ApplyMresResist(mobData, dmg) {
 
     var mres = 0;
     var resistedRatio = 0;
@@ -1310,7 +1261,7 @@ function ApplyMresResist(mobData, dmg) {
  * 左手ステータスATKのP.Atkペナルティ
  */
 // @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyPAtkLeftHandPenalty(charaData, specData, mobData, dmg) {
+export function ApplyPAtkLeftHandPenalty(charaData, specData, mobData, dmg) {
 
     // TODO: 何かおかしい
     return dmg;
@@ -1320,7 +1271,6 @@ function ApplyPAtkLeftHandPenalty(charaData, specData, mobData, dmg) {
 
 
     // 特性ステータスPOWによるATK増加効果が乗らない
-    // @ts-expect-error TS(2304): Cannot find name 'MIG_PARAM_ID_POW'.
     var powAtk = Math.ceil(ApplyPAtkAmplify(5 * GetTotalSpecStatus(MIG_PARAM_ID_POW)));
 
     // モンスター特化適用（たぶん計算に含まれてる）
@@ -1337,7 +1287,7 @@ function ApplyPAtkLeftHandPenalty(charaData, specData, mobData, dmg) {
  * @remarks ただ、呼び出し側も途中で追加計算していたりするため、特性ごとに個別に呼び出し処理をかかないといけない
  */
 // @ts-expect-error TS(7006): Parameter 'spid' implicitly has an 'any' type.
-function ApplySpecModify(spid, spVal) {
+export function ApplySpecModify(spid, spVal) {
 
     var sklLv = 0;
     var bufLv = 0;
@@ -1347,8 +1297,6 @@ function ApplySpecModify(spid, spVal) {
 
 
     switch (spid) {
-
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_HIT_PLUS'.
         case ITEM_SP_HIT_PLUS:
 
             // 「インペリアルガード」スキル「槍＆片手剣修練」習得による効果
@@ -1356,13 +1304,9 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_YARI_KATATE_KEN_SHUREN)) > 0) {
 
                 // 片手剣・片手槍・両手槍装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SWORD'.
                     case ITEM_KIND_SWORD:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SPEAR'.
                     case ITEM_KIND_SPEAR:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SPEAR_2HAND'.
                     case ITEM_KIND_SPEAR_2HAND:
                         spVal += 10 * sklLv;
                         break;
@@ -1389,7 +1333,6 @@ function ApplySpecModify(spid, spVal) {
 
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_FLEE_PLUS'.
         case ITEM_SP_FLEE_PLUS:
 
             // 「シャドウクロス」スキル「シャドウセンス」習得による効果
@@ -1406,7 +1349,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_CRI_PLUS'.
         case ITEM_SP_CRI_PLUS:
 
             // 「シャドウクロス」スキル「シャドウセンス」習得による効果
@@ -1414,11 +1356,8 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_SHADOW_SENSE)) > 0) {
 
                 // 右手短剣、カタール装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_KNIFE'.
                     case ITEM_KIND_KNIFE:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_KATAR'.
                     case ITEM_KIND_KATAR:
 
                         valWork = 1 * sklLv;
@@ -1432,7 +1371,6 @@ function ApplySpecModify(spid, spVal) {
                             valWork += 9;
                         }
 
-                        // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                         if (n_A_WeaponType == ITEM_KIND_KNIFE) {
                             valWork *= 2;
                         }
@@ -1450,7 +1388,6 @@ function ApplySpecModify(spid, spVal) {
 
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAXHP_UP'.
         case ITEM_SP_MAXHP_UP:
 
             // 「インクイジター」スキル「堅固な信念」による効果
@@ -1460,7 +1397,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_ATK_PLUS'.
         case ITEM_SP_ATK_PLUS:
 
             // 「インペリアルガード」スキル「ガードスタンス」による効果（ペナルティ）
@@ -1468,7 +1404,6 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_GUARD_STANCE)) > 0) {
 
                 // 盾装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
                     spVal -= 10 * sklLv;
                 }
@@ -1489,7 +1424,6 @@ function ApplySpecModify(spid, spVal) {
 
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_DEF_PLUS'.
         case ITEM_SP_DEF_PLUS:
 
             // 「インペリアルガード」スキル「ガードスタンス」による効果
@@ -1497,7 +1431,6 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_GUARD_STANCE)) > 0) {
 
                 // 盾装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
                     spVal += 50 * sklLv;
                     if (sklLv >= 5) {
@@ -1511,7 +1444,6 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_ATTACK_STANCE)) > 0) {
 
                 // 盾装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
                     spVal -= 10 * sklLv;
                 }
@@ -1530,7 +1462,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MDEF_PLUS'.
         case ITEM_SP_MDEF_PLUS:
 
             // 四次職支援「クライマックスインパクト」による効果
@@ -1540,7 +1471,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_LONGRANGE_DAMAGE_UP'.
         case ITEM_SP_LONGRANGE_DAMAGE_UP:
 
             // 「マイスター」スキル「ラッシュ状態」による効果
@@ -1560,7 +1490,6 @@ function ApplySpecModify(spid, spVal) {
             }
 
             // 四次職支援「天地神霊」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_TENCHI_SHINRE]) > 0) {
                 spVal += 10 + bufLv;
             }
@@ -1573,11 +1502,8 @@ function ApplySpecModify(spid, spVal) {
 
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_SMALL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_MEDIUM:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_SIZE_LARGE:
 
             // 「カーディナル」スキル「鈍器＆本修練」習得による効果
@@ -1585,11 +1511,8 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_DONKI_HON_SHUREN)) > 0) {
 
                 // 鈍器、本装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_CLUB'.
                     case ITEM_KIND_CLUB:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_BOOK'.
                     case ITEM_KIND_BOOK:
                         valWork = [0, 1, 2, 3, 4, 5, 7, 9, 11, 15, 20][sklLv];
                         spVal += valWork;
@@ -1602,11 +1525,8 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_TANKEN_YUMI_SHUREN)) > 0) {
 
                 // 短剣、弓装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_KNIFE'.
                     case ITEM_KIND_KNIFE:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_BOW'.
                     case ITEM_KIND_BOW:
 
                         valWork = 1 * sklLv;
@@ -1623,27 +1543,16 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_SOLID:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_UNDEAD:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_ANIMAL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_PLANT:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_INSECT:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_FISH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_DEMON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_HUMAN:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_ANGEL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_DRAGON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_HUMAN_NOT_PLAYER:
 
             // 「インクイジター」スキル「信仰の意志」習得による効果
@@ -1651,13 +1560,10 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_SHINKONO_ISHI)) > 0) {
 
                 // 爪装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_FIST'.
                     case ITEM_KIND_FIST:
 
                         // 不死、悪魔
-                        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_... Remove this comment to see the full error message
                         if ([ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_UNDEAD, ITEM_SP_PHYSICAL_DAMAGE_UP_RACE_DEMON].indexOf(spid) >= 0) {
 
                             valWork = 1 * sklLv;
@@ -1677,7 +1583,6 @@ function ApplySpecModify(spid, spVal) {
                 }
             }
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_RESIST_ELM_WATER'.
         case ITEM_SP_RESIST_ELM_WATER:
 
             // 四次職支援「クライマックスインパクト」による効果
@@ -1687,9 +1592,7 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_RESIST_ELM_DARK'.
         case ITEM_SP_RESIST_ELM_DARK:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_RESIST_ELM_UNDEAD'.
         case ITEM_SP_RESIST_ELM_UNDEAD:
 
             // 「インペリアルガード」スキル「ホーリーシールド」による効果
@@ -1697,11 +1600,9 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_HOLY_SHIELD)) > 0) {
 
                 // 盾装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
 
                     // 闇、不死耐性
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_RESIST_ELM_DARK'.
                     if ([ITEM_SP_RESIST_ELM_DARK, ITEM_SP_RESIST_ELM_UNDEAD].indexOf(spid) >= 0) {
                         spVal += 3 * sklLv;
                     }
@@ -1709,7 +1610,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_CRITICAL_DAMAGE_UP'.
         case ITEM_SP_CRITICAL_DAMAGE_UP:
 
             // 「未知なる創造のブーツ」の純粋なステータスによる効果
@@ -1723,7 +1623,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PERFECT_ATTACK_UP'.
         case ITEM_SP_PERFECT_ATTACK_UP:
 
             // 「インクイジター」スキル「忠実な信念」習得による効果
@@ -1753,7 +1652,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_RESIST_SIZE_SMA... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_RESIST_SIZE_SMALL:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_RESIST_SIZE_MED... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_RESIST_SIZE_MEDIUM:
@@ -1765,13 +1663,9 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_TWOHAND_DEFENDING)) > 0) {
 
                 // 両手武器装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SWORD_2HAND'.
                     case ITEM_KIND_SWORD_2HAND:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SPEAR_2HAND'.
                     case ITEM_KIND_SPEAR_2HAND:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_AXE_2HAND'.
                     case ITEM_KIND_AXE_2HAND:
                         spVal += sklLv;
                         break;
@@ -1783,9 +1677,7 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_TWO_AXE_DEFENDING)) > 0) {
 
                 // 両手斧装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_AXE_2HAND'.
                     case ITEM_KIND_AXE_2HAND:
                         spVal += sklLv;
                         break;
@@ -1793,11 +1685,8 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_S... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_SMALL:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_M... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_MEDIUM:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_L... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_SIZE_LARGE:
 
             // 「アビスチェイサー」スキル「魔法剣修練」習得による効果
@@ -1805,11 +1694,8 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_MAHOKEN_SHUREN)) > 0) {
 
                 // 短剣、片手剣装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_KNIFE'.
                     case ITEM_KIND_KNIFE:
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_SWORD'.
                     case ITEM_KIND_SWORD:
 
                         valWork = 1 * sklLv;
@@ -1823,11 +1709,9 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_SHORTRANGE_DAMAGE_UP'.
         case ITEM_SP_SHORTRANGE_DAMAGE_UP:
 
             // 四次職支援「天地神霊」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_TENCHI_SHINRE]) > 0) {
                 spVal += 10 + bufLv;
             }
@@ -1866,7 +1750,6 @@ function ApplySpecModify(spid, spVal) {
             }
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_S... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_SOLID:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_U... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_UNDEAD:
@@ -1880,15 +1763,12 @@ function ApplySpecModify(spid, spVal) {
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_FISH:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_D... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_DEMON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_H... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_HUMAN:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_A... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_ANGEL:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_D... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_DRAGON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_RACE_H... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_RACE_HUMAN_NOT_PLAYER:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_VA... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_VANITY:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WA... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_ELM_WATER:
@@ -1948,7 +1828,6 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_HOLY_SHIELD)) > 0) {
 
                 // 盾装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_Equip'.
                 if (n_A_Equip[EQUIP_REGION_ID_SHIELD] != ITEM_ID_NOEQUIP_SHIELD) {
 
                     // 聖属性魔法
@@ -1964,9 +1843,7 @@ function ApplySpecModify(spid, spVal) {
             if ((sklLv = UsedSkillSearch(SKILL_ID_MAHO_HON_SHUREN)) > 0) {
 
                 // 本装備時限定
-                // @ts-expect-error TS(2304): Cannot find name 'n_A_WeaponType'.
                 switch (n_A_WeaponType) {
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_KIND_BOOK'.
                     case ITEM_KIND_BOOK:
 
                         arrayWork = [
@@ -2003,7 +1880,6 @@ function ApplySpecModify(spid, spVal) {
             }
 
             // 四次職支援「天地神霊」による効果
-            // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_TENCHI_SHINRE]) > 0) {
                 spVal += 10 + bufLv;
             }
@@ -2019,7 +1895,6 @@ function ApplySpecModify(spid, spVal) {
 
             break;
 
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_VANITY:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
         case ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WATER:
@@ -2051,7 +1926,6 @@ function ApplySpecModify(spid, spVal) {
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_WIND,
                     // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_EARTH,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_MAGICAL_DAMAGE_UP_MONSTE... Remove this comment to see the full error message
                     ITEM_SP_MAGICAL_DAMAGE_UP_MONSTER_ELM_VANITY,
                 ];
                 // 火・水・風・地・無属性モンスター
@@ -2062,7 +1936,6 @@ function ApplySpecModify(spid, spVal) {
             break;
 
         // 属性攻撃ダメージ増加
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_V... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_VANITY:
         // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_W... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_ELM_WATER:
@@ -2096,39 +1969,24 @@ function ApplySpecModify(spid, spVal) {
 
 
         // 属性モンスターへの物理ダメージ増加
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_VANITY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_WATER:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_EARTH:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_FIRE:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_WIND:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_POISON:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_HOLY:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_DARK:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_PSYCO:
-        // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
         case ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_UNDEAD:
             // 四次職支援「五行符」による効果
             // @ts-expect-error TS(7005): Variable 'g_confDataYozi' implicitly has an 'any' ... Remove this comment to see the full error message
             if ((bufLv = g_confDataYozi[CCharaConfYozi.CONF_ID_GOGYO_FU]) > 0) {
                 arrayWork = [
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_VANITY,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_WATER,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_EARTH,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_FIRE,
-                    // @ts-expect-error TS(2304): Cannot find name 'ITEM_SP_PHYSICAL_DAMAGE_UP_MONST... Remove this comment to see the full error message
                     ITEM_SP_PHYSICAL_DAMAGE_UP_MONSTER_ELM_WIND,
                 ];
                 // 火・水・風・地・無属性モンスター

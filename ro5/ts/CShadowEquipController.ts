@@ -1,8 +1,9 @@
+import { AutoCalc } from "./head";
 
 /**
  * シャドウ装備コントローラクラス.
  */
-class CShadowEquipController {
+export class CShadowEquipController {
 
     /**
      * 装備箇所名：武器（右手）.
@@ -289,9 +290,7 @@ class CShadowEquipController {
         const itemInfoArray = [];
         for (let idx = 0; idx < itemIdArray.length; idx++) {
             const itemId = itemIdArray[idx];
-            // @ts-expect-error TS(2304): Cannot find name 'ItemObjNew'.
             const itemName = (itemId == 0) ? "（なし）" : ItemObjNew[itemId][ITEM_DATA_INDEX_NAME];
-            // @ts-expect-error TS(2304): Cannot find name 'ItemObjNew'.
             const itemKana = (itemId == 0) ? "ア" : ItemObjNew[itemId][ITEM_DATA_INDEX_KANA];
             itemInfoArray.push([itemId, itemName, itemKana]);
         }
@@ -349,7 +348,7 @@ class CShadowEquipController {
 
         // 再計算
         StAllCalc();
-        AutoCalc();
+        AutoCalc("");
     }
 
     /**

@@ -1,4 +1,6 @@
 import { OnChangeSettingAutoSpell } from "./calcautospell";
+import { CAttackMethodAreaComponentManager } from "./CAttackMethodAreaComponentManager";
+import { CShadowEquipController } from "./CShadowEquipController";
 import { Click_A1, Click_A3, Click_A4, Click_A7, Click_A8 } from "./head";
 import { CSaveDataConst } from "./savedata/CSaveDataConst";
 import * as SaveDataUnit from "./savedata/CSaveDataUnit";
@@ -813,19 +815,12 @@ export class CSaveDataManager {
         funcCallApplyTimeBuffID(this, SaveDataUnit.TYPE_TIME_BUFF, g_timeItemConf);
         funcCallApplyAutoSpell(this, SaveDataUnit.TYPE_AUTO_SPELLS, n_A_PassSkill5);
         funcCallApplyBuffLv(this, SaveDataUnit.TYPE_CHARA_DEBUFF, n_A_IJYOU);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         funcCallApplyConfig(this, SaveDataUnit.TYPE_CHARA_CONF_BASIC, g_confDataCustomStatusMIG);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         funcCallApplyConfigSpec(this, CSaveDataConst.specKindAttackPhysical, g_confDataSpecMIG[0][0]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         funcCallApplyConfigSpec(this, CSaveDataConst.specKindAttackMagical, g_confDataSpecMIG[0][1]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         funcCallApplyConfigSpec(this, CSaveDataConst.specKindAttackAny, g_confDataSpecMIG[0][2]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         funcCallApplyConfigSpec(this, CSaveDataConst.specKindDefencekAny, g_confDataSpecMIG[1][2]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         funcCallApplyConfig(this, SaveDataUnit.TYPE_CHARA_CONF_SKILL, g_confDataCustomSkillMIG);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSpecStatusMIG' implicitl... Remove this comment to see the full error message
         funcCallApplyConfig(this, SaveDataUnit.TYPE_CHARA_CONF_SPEC_BASIC, g_confDataCustomSpecStatusMIG);
         funcCallApplyMob(this, SaveDataUnit.TYPE_MOB);
         funcCallApplyMobConfPlayer(this, SaveDataUnit.TYPE_MOB_CONF_PLAYER, n_B_TAISEI);
@@ -839,113 +834,66 @@ export class CSaveDataManager {
         // TODO: 構造変更後、撤去予定
 
         // グローバル変数のデータ調整
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSpecStatusMIG' implicitl... Remove this comment to see the full error message
         let spliceArray = g_confDataCustomSpecStatusMIG.slice(0, 24);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomSpecStatus'.
         g_confDataCustomSpecStatus.splice(1, spliceArray.length, ...spliceArray);
 
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray = g_confDataCustomStatusMIG.slice(0, 22);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomStatus'.
         g_confDataCustomStatus.splice(1, spliceArray.length, ...spliceArray);
 
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray = g_confDataCustomStatusMIG.slice(22, 25);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[25]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][0]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][14]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][37]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][41]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][47]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][2][1]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[26]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][51]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[29]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][0]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][14]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][37]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][41]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][26]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][51]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][2][50]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][2][2]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][44]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][1][44]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[27]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[0][0][26]);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomAtk'.
         g_confDataCustomAtk.splice(1, spliceArray.length, ...spliceArray);
 
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray = g_confDataCustomStatusMIG.slice(30, 32);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][14]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][37]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][26]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][41]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][46]);		// 全射程ではなく遠距離なので注意
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][50]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][2]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataSpecMIG' implicitly has an 'an... Remove this comment to see the full error message
         spliceArray.push(g_confDataSpecMIG[1][2][44]);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomDef'.
         g_confDataCustomDef.splice(1, spliceArray.length, ...spliceArray);
 
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray = [g_confDataCustomSkillMIG[3]];
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[32]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomStatusMIG' implicitly ha... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomStatusMIG[33]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[7]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[6]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[9]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[8]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[11]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[10]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[2]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[4]);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSkillMIG' implicitly has... Remove this comment to see the full error message
         spliceArray.push(g_confDataCustomSkillMIG[5]);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomSkill'.
         g_confDataCustomSkill.splice(1, spliceArray.length, ...spliceArray);
-        // @ts-expect-error TS(7005): Variable 'g_confDataCustomSpecStatusMIG' implicitl... Remove this comment to see the full error message
         spliceArray = g_confDataCustomSpecStatusMIG.slice(0, 24);
         // @ts-expect-error TS(2304): Cannot find name 'g_confDataCustomSpecStatus'.
         g_confDataCustomSpecStatus.splice(1, spliceArray.length, ...spliceArray);

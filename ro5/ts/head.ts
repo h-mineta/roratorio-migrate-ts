@@ -4,6 +4,8 @@ import { GetJobName } from "./data/mig.job.h"
 import { n_AS_SKILL, AS_PLUS, AUTO_SPELL_SETTING_COUNT, OBJID_OFFSET_AS_SKILL_ID, AS_Calc } from "./calcautospell";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
+import { CAttackMethodAreaComponentManager } from "./CAttackMethodAreaComponentManager";
+import { ApplyCRateAmplify, ApplyMresResist, ApplyPAtkLeftHandPenalty, ApplyResResist, ApplySMatkAmplify, GetHPlus, GetPAtk, GetTotalSpecStatus } from "./hmjob";
 
 // データ収集用
 // バトルデータインデックス
@@ -280,11 +282,11 @@ export let bodyElmRatioArray = 0;
 export let finalRatioArray = 0;
 
 /** 変動詠唱 0 を達成するために必要な DEX */
-const CAST_PARAM_BORDER = 265;
+export const CAST_PARAM_BORDER = 265;
 /** オートガードによるダメージ減衰率 */
-const w_AG = [100, 95, 90, 86, 82, 79, 76, 74, 72, 71, 70];
+export const w_AG = [100, 95, 90, 86, 82, 79, 76, 74, 72, 71, 70];
 /** 属性配列 */
-const mostEffectiveElmIdArray = [
+export const mostEffectiveElmIdArray = [
     ELM_ID_VANITY,
     ELM_ID_WIND,
     ELM_ID_FIRE,
@@ -297,41 +299,41 @@ const mostEffectiveElmIdArray = [
     ELM_ID_HOLY,
 ];
 /** 手裏剣の種類 */
-const SyurikenOBJ = [[10, 0, "手裏剣"], [30, 0, "雨雲の手裏剣"], [45, 0, "閃光の手裏剣"], [70, 0, "鋭刃の手裏剣"], [100, 0, "棘針の手裏剣"], [110, 0, "星ヒトデ"]];
+export const SyurikenOBJ = [[10, 0, "手裏剣"], [30, 0, "雨雲の手裏剣"], [45, 0, "閃光の手裏剣"], [70, 0, "鋭刃の手裏剣"], [100, 0, "棘針の手裏剣"], [110, 0, "星ヒトデ"]];
 /** 苦無の種類 */
-const KunaiOBJ = [[30, 3, "烈火の苦無"], [30, 1, "氷柱の苦無"], [30, 4, "狂風の苦無"], [30, 2, "黒土の苦無"], [30, 5, "猛毒の苦無"], [50, 0, "スルメイカ"], [50, 0, "トビウオ"]];
+export const KunaiOBJ = [[30, 3, "烈火の苦無"], [30, 1, "氷柱の苦無"], [30, 4, "狂風の苦無"], [30, 2, "黒土の苦無"], [30, 5, "猛毒の苦無"], [50, 0, "スルメイカ"], [50, 0, "トビウオ"]];
 /** キャノンボールの種類 */
-const CanonOBJ = [[100, 0, "キャノンボール"], [250, 0, "アイアンキャノンボール"], [120, 6, "ホーリーキャノンボール"], [120, 7, "ダークキャノンボール"], [120, 8, "ソウルキャノンボール"], [120, ELM_ID_WATER, "アイスキャノンボール"], [120, ELM_ID_EARTH, "ストーンキャノンボール"], [120, ELM_ID_FIRE, "フレアキャノンボール"], [120, ELM_ID_WIND, "ライトニングキャノンボール"]];
+export const CanonOBJ = [[100, 0, "キャノンボール"], [250, 0, "アイアンキャノンボール"], [120, 6, "ホーリーキャノンボール"], [120, 7, "ダークキャノンボール"], [120, 8, "ソウルキャノンボール"], [120, ELM_ID_WATER, "アイスキャノンボール"], [120, ELM_ID_EARTH, "ストーンキャノンボール"], [120, ELM_ID_FIRE, "フレアキャノンボール"], [120, ELM_ID_WIND, "ライトニングキャノンボール"]];
 /** 文字列定数 */
-const SubName = ["％", "秒", "ダメージ", "クリティカルダメージ", "クリティカル(発動率)", "10000回以上", "計測不能", "計算外", "×", "詠唱時間", "なし", "あり"];
+export const SubName = ["％", "秒", "ダメージ", "クリティカルダメージ", "クリティカル(発動率)", "10000回以上", "計測不能", "計算外", "×", "詠唱時間", "なし", "あり"];
 /** シールドスペル：ATK加算値 */
-const n_SieldSpDum = ["off", "on", 20, 35, 40, 50, 60, 75, 80, 85, 90, 95, 98, 100, 105, 110, 120, 130, 140, 150, 170];
+export const n_SieldSpDum = ["off", "on", 20, 35, 40, 50, 60, 75, 80, 85, 90, 95, 98, 100, 105, 110, 120, 130, 140, 150, 170];
 /** シールドスペル：ATK加算値（これは順序が違うので注意）*/
-const n_SieldSp = ["off", "on", 20, 35, 40, 50, 60, 75, 80, 85, 90, 95, 98, 105, 110, 120, 130, 150, 100, 140, 170];
+export const n_SieldSp = ["off", "on", 20, 35, 40, 50, 60, 75, 80, 85, 90, 95, 98, 105, 110, 120, 130, 150, 100, 140, 170];
 /** シールドスペル：順序が違う配列を並び替えるために使われる index 値 */
-const n_SieldSpNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 13, 14, 15, 16, 19, 17, 20];
+export const n_SieldSpNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 13, 14, 15, 16, 19, 17, 20];
 /** 修練が乗らないスキルID */
-const n_SP_SKILL = [66, 159, 162, 193, 197, 244, 248, 263, 321, 324, 328, 384, 394, 395, 405, 423, 432, 438, 554, 669, 723, 738, 768, 769, 810, SKILL.ID_ZYURYOKU_CHOSE];
+export const n_SP_SKILL = [66, 159, 162, 193, 197, 244, 248, 263, 321, 324, 328, 384, 394, 395, 405, 423, 432, 438, 554, 669, 723, 738, 768, 769, 810, SKILL.ID_ZYURYOKU_CHOSE];
 /** 回復スキル種類：ヒール */
-const HEALTYPE_HEAL = 0;
+export const HEALTYPE_HEAL = 0;
 /** 回復スキル種類：ハイネスヒール */
-const HEALTYPE_HIGHNESS = 1;
+export const HEALTYPE_HIGHNESS = 1;
 /** 回復スキル種類：サンクチュアリ */
-const HEALTYPE_SANCTUARY = 2;
+export const HEALTYPE_SANCTUARY = 2;
 /** 回復スキル種類：新鮮なエビ */
-const HEALTYPE_SHINSENNA_EBI = 3;
+export const HEALTYPE_SHINSENNA_EBI = 3;
 /** 回復スキル種類：エビ三昧 */
-const HEALTYPE_EBI_ZANMAI = 4;
+export const HEALTYPE_EBI_ZANMAI = 4;
 /** 回復スキル種類：コルセオヒール */
-const HEALTYPE_COLUCEO_HEAL = 5;
+export const HEALTYPE_COLUCEO_HEAL = 5;
 /** 回復スキル種類：ディレクティオヒール */
-const HEALTYPE_DILECTIO_HEAL = 6;
+export const HEALTYPE_DILECTIO_HEAL = 6;
 /** 回復スキル対象：自分 */
-const HEAL_TARGETTYPE_SELF = 0;
+export const HEAL_TARGETTYPE_SELF = 0;
 /** 回復スキル対象：他人 */
-const HEAL_TARGETTYPE_PLAYER = 1;
+export const HEAL_TARGETTYPE_PLAYER = 1;
 /** 回復スキル対象：モンスター */
-const HEAL_TARGETTYPE_ENEMY = 2;
+export const HEAL_TARGETTYPE_ENEMY = 2;
 
 /**
  * ダメージ計算本体　エントリ関数.
@@ -19119,7 +19121,7 @@ function GetIkariPow(mobData) {
  * 			CAttackMethodAreaComponentManager.OnChangeAttackMethod	: 自動計算のON/OFF
  */
 // @ts-expect-error TS(7006): Parameter 'callFrom' implicitly has an 'any' type.
-function AutoCalc(callFrom) {
+export function AutoCalc(callFrom) {
     // 自動設定が有効の場合のみ、再計算する
     var autoCalcFlag = HtmlGetObjectValueByIdAsInteger("OBJID_INPUT_ATTACK_METHOD_AUTO_CALC", 0);
     switch (autoCalcFlag) {
@@ -21365,7 +21367,7 @@ function ApplyHitJudgeElementRatio(skillId, dam, mobData) {
  * @returns 適用後のダメージ
  */
 // @ts-expect-error TS(7006): Parameter 'charaData' implicitly has an 'any' type... Remove this comment to see the full error message
-function ApplyPhysicalSpecializeMonster(charaData, specData, mobData, dmg) {
+export function ApplyPhysicalSpecializeMonster(charaData, specData, mobData, dmg) {
 
     //--------------------------------
     // 種族特化

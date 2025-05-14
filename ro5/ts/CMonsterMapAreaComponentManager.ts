@@ -66,7 +66,6 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     objRoot = document.getElementById("OBJID_TD_MONSTER_MAP_AREA");
 
     // 設定欄を初期化
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
     HtmlRemoveAllChild(objRoot);
 
 
@@ -86,24 +85,20 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // ヘッダ
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // ラベル
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
     objTd.setAttribute("colspan", "2");
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("モンスター", objTd);
 
     //--------------------------------
     // 展開スイッチ
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("id", "OBJID_TD_MONSTER_MAP_AREA_EXTRACT_CHECKBOX");
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
@@ -136,7 +131,6 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // 地域選択
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     // 展開表示でなければ、隠す
@@ -147,17 +141,14 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // ラベル
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("地域", objTd);
 
     //----------------
     // カスタムセレクトオブジェクト生成
     //----------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("colspan", "3");
 
@@ -168,7 +159,6 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // マップ選択
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     // 展開表示でなければ、隠す
@@ -179,17 +169,14 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // ラベル
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("マップ", objTd);
 
     //----------------
     // カスタムセレクトオブジェクト生成
     //----------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("colspan", "3");
 
@@ -200,23 +187,19 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // モンスター選択
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // ラベル
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("名称", objTd);
 
     //----------------
     // カスタムセレクトオブジェクト生成
     //----------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("colspan", "3");
 
@@ -227,23 +210,18 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // HP / LV
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // HP
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
     objTd.setAttribute("style", "min-width: 8em;");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("HP", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("style", "min-width: 7em;");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_HP");
 
@@ -252,17 +230,13 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // LV
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
     objTd.setAttribute("style", "min-width: 8em;");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("LV", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("style", "min-width: 7em;");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_LEVEL");
 
@@ -273,27 +247,20 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // ATK / BaseExp
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // ATK
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("ATK", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.style.whiteSpace = "nowrap";
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_ATK_MIN");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("～", objTd);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_ATK_MAX");
 
@@ -303,15 +270,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // BaseExp
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("BaseExp", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_BASE_EXP");
 
@@ -322,27 +285,20 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // MATK / JobExp
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // MATK
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("MATK", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.style.whiteSpace = "nowrap";
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_MATK_MIN");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("～", objTd);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_MATK_MAX");
 
@@ -352,15 +308,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // JobExp
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("JobExp", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_JOB_EXP");
 
@@ -371,21 +323,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // DEF(除算) / 種族
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // DEF(除算)
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("DEF(除算)", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_DEF_DIV");
 
@@ -394,15 +341,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 種族
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("種族", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_RACE");
 
@@ -413,21 +356,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // DEF(減算) / 属性
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // DEF(減算)
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("DEF(減算)", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_DEF_MINUS_MIN");
 
@@ -436,15 +374,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 属性
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("属性", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_ELEMENT");
 
@@ -455,21 +389,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // Res / サイズ
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // Res
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("Res", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_RES");
 
@@ -478,15 +407,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // サイズ
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("サイズ", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_SIZE");
 
@@ -497,21 +422,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // MDEF(除算) / 特性
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // MDEF(除算)
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("MDEF(除算)", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_MDEF_DIV");
 
@@ -520,15 +440,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 特性
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("特性", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_SPECIALITY");
 
@@ -539,21 +455,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // MDEF(減算) / 必中HIT
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // MDEF(減算)
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("MDEF(減算)", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_MDEF_MINUS");
 
@@ -562,15 +473,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 必中HIT
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("必中HIT", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_100HIT");
 
@@ -581,21 +488,16 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // Mres / 95%回避FLEE
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // Mres
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("Mres", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_MRES");
 
@@ -604,15 +506,11 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //--------------------------------
     // 95%回避FLEE
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("95%回避FLEE", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_95FLEE");
 
@@ -621,35 +519,26 @@ CMonsterMapAreaComponentManager.RebuildControls = function () {
     //----------------------------------------------------------------
     // Blank / 100%要求CRI
     //----------------------------------------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTr = HtmlCreateElement("tr", objTbody);
 
     //--------------------------------
     // Blank
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
 
     //--------------------------------
     // 100%要求CRI
     //--------------------------------
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
     objTd.setAttribute("class", "CSSCLS_INFO_HEADER");
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateTextNode'.
     HtmlCreateTextNode("100%ｸﾘﾃｨｶﾙCRI", objTd);
 
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objTd = HtmlCreateElement("td", objTr);
-    // @ts-expect-error TS(2304): Cannot find name 'HtmlCreateElement'.
     objSpan = HtmlCreateElement("span", objTd);
     objSpan.setAttribute("id", "OBJID_SPAN_MONSTER_100CRI");
 
@@ -746,7 +635,7 @@ CMonsterMapAreaComponentManager.SetDispObject = function (objId, objDisp) {
     objTarget = document.getElementById(objId);
 
     if (objTarget) {
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
+
         HtmlRemoveAllChild(objTarget);
         objTarget.appendChild(objDisp);
     }
@@ -768,7 +657,6 @@ CMonsterMapAreaComponentManager.RefreshtDispObject = function (objId) {
 
     if (objTarget) {
 
-        // @ts-expect-error TS(2304): Cannot find name 'HtmlRemoveAllChild'.
         HtmlRemoveAllChild(objTarget);
 
         if (objDisp) {
