@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Skillの型定義
-interface Skill {
+export interface Skill {
     name: string | null;
     max_lv: number | null;
     type: string | null;
@@ -58,7 +58,7 @@ export function getSkillByIdNum(idNum: number): Skill | undefined {
 //--------------------------------------------------------
 
 // Itemの型定義
-interface Item {
+export interface Item {
     id: number;
     displayname: string;
     description: string;

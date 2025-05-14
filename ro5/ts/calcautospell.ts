@@ -1,4 +1,4 @@
-import { AutoCalc, UsedSkillSearch, n_AS_MODE, n_AS_check_3dan, n_A_ActiveSkill, n_A_ActiveSkillLV, n_A_DMG, n_Delay, n_Enekyori, w_DMG, w_DMG_AS_OverHP, w_HIT_HYOUJI } from "./head";
+import { AutoCalc, UsedSkillSearch, n_AS_MODE, n_AS_check_3dan, n_A_ActiveSkillIdNum, n_A_ActiveSkillLV, n_A_DMG, n_Delay, n_Enekyori, w_DMG, w_DMG_AS_OverHP, w_HIT_HYOUJI } from "./head";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
 import {
@@ -110,14 +110,14 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     var wAS_3dan = 0;
     // @ts-expect-error TS(7005): Variable 'n_A_ActiveSkill' implicitly has an 'any'... Remove this comment to see the full error message
-    wAS_3dan = GetActRateSandansho(n_A_ActiveSkill, mobData);
+    wAS_3dan = GetActRateSandansho(n_A_ActiveSkillIdNum, mobData);
 
     //----------------------------------------------------------------
     // 通常攻撃時の、デュプレライト追撃効果
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_DUPLELIGHT);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0)) {
 
         // オートスペルに、デュプレライト物理部分（グラハムライト）を設定
         funcAddAS();
@@ -172,7 +172,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLv = UsedSkillSearch(SKILL.ID_AUTO_SHADOW_SPELL);
     skillKind = UsedSkillSearch(SKILL.ID_MAGIC_SETTING_FOR_AUTO_SHADOW_SPELL);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0) && (skillKind != 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (n_Enekyori == 0) && (skillLv > 0) && (skillKind != 0)) {
 
         var wASS = [
             0, 51, 52, 53, 54, 55, 56, 57, 46, 47, 125, 126, 127, 128, 130, 131, 132, 133, 102, 104,
@@ -218,7 +218,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_SERVANT_WEAPON);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
 
         // オートスペルに、サーヴァントウェポンを設定
         funcAddAS();
@@ -245,7 +245,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         [SPILIT.SUPPORT_SKILL_ID_DEEP_POISONING, SKILL.ID_POISON_BUSTER],
     ]);
     let boltSkillId = SERE_SUPPORT_SKILL_TO_BOLT_SKILL.get(skillKind);
-    if (boltSkillId && n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) {
+    if (boltSkillId && n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) {
         funcAddAS();
         n_AS_SKILL[idx][0] = boltSkillId;
         n_AS_SKILL[idx][1] = Math.max(1, LearnedSkillSearch(boltSkillId)); // 最低保障スキルLv = 1
@@ -262,7 +262,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 公式サイトでは「アビス球体攻撃」と表記される
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(SKILL.ID_FROM_THE_ABYSS);
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
         // オートスペルに、フロムジアビスを設定
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_FROM_THE_ABYSS;
@@ -294,7 +294,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 通常攻撃時の、オートファイアリングランチャー追撃効果
     //----------------------------------------------------------------
     skillLv = UsedSkillSearch(getSkillById("RA_FIRINGTRAP")?.id_num);
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLv > 0)) {
         // オートスペルに、ベーシックグレネードを設定
         skillLvSub = UsedSkillSearch(getSkillById("NW_BASIC_GRENADE")?.id_num);
         if (skillLvSub > 0) {
@@ -340,7 +340,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ビーストストレイフィング時の、ダブルストレイフィング追撃あり時の効果
     //----------------------------------------------------------------
-    if ((n_A_ActiveSkill == SKILL.ID_BEAST_STRAIFING) && (attackMethodConfArray[0].GetOptionValue(0) == 1)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_BEAST_STRAIFING) && (attackMethodConfArray[0].GetOptionValue(0) == 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_DOUBLE_STRAFING;
         n_AS_SKILL[idx][1] = 10;
@@ -352,7 +352,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ハンドレッドスピア時の、スピアブーメラン追撃効果
     //----------------------------------------------------------------
-    if ((n_A_ActiveSkill == SKILL.ID_HANDRED_SPEAR) && (attackMethodConfArray[0].GetOptionValue(1)) >= 1) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_HANDRED_SPEAR) && (attackMethodConfArray[0].GetOptionValue(1)) >= 1) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_SPEAR_BOOMERANG;
         n_AS_SKILL[idx][1] = attackMethodConfArray[0].GetOptionValue(1);
@@ -364,7 +364,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ダークイリュージョン時の、クロスインパクト追撃効果
     //----------------------------------------------------------------
-    if ((n_A_ActiveSkill == SKILL.ID_DARK_ILLUSION) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_DARK_ILLUSION) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_CROSS_IMPACT;
         n_AS_SKILL[idx][1] = attackMethodConfArray[0].GetOptionValue(0);
@@ -376,7 +376,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // パワースイング時の、アックスブーメラン追撃効果
     //----------------------------------------------------------------
-    if ((n_A_ActiveSkill == SKILL.ID_POWER_SWING) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_POWER_SWING) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         // 斧系限定の効果
         switch (n_A_WeaponType) {
             case ITEM_KIND_AXE:
@@ -399,7 +399,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     let skillLvBlitz = UsedSkillSearch(SKILL.ID_BLITZ_BEAT);
 
     // 自動狼の場合
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_WUG_STRIKE;
         n_AS_SKILL[idx][1] = skillLvWug;
@@ -408,7 +408,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     }
 
     // 自動鷹の場合
-    else if ((n_A_ActiveSkill == 0) && (n_A_WeaponType == ITEM_KIND_BOW) && (skillLvBlitz > 0)) {
+    else if ((n_A_ActiveSkillIdNum == 0) && (n_A_WeaponType == ITEM_KIND_BOW) && (skillLvBlitz > 0)) {
 
         funcAddAS();
 
@@ -447,7 +447,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_TORIKAINO_YOBIKO);
 
-    if ((n_A_ActiveSkill == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
+    if ((n_A_ActiveSkillIdNum == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_BLITZ_BEAT;
@@ -464,7 +464,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_SORATOBU_GARAPAGO);
 
-    if ((n_A_ActiveSkill == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
+    if ((n_A_ActiveSkillIdNum == 0) && (skillLvWug == 0) && (skillLvBlitz > 0) && (itemCount > 0)) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_BLITZ_BEAT;
@@ -480,7 +480,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvWug = UsedSkillSearch(SKILL.ID_AUTO_WUG);
     itemCount = EquipNumSearch(ITEM_ID_FURUBITA_MEISAIUSAGI);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLvWug > 0)) {
 
         if ((itemCount > 0) && (n_A_HEAD_DEF_PLUS >= 9)) {
 
@@ -507,7 +507,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     let skillLvQuickDraw = UsedSkillSearch(SKILL.ID_AS_QUICKDRAW);
     let skillLvChainAction = UsedSkillSearch(SKILL.ID_CHAIN_ACTION);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
         && (n_A_WeaponType == ITEM_KIND_HANDGUN) && (skillLvChainAction > 0)) {
 
         funcAddAS();
@@ -532,7 +532,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLvQuickDraw = UsedSkillSearch(SKILL.ID_AS_QUICKDRAW);
     skillLvEternalChain = UsedSkillSearch(SKILL.ID_ETERNAL_CHAIN);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLvQuickDraw > 0)
         && (ITEM_KIND_HANDGUN <= n_A_WeaponType) && (n_A_WeaponType <= ITEM_KIND_GRENADEGUN)
         && (skillLvEternalChain > 0)) {
 
@@ -556,7 +556,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 通常攻撃時の、流星落下追撃効果
     //----------------------------------------------------------------
     var skillLvRyuseRakka = UsedSkillSearch(SKILL.ID_RYUSE_RAKKA);
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) && (skillLvRyuseRakka > 0)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) && (skillLvRyuseRakka > 0)) {
         // 流星落下の初撃を設定
         funcAddAS();
         // 適用スキルの設定
@@ -615,7 +615,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // 鋭敏な嗅覚時の、ウォーグバイト追撃効果
     //----------------------------------------------------------------
 
-    if ((n_A_ActiveSkill == SKILL.ID_EIBINNA_KYUKAKU) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_EIBINNA_KYUKAKU) && (attackMethodConfArray[0].GetOptionValue(0) >= 1)) {
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_WUG_BITE;
         n_AS_SKILL[idx][1] = attackMethodConfArray[0].GetOptionValue(0);
@@ -628,7 +628,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     // ヘスペルスリット時の、ピンポイントアタック追撃効果
     //----------------------------------------------------------------
 
-    if (n_A_ActiveSkill == SKILL.ID_HESPERUS_SLIT) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_HESPERUS_SLIT) {
         var w = 1;
         if (UsedSkillSearch(SKILL.ID_INSPIRATION)) w += 2;
         if ((UsedSkillSearch(SKILL.ID_COUNT_OF_RG_FOR_BANDING) + w) == 6) {
@@ -644,7 +644,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 閃光連撃時の、連撃
     //----------------------------------------------------------------
-    if (n_A_ActiveSkill == SKILL.ID_SENKO_RENGEKI) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_SENKO_RENGEKI) {
         if (attackMethodConfArray[0].GetOptionValue(0) != 0) {
             funcAddAS();
             n_AS_SKILL[idx][0] = SKILL.ID_SORYUKYAKU;
@@ -679,7 +679,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 三段コンボ時の、連撃
     //----------------------------------------------------------------
-    if ((n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_MONK) || (n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_CHAMP)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_COMBO_SANDAN_MONK) || (n_A_ActiveSkillIdNum == SKILL.ID_COMBO_SANDAN_CHAMP)) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_SANDANSHO;
@@ -704,7 +704,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
         }
 
         // モンクの場合
-        if (n_A_ActiveSkill == SKILL.ID_COMBO_SANDAN_MONK) {
+        if (n_A_ActiveSkillIdNum == SKILL.ID_COMBO_SANDAN_MONK) {
             if (attackMethodConfArray[0].GetOptionValue(2) != 0) {
                 funcAddAS();
                 n_AS_SKILL[idx][0] = SKILL.ID_ASHURA_HAOKEN_SPKOTEI;
@@ -744,7 +744,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 双龍コンボ時の、連撃
     //----------------------------------------------------------------
-    if (n_A_ActiveSkill == SKILL.ID_COMBO_SORYUKYAKU) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_COMBO_SORYUKYAKU) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_SORYUKYAKU;
@@ -799,7 +799,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ギガントセット　ジョイントコンボ時の、連撃
     //----------------------------------------------------------------
-    if (n_A_ActiveSkill == SKILL.ID_COMBO_GIGANTSET_JOINT_BEAT) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_COMBO_GIGANTSET_JOINT_BEAT) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_JOINT_BEAT;
@@ -828,7 +828,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ギガントセット　スパイラルコンボ時の、連撃
     //----------------------------------------------------------------
-    if (n_A_ActiveSkill == SKILL.ID_COMBO_GIGANTSET_SPIRAL_PIERCE) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_COMBO_GIGANTSET_SPIRAL_PIERCE) {
 
         funcAddAS();
         n_AS_SKILL[idx][0] = SKILL.ID_SPIRAL_PIERCE;
@@ -852,7 +852,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     sereKind = UsedSkillSearch(SKILL.ID_SERE);
     sereMode = UsedSkillSearch(SKILL.ID_SERE_MODE);
 
-    if (n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkill == SKILL.ID_SPELL_FIST) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkillIdNum == SKILL.ID_SPELL_FIST) {
 
         if (sereMode == 1) {
 
@@ -945,7 +945,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // 通常攻撃、スペルフィストにおける、装備オートスペル効果
     //----------------------------------------------------------------
-    if (n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkill == SKILL.ID_SPELL_FIST) {
+    if (n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI || n_A_ActiveSkillIdNum == SKILL.ID_SPELL_FIST) {
 
         // 通常オートスペル
         for (var asidx = 0; asidx < AUTO_SPELL_SETTING_COUNT; asidx++) {
@@ -1027,7 +1027,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     //----------------------------------------------------------------
     // ボルト使用時の、ダブルキャスティング効果
     //----------------------------------------------------------------
-    switch (n_A_ActiveSkill) {
+    switch (n_A_ActiveSkillIdNum) {
 
         case SKILL.ID_FIRE_BOLT:
         case SKILL.ID_COLD_BOLT:
@@ -1037,7 +1037,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
 
             if (skillLvDoubleCasting > 0) {
                 funcAddAS();
-                n_AS_SKILL[idx][0] = n_A_ActiveSkill;
+                n_AS_SKILL[idx][0] = n_A_ActiveSkillIdNum;
                 n_AS_SKILL[idx][1] = n_A_ActiveSkillLV;
                 n_AS_SKILL[idx][2] = (30 + 10 * skillLvDoubleCasting) * 10;
                 n_AS_SKILL[idx][3] = 0;
@@ -1046,7 +1046,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
             // 「バニルミルトの帽子　浮遊する賢者の石セット」のダブルキャスティング効果への対応
             else if (TimeItemNumSearch(76)) {
                 funcAddAS();
-                n_AS_SKILL[idx][0] = n_A_ActiveSkill;
+                n_AS_SKILL[idx][0] = n_A_ActiveSkillIdNum;
                 n_AS_SKILL[idx][1] = n_A_ActiveSkillLV;
                 n_AS_SKILL[idx][2] = 40 * 10;
                 n_AS_SKILL[idx][3] = 0;
@@ -1060,7 +1060,7 @@ export function AS_Calc(charaData: any, specData: any, mobData: any, attackMetho
     skillLv = UsedSkillSearch(SKILL.ID_AUTO_MAGICIAN_SPELL);
     skillKind = UsedSkillSearch(SKILL.ID_MAGIC_SETTING_FOR_AUTO_SPELL);
 
-    if ((n_A_ActiveSkill == SKILL.ID_TUZYO_KOGEKI) || (n_A_ActiveSkill == SKILL.ID_SPELL_FIST)) {
+    if ((n_A_ActiveSkillIdNum == SKILL.ID_TUZYO_KOGEKI) || (n_A_ActiveSkillIdNum == SKILL.ID_SPELL_FIST)) {
 
         if ((skillLv > 0) && (skillKind != 0)) {
 
