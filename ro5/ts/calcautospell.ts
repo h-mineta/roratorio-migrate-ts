@@ -1,4 +1,4 @@
-import { AutoCalc, UsedSkillSearch, n_AS_MODE, n_AS_check_3dan, n_A_ActiveSkillIdNum, n_A_ActiveSkillLV, n_A_DMG, n_Delay, n_Enekyori, w_DMG, w_DMG_AS_OverHP, w_HIT_HYOUJI } from "./head";
+import { AutoCalc, UsedSkillSearch, n_AS_check_3dan, n_A_ActiveSkillIdNum, n_A_ActiveSkillLV, n_Enekyori, w_DMG } from "./head";
 import * as SKILL from "./skill"
 import * as SPILIT from "./skill_spilit"
 
