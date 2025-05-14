@@ -1,3 +1,6 @@
+import pako = require("pako");
+import { AutoCalc } from "./head";
+
 // Base64デコード関数（URLセーフに対応）
 function base64ToUint8Array(base64: string): Uint8Array {
     // パディングの補完
@@ -170,7 +173,7 @@ async function loadRodbTranslator(fragment: string): Promise<void> {
     // 計算
     CalcStatusPoint(true);
     StAllCalc();
-    AutoCalc();
+    AutoCalc("");
 }
 
 interface JobStatus {
