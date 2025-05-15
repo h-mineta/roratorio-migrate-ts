@@ -76,7 +76,7 @@ async function fetchSearchSkill(seachUrls: string[]): Promise<void> {
     }
 }
 
-async function loadRodbTranslator(fragment: string): Promise<void> {
+export async function loadRodbTranslator(fragment: string): Promise<void> {
     const prefixCheck = /^#rtx(\d+):(.+)$/;
     const matches = prefixCheck.exec(fragment);
     if (!matches) {

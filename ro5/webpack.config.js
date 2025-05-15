@@ -6,7 +6,7 @@ module.exports = {
     output: {
         filename: 'bundle.js', // 出力ファイル名
         path: path.resolve(__dirname, 'js'), // 出力ディレクトリ
-        library: 'RoratorioV5', // グローバル変数名（window.MyApp でアクセス可）
+        library: 'Roratorio', // グローバル変数名
         libraryTarget: 'var'
     },
     resolve: {

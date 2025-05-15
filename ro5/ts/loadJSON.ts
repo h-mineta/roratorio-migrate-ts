@@ -3,48 +3,87 @@ import { ZSTDDecoder } from 'zstddec';
 const zstdDecoder = new ZSTDDecoder();
 //--------------------------------------------------------
 
-// Skillの型定義
-export interface Skill {
-    name: string | null;
+// SkillMapの型定義
+export interface SkillMap {
+    _mig_id: string | null;
+    _mig_id2: string | null;
+    _mig_id_num: number | null;
+    _mig_name: string | null;
+    attack_range: Record<number, number> | null;
+    id: string;
+    id_num: number;
     max_lv: number | null;
-    type: string | null;
+    name: string | null;
+    need_skill_list: {
+        need_lv: number;
+        skill_id: string;
+    }[] | null;
     seperate_lv: boolean | null;
     sp_amount: Record<number, number> | null;
-    attack_range: Record<number, number> | null;
-    need_skill_list: any[] | null;
-    id_num: number;
-    id: string;
+    type: string | null;
 }
 // ハッシュ型配列
-const skillTable: Record<string, Skill> = {};
+let skillMap: Record<string, SkillMap> = {};
 
 /**
  * id から Skill を取得する関数
  * @param id 検索したいスキルID（例: "NV_BASIC"）
  * @returns Skill オブジェクトまたは undefined（見つからない場合）
  */
-export function getSkillTableById(id: string): Skill | undefined {
-    return skillTable[id];
+export function getSkillMapById(id: string): SkillMap | undefined {
+    return skillMap[id];
 }
 
 /**
  * id_num から Skill を取得する関数
- * @param idNum 取得したいスキルの id_num（数値）
+ * @param num 取得したいスキルの id_num（数値）
  * @returns Skill オブジェクトまたは undefined（見つからない場合）
  */
-export function getSkillTableByIdNum(idNum: number): Skill | undefined {
-    for (const skill of Object.values(skillTable)) {
-        if (skill.id_num === idNum) {
+export function getSkillMapByIdNum(num: number): SkillMap | undefined {
+    for (const skill of Object.values(skillMap)) {
+        if (skill.id_num === num) {
             return skill;
         }
     }
     return undefined;
 }
 
+/**
+ * _mig_id から Skill を取得する関数
+ * @param num 取得したいスキルの _mig_id2（文字列）
+ * @returns Skill オブジェクトまたは undefined（見つからない場合）
+ */
+export function getSkillMapByMigId(id: string): SkillMap | undefined {
+    for (const skill of Object.values(skillMap)) {
+        if (skill._mig_id === id) {
+            return skill;
+        }
+    }
+    return undefined;
+}
+
+/**
+ * _mig_id2 から skill.h.jsで定義していた数値を取得する関数
+ * @param num 取得したいスキルの _mig_id2（文字列）
+ * @returns MIG_IDの数値 または -1（見つからない場合）
+ */
+export function getMigIdFromSkillMapByMigId2(id: string): number {
+    for (const skill of Object.values(skillMap)) {
+        if (skill._mig_id2 === id) {
+            if (skill._mig_id_num !== null) {
+                // _mig_id2が一致し、_mig_id_numがnullでない場合
+                return skill._mig_id_num;
+            }
+            break; // _mig_id_numがnullの場合はスキップ
+        }
+    }
+    return -1;
+}
+
 //--------------------------------------------------------
 
-// Itemの型定義
-export interface Item {
+// ItemMapの型定義
+export interface ItemMap {
     id: number;
     displayname: string;
     description: string;
@@ -54,15 +93,15 @@ export interface Item {
     type: string | null;
 }
 // ハッシュ型配列
-const itemTable: Record<number, Item> = {};
+let itemMap: Record<number, ItemMap> = {};
 
 /*
 * id から Item を取得する関数
 * @param id 検索したいアイテムID（数値）
 * @returns Item オブジェクトまたは undefined（見つからない場合）
 */
-export function getItemTableById(id: number): Item | undefined {
-    return itemTable[id];
+export function getItemMapById(id: number): ItemMap | undefined {
+    return itemMap[id];
 }
 
 /**
@@ -70,8 +109,8 @@ export function getItemTableById(id: number): Item | undefined {
  * @param displayName 検索したいアイテム名（完全一致）
  * @returns Item オブジェクトまたは undefined（見つからない場合）
  */
-export function getItemTableByDisplayName(displayName: string): Item | undefined {
-    for (const item of Object.values(itemTable)) {
+export function getItemMapByDisplayName(displayName: string): ItemMap | undefined {
+    for (const item of Object.values(itemMap)) {
         if (item.displayname === displayName) {
             return item;
         }
@@ -104,15 +143,15 @@ export interface Job {
     allow_equipment_weapons_type: number[] //装備可能武器タイプ
 }
 
-const jobTable: Record<string, Job> = {};
+let jobMap: Record<string, Job> = {};
 
 /**
  * id_name から Job を取得する関数
  * @param idName 検索したい職業ID名（例: "NOVICE"）
  * @returns Job オブジェクトまたは undefined（見つからない場合）
  */
-export function getJobTableByIdName(idName: string): Job | undefined {
-    return jobTable[idName];
+export function getJobMapByIdName(idName: string): Job | undefined {
+    return jobMap[idName];
 }
 
 /**
@@ -120,8 +159,8 @@ export function getJobTableByIdName(idName: string): Job | undefined {
  * @param idNum 検索したい職業ID番号
  * @returns Job オブジェクトまたは undefined（見つからない場合）
  */
-export function getJobTableByIdNum(idNum: number): Job | undefined {
-    for (const job of Object.values(jobTable)) {
+export function getJobMapByIdNum(idNum: number): Job | undefined {
+    for (const job of Object.values(jobMap)) {
         if (job.id_num === idNum) {
             return job;
         }
@@ -137,37 +176,19 @@ async function loadFileAsUint8Array(url: string): Promise<Uint8Array> {
     return new Uint8Array(await response.arrayBuffer());
 }
 
-// JSON文字列を安全にパースする関数（nullの場合も考慮）
-function parseOptionalJSON<T>(str: string | null): T | null {
-    if (str === null) return null;
-    try {
-        return JSON.parse(str);
-    } catch {
-        return null;
-    }
-}
-
-
 async function loadAllJSON() {
-    let skillCompressed = await loadFileAsUint8Array('json/skills.jsonl.zst');
-    zstdDecoder.init();
+    await zstdDecoder.init();
+
+    let skillCompressed = await loadFileAsUint8Array('json/skills.json.zst');
     let skillDecompressed = zstdDecoder.decode(skillCompressed);
     let skillLines = new TextDecoder('utf-8').decode(skillDecompressed);
-
-    for (const line of skillLines.split('\n')) {
-        if (!line.trim()) continue;
-
-        const raw = JSON.parse(line);
-
-        raw.sp_amount = parseOptionalJSON<Record<number, number>>(raw.sp_amount);
-        raw.attack_range = parseOptionalJSON<Record<number, number>>(raw.attack_range);
-        raw.need_skill_list = parseOptionalJSON<any[]>(raw.need_skill_list);
-
-        skillTable[raw.id] = raw as Skill;
+    try {
+        skillMap = JSON.parse(skillLines);
+    } catch (err) {
+        console.error('JSON parse error:', err);
     }
 
     let itemCompressed = await loadFileAsUint8Array('json/items.jsonl.zst');
-    zstdDecoder.init();
     let itemDecompressed = zstdDecoder.decode(itemCompressed);
     let itemLines = new TextDecoder('utf-8').decode(itemDecompressed);
 
@@ -175,26 +196,20 @@ async function loadAllJSON() {
         if (!line.trim()) continue; // 空行スキップ
 
         try {
-            const raw: Item = JSON.parse(line);
-            itemTable[raw.id] = raw;
+            const raw: ItemMap = JSON.parse(line);
+            itemMap[raw.id] = raw;
         } catch (err) {
             console.error('JSON parse error:', err);
         }
     }
 
-    let jobCompressed = await loadFileAsUint8Array('json/jobs.jsonl.zst');
-    zstdDecoder.init();
+    let jobCompressed = await loadFileAsUint8Array('json/jobs.json.zst');
     let jobDecompressed = zstdDecoder.decode(jobCompressed);
     let jobLines = new TextDecoder('utf-8').decode(jobDecompressed);
-
-    for (const line of jobLines.split('\n')) {
-        if (!line.trim()) continue;
-        try {
-            const raw: Job = JSON.parse(line);
-            jobTable[raw.id_name] = raw;
-        } catch (err) {
-            console.error('JSON parse error:', err);
-        }
+    try {
+        jobMap = JSON.parse(jobLines);
+    } catch (err) {
+        console.error('JSON parse error:', err);
     }
 }
 loadAllJSON()
